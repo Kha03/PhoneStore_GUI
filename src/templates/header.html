@@ -1,0 +1,735 @@
+ddiv<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Fonts -->
+    <link href="../assets/fonts/stylesheet.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap JS -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <!-- Styles -->
+    <link href="../assets/css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container container-fluid border-bottom border-primary">
+      <header
+        class="d-flex align-items-center justify-content-between pt-2 pb-2"
+      >
+        <a href="#!">
+          <img src="../assets/imgs/img_logo_blue_a700.svg" alt="Logo" />
+        </a>
+        <ul class="nav col-12 col-md-auto justify-content-center">
+          <li>
+            <a href="#" class="nav-link px-2 mx-2 link-secondary">Home</a>
+          </li>
+          <li><a href="#" class="nav-link px-2 mx-2 link-dark">Products</a></li>
+          <li><a href="#" class="nav-link px-2 mx-2 link-dark">Blog</a></li>
+          <li><a href="#" class="nav-link px-2 mx-2 link-dark">FAQ</a></li>
+          <li>
+            <a href="#" class="nav-link px-2 mx-2 link-dark">Contact Us</a>
+          </li>
+        </ul>
+
+        <div class="col-3 text-end">
+          <button type="button" class="btn btn-primary me-2">
+            Sign In / Sign Up
+          </button>
+        </div>
+      </header>
+    </div>
+    <!-- Main -->
+    <main class="container container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <div class="d-flex flex-column h-100">
+            <h1 class="mt-5">Tech Heim</h1>
+            <h3 class="mt-5">"Join the digital revolution"</h3>
+            <button
+              type="button"
+              class="btn btn-dark align-self-start py-2 w-50 mt-auto border-r"
+            >
+              Explore More
+            </button>
+          </div>
+        </div>
+        <div class="col-6">
+          <img src="../assets/imgs/main_pic.png" alt="" class="img-fluid" />
+        </div>
+      </div>
+      <!-- list -->
+      <div class="row mt-5">
+        <!-- Item product -->
+        <div class="col-2">
+          <div class="p-1 shadow-sm bg-body rounded">
+            <div class="product_img-content mx-auto">
+              <img
+                src="../assets/imgs/p1.png"
+                alt="Accessories"
+                class="img-fluid"
+              />
+            </div>
+            <p class="mt-2 text-center">Accessories</p>
+          </div>
+        </div>
+        <!-- Item product -->
+        <div class="col-2">
+          <div class="p-1 shadow-sm bg-body rounded">
+            <div class="product_img-content mx-auto">
+              <img
+                src="../assets/imgs/p1.png"
+                alt="Accessories"
+                class="img-fluid"
+              />
+            </div>
+            <p class="mt-2 text-center">Camera</p>
+          </div>
+        </div>
+        <!-- Item product -->
+        <div class="col-2">
+          <div class="p-1 shadow-sm bg-body rounded">
+            <div class="product_img-content mx-auto">
+              <img
+                src="../assets/imgs/p2.png"
+                alt="Accessories"
+                class="img-fluid"
+              />
+            </div>
+            <p class="mt-2 text-center">Laptop</p>
+          </div>
+        </div>
+        <!-- Item product -->
+        <div class="col-2">
+          <div class="p-1 shadow-sm bg-body rounded">
+            <div class="product_img-content mx-auto">
+              <img
+                src="../assets/imgs/p2.png"
+                alt="Accessories"
+                class="img-fluid"
+              />
+            </div>
+            <p class="mt-2 text-center">Smart Phone</p>
+          </div>
+        </div>
+        <!-- Item product -->
+        <div class="col-2">
+          <div class="p-1 shadow-sm bg-body rounded">
+            <div class="product_img-content mx-auto">
+              <img
+                src="../assets/imgs/p1.png"
+                alt="Accessories"
+                class="img-fluid"
+              />
+            </div>
+            <p class="mt-2 text-center">Gaming</p>
+          </div>
+        </div>
+        <!-- Item product -->
+        <div class="col-2">
+          <div class="p-1 shadow-sm bg-body rounded">
+            <div class="product_img-content mx-auto">
+              <img
+                src="../assets/imgs/p2.png"
+                alt="Accessories"
+                class="img-fluid"
+              />
+            </div>
+            <p class="mt-2 text-center">Smart Watch</p>
+          </div>
+        </div>
+      </div>
+      <!-- sales section -->
+      <div class="row mt-3 pt-2 pb-5 bg-dark b rounded-3">
+        <!-- Sidebar for product information -->
+        <div
+          class="col-md-3 d-flex flex-column justify-content-center gap-3 align-items-center text-white"
+        >
+          <h4 class="mb-3">Products On Sale</h4>
+          <p>Shop Now!</p>
+          <a href="#" class="btn btn-outline-light">View all &rarr;</a>
+        </div>
+        <!-- Carousel for product items -->
+        <div class="col-md-9">
+          <div
+            id="carouselProductListSale"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <!-- 3 item in 1 carousel inner -->
+                <div class="row flex-nowrap">
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p1.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p1.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p1.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p1.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 3 item in 1 carousel inner -->
+              <div class="carousel-item">
+                <div class="row flex-nowrap">
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p2.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p2.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p2.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p2.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 3 item in 1 carousel inner -->
+              <div class="carousel-item">
+                <div class="row flex-nowrap">
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p1.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p1.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p1.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card h-100 p-2">
+                      <span
+                        class="badge bg-danger position-absolute"
+                        style="top: 10px; right: 10px"
+                        >-50%</span
+                      >
+                      <img
+                        src="../assets/imgs/p1.png"
+                        class="card-img-top img-fluid"
+                        alt="Product 1"
+                      />
+                      <h6 class="card-title fw-light text-truncate">
+                        Logitech G502 Gaming
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted text-decoration-line-through">
+                          $38.00
+                        </p>
+                        <p class="fw-light">$19.00</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselProductListSale"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselProductListSale"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Blog section -->
+      <div class="row mt-4">
+        <div class="col-12 p-0">
+          <div class="row">
+            <div class="col-6">
+              <h3>Best Sellers</h3>
+            </div>
+            <div class="col-6">
+              <a class="btn-link float-end me-5" href="#">View all &rarr;</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 p-0 mt-3">
+          <div class="row">
+            <!-- item product -->
+            <div class="col-3">
+              <div
+                class="product_card p-3 shadow-sm position-relative overflow-hidden"
+              >
+                <span
+                  class="badge bg-danger position-absolute opacity-0"
+                  style="top: 10px; right: 10px"
+                  >-50%</span
+                >
+                <div class="product_card-img mx-auto">
+                  <img
+                    src="../assets/imgs/p1.png"
+                    class="object-fit-contain product_card-img_content"
+                    alt="Product 1"
+                  />
+                </div>
+                <div class="product_card-content mt-3">
+                  <h6 class="fw-light text-truncate lh-base">
+                    Iphone 14 promax 256 gig Iphone 14 promax 256 gig Iphone 14
+                    promax 256 gig Iphone 14 promax 256 gig Iphone 14 promax 256
+                    gig
+                  </h6>
+                  <div
+                    class="d-flex justify-content-between mt-3 align-items-end product_card-content_cost"
+                  >
+                    <div class="d-flex flex-column">
+                      <p
+                        class="text-muted text-decoration-line-through m-0 opacity-0 product_card-discount"
+                      >
+                        $38.00
+                      </p>
+                      <p class="fw-light m-0">$19.00</p>
+                    </div>
+                    <div class="product_card-start d-flex gap-2">
+                      <img src="../assets/icon/start-icon.svg" alt="Star" />
+                      <p class="m-0">4.8</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="w-100 p-2 d-flex align-items-center justify-content-around position-absolute z-1 product_card-add"
+                >
+                  <button class="btn btn-outline-dark d-flex gap-1">
+                    <img
+                      src="../assets/icon/shopping-cart.svg"
+                      alt=""
+                      class="cart-icon"
+                    />
+                    <p class="m-0">Add to cart</p>
+                  </button>
+                  <img
+                    src="../assets/icon/heart_icon.svg"
+                    alt=""
+                    class="heart-icon"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- item product -->
+            <div class="col-3">
+              <div
+                class="product_card p-3 shadow-sm position-relative overflow-hidden"
+              >
+                <span
+                  class="badge bg-danger position-absolute"
+                  style="top: 10px; right: 10px"
+                  >-50%</span
+                >
+                <div class="product_card-img mx-auto">
+                  <img
+                    src="../assets/imgs/p1.png"
+                    class="object-fit-contain product_card-img_content"
+                    alt="Product 1"
+                  />
+                </div>
+                <div class="product_card-content mt-3">
+                  <h6 class="fw-light text-truncate lh-base">
+                    Iphone 14 promax 256 gig Iphone 14 promax 256 gig Iphone 14
+                    promax 256 gig Iphone 14 promax 256 gig Iphone 14 promax 256
+                    gig
+                  </h6>
+                  <div
+                    class="d-flex justify-content-between mt-3 align-items-end product_card-content_cost"
+                  >
+                    <div class="d-flex flex-column">
+                      <p
+                        class="text-muted text-decoration-line-through m-0 product_card-discount"
+                      >
+                        $38.00
+                      </p>
+                      <p class="fw-light m-0">$19.00</p>
+                    </div>
+                    <div class="product_card-start d-flex gap-2">
+                      <img src="../assets/icon/start-icon.svg" alt="Star" />
+                      <p class="m-0">4.8</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="w-100 p-2 d-flex align-items-center justify-content-around position-absolute z-1 product_card-add"
+                >
+                  <button class="btn btn-outline-dark d-flex gap-1">
+                    <img
+                      src="../assets/icon/shopping-cart.svg"
+                      alt=""
+                      class="cart-icon"
+                    />
+                    <p class="m-0">Add to cart</p>
+                  </button>
+                  <img
+                    src="../assets/icon/heart_icon.svg"
+                    alt=""
+                    class="heart-icon"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- item product -->
+            <div class="col-3">
+              <div
+                class="product_card p-3 shadow-sm position-relative overflow-hidden"
+              >
+                <span
+                  class="badge bg-danger position-absolute"
+                  style="top: 10px; right: 10px"
+                  >-50%</span
+                >
+                <div class="product_card-img mx-auto">
+                  <img
+                    src="../assets/imgs/p1.png"
+                    class="object-fit-contain product_card-img_content"
+                    alt="Product 1"
+                  />
+                </div>
+                <div class="product_card-content mt-3">
+                  <h6 class="fw-light text-truncate lh-base">
+                    Iphone 14 promax 256 gig Iphone 14 promax 256 gig Iphone 14
+                    promax 256 gig Iphone 14 promax 256 gig Iphone 14 promax 256
+                    gig
+                  </h6>
+                  <div
+                    class="d-flex justify-content-between mt-3 align-items-end product_card-content_cost"
+                  >
+                    <div class="d-flex flex-column">
+                      <p
+                        class="text-muted text-decoration-line-through m-0 product_card-discount"
+                      >
+                        $38.00
+                      </p>
+                      <p class="fw-light m-0">$19.00</p>
+                    </div>
+                    <div class="product_card-start d-flex gap-2">
+                      <img src="../assets/icon/start-icon.svg" alt="Star" />
+                      <p class="m-0">4.8</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="w-100 p-2 d-flex align-items-center justify-content-around position-absolute z-1 product_card-add"
+                >
+                  <button class="btn btn-outline-dark d-flex gap-1">
+                    <img
+                      src="../assets/icon/shopping-cart.svg"
+                      alt=""
+                      class="cart-icon"
+                    />
+                    <p class="m-0">Add to cart</p>
+                  </button>
+                  <img
+                    src="../assets/icon/heart_icon.svg"
+                    alt=""
+                    class="heart-icon"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- item product -->
+            <div class="col-3">
+              <div
+                class="product_card p-3 shadow-sm position-relative overflow-hidden"
+              >
+                <span
+                  class="badge bg-danger position-absolute"
+                  style="top: 10px; right: 10px"
+                  >-50%</span
+                >
+                <div class="product_card-img mx-auto">
+                  <img
+                    src="../assets/imgs/p1.png"
+                    class="object-fit-contain product_card-img_content"
+                    alt="Product 1"
+                  />
+                </div>
+                <div class="product_card-content mt-3">
+                  <h6 class="fw-light text-truncate lh-base">
+                    Iphone 14 promax 256 gig Iphone 14 promax 256 gig Iphone 14
+                    promax 256 gig Iphone 14 promax 256 gig Iphone 14 promax 256
+                    gig
+                  </h6>
+                  <div
+                    class="d-flex justify-content-between mt-3 align-items-end product_card-content_cost"
+                  >
+                    <div class="d-flex flex-column">
+                      <p
+                        class="text-muted text-decoration-line-through m-0 product_card-discount"
+                      >
+                        $38.00
+                      </p>
+                      <p class="fw-light m-0">$19.00</p>
+                    </div>
+                    <div class="product_card-start d-flex gap-2">
+                      <img src="../assets/icon/start-icon.svg" alt="Star" />
+                      <p class="m-0">4.8</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="w-100 p-2 d-flex align-items-center justify-content-around position-absolute z-1 product_card-add"
+                >
+                  <button class="btn btn-outline-dark d-flex gap-1">
+                    <img
+                      src="../assets/icon/shopping-cart.svg"
+                      alt=""
+                      class="cart-icon"
+                    />
+                    <p class="m-0">Add to cart</p>
+                  </button>
+                  <img
+                    src="../assets/icon/heart_icon.svg"
+                    alt=""
+                    class="heart-icon"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
