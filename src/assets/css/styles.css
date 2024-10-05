@@ -92,3 +92,31 @@ body {
   filter: invert(34%) sepia(80%) saturate(2395%) hue-rotate(319deg)
     brightness(91%) contrast(101%);
 }
+/* Banner */
+.banner {
+  height: 420px;
+  border-radius: 8px;
+  background: #6c757d;
+}
+.banner_2 {
+  background: #3c98a5;
+}
+.banner::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  top: -260;
+  right: -390;
+  width: 800px;
+  height: 655px;
+  background: #adb5bd;
+}
+.banner_2::after {
+  background: #0d263f;
+}
+.banner_header {
+  font-size: 3.2rem;
+}
+.banner_text {
+  font-size: 1.6rem;
+}
