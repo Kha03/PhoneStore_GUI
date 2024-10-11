@@ -120,3 +120,19 @@ body {
 .banner_text {
   font-size: 1.6rem;
 }
+/* footer */
+.footer {
+  background: #2d2d2d;
+}
+.footer_header {
+  color: #f8f9fa;
+}
+.footer_link {
+  color: #cbcbcb;
+}
+footer input::placeholder {
+  color: #f9f9f9 !important;
+}
+footer form {
+  margin-right: 104px;
+}
