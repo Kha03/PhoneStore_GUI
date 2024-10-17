@@ -1,8 +1,10 @@
-const toggleButton = document.getElementById("toggleButton");
-const arrowIcon = document.getElementById("arrowIcon");
+const toggleButtons = document.querySelectorAll(".toggleButton");
+const arrowIcons = document.querySelectorAll(".arrowIcon");
 
-toggleButton.addEventListener("click", () => {
-  arrowIcon.classList.toggle("arrow-up");
+toggleButtons.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    arrowIcons[index].classList.toggle("arrow-up");
+  });
 });
 // Khởi tạo thanh trượt
 window.onload = function () {
