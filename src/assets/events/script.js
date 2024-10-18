@@ -54,3 +54,34 @@ sliderLabel.addEventListener("click", function () {
     checkbox.checked = false;
   });
 });
+
+// Define the data container
+var dataContainer = $("#data-container");
+
+// Define the template function to generate HTML
+function template(data) {
+  var html = `<ul class="pagination">`;
+  $.each(data, function (index, item) {
+    html += `<li  class="page-item"><a class="page-link" href="#!">${item}</a></li>`;
+  });
+  html += "</ul>";
+  return html;
+}
+
+// Initialize pagination
+$("#pagination").pagination({
+  dataSource: [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+    12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31,
+    32,
+  ], // Your data array
+  prevText: '<img src="../assets/icon/arrow-left_page.svg"/>',
+  nextText: '<img src="../assets/icon/arrow-right_page.svg"/>',
+  pageSize: 4, // Adjust the number of items per page
+  pageRange: 1,
+  callback: function (data, pagination) {
+    var html = template(data);
+    dataContainer.html(html);
+  },
+});

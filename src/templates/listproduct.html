@@ -25,6 +25,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/pagination.min.js"></script>
     <!-- Styles -->
     <link href="../assets/css/styles.css" rel="stylesheet" />
   </head>
@@ -71,9 +73,14 @@
       <!-- products -->
       <div class="row mt-3">
         <div class="col-3">
-          <h4>Filter</h4>
+          <h5 class="d-inline-flex align-items-center">
+            <img src="../assets/icon/document-filter.svg" alt="" /><span
+              class="ps-2 m-0"
+              >Filter</span
+            >
+          </h5>
           <!-- brand -->
-          <div class="filter_group">
+          <form class="filter_group">
             <!-- brand -->
             <div class="card border-0">
               <div class="card-header btn-outline-light">
@@ -175,66 +182,51 @@
                     <input
                       type="checkbox"
                       class="btn-check"
-                      id="btn-check-outlined-1"
+                      id="btn-check-price-1"
                       autocomplete="off"
                       name="priceRange"
                     />
-                    <label
-                      class="btn btn-outline-dark"
-                      for="btn-check-outlined-1"
-                    >
+                    <label class="btn btn-outline-dark" for="btn-check-price-1">
                       Dưới 7 Triệu
                     </label>
 
                     <input
                       type="checkbox"
                       class="btn-check"
-                      id="btn-check-outlined-2"
+                      id="btn-check-price-2"
                       autocomplete="off"
                       name="priceRange"
                     />
-                    <label
-                      class="btn btn-outline-dark"
-                      for="btn-check-outlined-2"
-                    >
+                    <label class="btn btn-outline-dark" for="btn-check-price-2">
                       7 - 15 Triệu
                     </label>
 
                     <input
                       type="checkbox"
                       class="btn-check"
-                      id="btn-check-outlined-3"
+                      id="btn-check-price-3"
                       autocomplete="off"
                       name="priceRange"
                     />
-                    <label
-                      class="btn btn-outline-dark"
-                      for="btn-check-outlined-3"
-                    >
+                    <label class="btn btn-outline-dark" for="btn-check-price-3">
                       15 - 25 Triệu </label
                     ><input
                       type="checkbox"
                       class="btn-check"
-                      id="btn-check-outlined-4"
+                      id="btn-check-price-4"
                       autocomplete="off"
                       name="priceRange"
                     />
-                    <label
-                      class="btn btn-outline-dark"
-                      for="btn-check-outlined-4"
-                    >
+                    <label class="btn btn-outline-dark" for="btn-check-price-4">
                       25 Triệu trở lên</label
                     ><input
                       type="checkbox"
                       class="btn-check"
-                      id="btn-check-outlined-5"
+                      id="btn-check-price-5"
                       autocomplete="off"
                       name="priceRange"
                     />
-                    <label
-                      class="btn btn-outline-dark"
-                      for="btn-check-outlined-5"
-                    >
+                    <label class="btn btn-outline-dark" for="btn-check-price-5">
                       15 - 25 Triệu
                     </label>
                   </div>
@@ -244,7 +236,7 @@
                       class="form-label"
                       data-bs-toggle="collapse"
                       href="#sliderPrice"
-                      style="cursor: pointer"
+                      style="cursor: pointer; text-decoration: underline"
                       >Khoảng giá khác:</label
                     >
                     <div id="sliderPrice" class="collapse p-2">
@@ -457,9 +449,102 @@
                 </div>
               </div>
             </div>
-          </div>
+            <!-- use need -->
+            <div class="card border-0">
+              <div class="card-header btn-outline-light">
+                <a
+                  class="btn d-inline-flex align-items-center justify-content-between w-100 toggleButton"
+                  data-bs-toggle="collapse"
+                  href="#UseNeed"
+                >
+                  <p class="m-0">Usage Needs</p>
+                  <img
+                    src="../assets/icon/arrow-down.svg"
+                    alt="Arrow"
+                    class="arrowIcon"
+                  />
+                </a>
+              </div>
+              <div id="UseNeed" class="collapse show">
+                <div class="card-body p-0">
+                  <div class="mt-2 d-flex flex-wrap gap-2">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="btn-check-use-1"
+                      autocomplete="off"
+                      name="useneed"
+                    />
+                    <label class="btn btn-outline-dark" for="btn-check-use-1">
+                      play games
+                    </label>
+
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="btn-check-use-2"
+                      autocomplete="off"
+                      name="useneed"
+                    />
+                    <label class="btn btn-outline-dark" for="btn-check-use-2">
+                      Huge battery over 5000 mAh
+                    </label>
+
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="btn-check-use-3"
+                      autocomplete="off"
+                      name="useneed"
+                    />
+                    <label class="btn btn-outline-dark" for="btn-check-use-3">
+                      Take photos and film </label
+                    ><input
+                      type="checkbox"
+                      class="btn-check"
+                      id="btn-check-use-4"
+                      autocomplete="off"
+                      name="useneed"
+                    />
+                    <label class="btn btn-outline-dark" for="btn-check-use-4">
+                      Thin and light</label
+                    ><input
+                      type="checkbox"
+                      class="btn-check"
+                      id="btn-check-use-5"
+                      autocomplete="off"
+                      name="useneed"
+                    />
+                    <label class="btn btn-outline-dark" for="btn-check-use-5">
+                      Livestream
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="mt-3 d-flex justify-content-center gap-2 border-top border-1 pt-2"
+            >
+              <button class="btn btn-outline-danger" type="reset">Reset</button>
+              <button class="btn btn-outline-dark" type="submit">
+                See 200 Results
+              </button>
+            </div>
+          </form>
         </div>
         <div class="col-9">
+          <div class="row mb-3">
+            <div class="offset-9 col-3 pe-4">
+              <form>
+                <select class="form-select filter-select" id="sortOptions">
+                  <option value="featured">Sort by: Featured</option>
+                  <option value="price-asc">Price: ascending</option>
+                  <option value="price-desc">Price: descending</option>
+                  <option value="new-arrivals">New Arrivals</option>
+                </select>
+              </form>
+            </div>
+          </div>
           <div class="row gy-4">
             <!-- item product -->
             <div class="col-4">
@@ -1344,9 +1429,181 @@
               </div>
             </div>
           </div>
+          <div class="row d-flex justify-content-center mt-3">
+            <div class="col-3">
+              <nav aria-label="Page navigation" id="pagination"></nav>
+              <!-- <div id="data-container"></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row mt-5 py-3 g-0 justify-content-between border-2 border-top"
+      >
+        <!-- tech item -->
+        <div class="col-2 d-flex align-items-center">
+          <img
+            src="../assets/icon/computer_icon.svg"
+            alt="Computer"
+            class="computer"
+          />
+          <p class="m-0 fs-5 ms-4" style="width: 180px">
+            Latest and Greatest Tech
+          </p>
+        </div>
+        <!-- tech item -->
+        <div class="col-2 d-flex align-items-center">
+          <img
+            src="../assets/icon/clock_icon.svg"
+            alt="Computer"
+            class="computer"
+          />
+          <p class="m-0 fs-5 ms-4" style="width: 180px">Guarantee</p>
+        </div>
+        <!-- tech item -->
+        <div class="col-2 d-flex align-items-center">
+          <img
+            src="../assets/icon/television_icon.svg"
+            alt="Computer"
+            class="computer"
+          />
+          <p class="m-0 fs-5 ms-4" style="width: 180px">
+            Free Shipping over 1000$
+          </p>
+        </div>
+        <!-- tech item -->
+        <div class="col-2 d-flex align-items-center">
+          <img
+            src="../assets/icon/airplane_icon.svg"
+            alt="Computer"
+            class="computer"
+          />
+          <p class="m-0 fs-5 ms-4" style="width: 180px">24/7 Support</p>
         </div>
       </div>
     </main>
+    <!-- Footer -->
+    <div class="footer mt-5">
+      <div class="container container-fluid">
+        <footer class="pt-5 pb-2">
+          <div class="row">
+            <div class="col-6 col-md-2 mb-3">
+              <h5 class="footer_header">Company</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 footer_link">about us</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 footer_link">blog</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 footer_link">returns</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 footer_link">order status </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3">
+              <h5 class="footer_header">Info</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 footer_link">How it works?</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 footer_link">our promises</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 footer_link">FAQ</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3">
+              <h5 class="footer_header">Contact us</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 footer_link text-nowrap"
+                    ><img src="../assets/icon/adress_icon_footer.svg" alt="" />
+                    123 Main Street, Anytown,USA</a
+                  >
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 footer_link text-nowrap"
+                    ><img src="../assets/icon/phone_icon_footer.svg" alt="" />
+                    +1 (555) 123-4567</a
+                  >
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 footer_link text-nowrap"
+                    ><img src="../assets/icon/mail_icon_footer.svg" alt="" />
+                    TechHeimSupport@gmail.com</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="col-md-5 offset-md-1 mb-3 d-flex flex-column align-items-end"
+            >
+              <form>
+                <h5 class="footer_header">Sign up for News and updates</h5>
+                <div
+                  class="d-flex w-100 input-group border-1 border-light border rounded-3 p-1 mt-3"
+                >
+                  <label for="newsletter1" class="visually-hidden"
+                    >Email address</label
+                  >
+                  <img
+                    src="../assets/icon/user_icon_footer.svg"
+                    alt=""
+                    class="p-1"
+                  />
+                  <input
+                    id="newsletter1"
+                    type="text"
+                    class="form-control border-0 bg-transparent text-white shadow-none p-1"
+                    placeholder="Email address"
+                  />
+                  <button class="btn p-1" type="button">
+                    <img src="../assets/icon/arrow-right.svg" alt="" />
+                  </button>
+                </div>
+              </form>
+              <ul class="list-unstyled d-flex align-self-center me-5 pe-3 mt-3">
+                <li class="me-3">
+                  <a class="link-body-emphasis" href="#">
+                    <img src="../assets/icon/Facebook.svg" alt="" />
+                  </a>
+                </li>
+                <li class="me-3">
+                  <a class="link-body-emphasis" href="#">
+                    <img src="../assets/icon/twitter.svg" alt=""
+                  /></a>
+                </li>
+                <li class="me-3">
+                  <a class="link-body-emphasis" href="#"
+                    ><img src="../assets/icon/Instagram.svg" alt=""
+                  /></a>
+                </li>
+                <li class="me-3">
+                  <a class="link-body-emphasis" href="#"
+                    ><img src="../assets/icon/Youtube.svg" alt=""
+                  /></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between pt-3 border-top">
+            <p class="footer_link">
+              &copy; 2024 Company, Inc. All rights reserved.
+            </p>
+          </div>
+        </footer>
+      </div>
+    </div>
     <!-- events  -->
     <script src="../assets/events/script.js"></script>
   </body>

@@ -1,6 +1,5 @@
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
-  height: 3000px;
 }
 /* product */
 .product_img-content {
@@ -152,7 +151,7 @@ footer form {
   border-color: inherit;
   box-shadow: none;
 }
-/* arrow up change */
+/* arrow up change in filter group*/
 .arrow-up {
   transform: rotate(180deg);
 }
@@ -184,4 +183,39 @@ footer form {
 .noUi-handle::after,
 .noUi-handle::before {
   display: none;
+}
+/* filter-select */
+.filter-select:focus {
+  border-color: #ced4da;
+  box-shadow: 0 0 0 0.2rem rgba(160, 160, 160, 0.25);
+}
+/* Styles for the pagination container */
+.paginationjs ul {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.paginationjs li {
+  margin: 0 5px;
+}
+
+.paginationjs a {
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 8px 12px; /* Add padding for clickable area */
+  text-decoration: none; /* Remove underline from links */
+  transition: background-color 0.3s, color 0.3s; /* Transition effects */
+}
+
+.paginationjs li:not(:first-child):not(:last-child) a:hover {
+  background-color: #000;
+  color: white !important;
+}
+
+/* Active page style */
+.paginationjs .active a {
+  background-color: #000;
+  color: white !important;
 }
