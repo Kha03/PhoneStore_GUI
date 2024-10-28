@@ -1,0 +1,118 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form{
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center     ;
+    border: 1px black solid;
+    align-items: center;
+    border-radius: 5px;
+    width: 400px;
+    height: 600px;
+}
+input{
+    margin-bottom: 1rem;
+}
+h1{
+    font-size: 1.8rem;
+}
+.form-group{
+    width: 70%;
+}
+.divider{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    margin: 20px 0;
+    width: 90%;
+}
+hr{
+    width: 25%;
+    margin-right: 6px;
+    margin-left: 6px;
+}
+.socialAcc{
+   width: 35%;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   border-radius: 6px; 
+   border: 0.3px black solid;
+}
+.method{
+    width:80%;
+    display: flex;
+    justify-content: space-around;
+    height: 40px;
+}
+.methodLog{
+    width: 100%;
+    display:flex; 
+    justify-content:center  ;
+    margin-bottom: 1.5rem;
+}
+#gg{
+    background-color: white;
+}
+#fb{
+    background-color: #1978f2;
+    color: white;
+}
+.choose{
+    display: flex;
+    justify-content: space-around;
+
+}
+.functionChoice{
+    width: 80%;
+    height:40px;
+    display:flex; 
+    justify-content:center;
+    margin-bottom: 1.75rem;
+    margin-top: -3rem;
+}
+.login{
+    border: 1px solid black;
+    width: 50%;
+}
+.signup{
+    border-bottom: 1px solid black;
+    width: 50%;
+}
+.function{
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+}
+input{
+    position: relative;
+}
+#exampleInputEmail1{
+    padding-left: 28px;
+    background: url("./icon/sms.png") no-repeat left;
+    background-size: 15px;
+    background-position: 6px center;
+}
+#exampleInputPassword1{
+    padding-left: 28px;
+    background: url("./icon/key.png") no-repeat left;
+    background-size: 15px;
+    background-position: 6px center;
+}
+#pwd {
+    position: absolute; 
+    width: 20px; 
+    height: 20px; 
+    right: 10px; /* Adjust this value as needed */
+    top: 35%; /* Center vertically */
+    transform: translateY(-50%); /* Center vertically */
+    cursor: pointer; /* Optional: changes cursor to pointer */
+}
