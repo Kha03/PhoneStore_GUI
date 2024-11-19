@@ -19,7 +19,7 @@
         <div class="form-row functionChoice">
           <div class="col choose">
             <a href="#" class="function login active">Sign in</a>
-            <a href="./signup.html" class="function signup">Sign up</a>
+            <a href="signup.jsp" class="function signup">Sign up</a>
           </div>
         </div>
         <h1 style="margin-bottom: 1rem">Log In</h1>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="form-group">
-          <p>Don't have an account? <a href="./signup.html">Sign up</a></p>
+          <p>Don't have an account? <a href="signup.jsp">Sign up</a></p>
         </div>
       </div>
     </form>

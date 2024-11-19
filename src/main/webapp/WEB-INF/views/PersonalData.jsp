@@ -44,7 +44,7 @@
           <a href="#"
             ><i class="fas fa-dollar-sign"></i> Payment & Instalments</a
           >
-          <a href="./Orders.html"><i class="fas fa-box"></i> Orders</a>
+          <a href="Orders.jsp"><i class="fas fa-box"></i> Orders</a>
           <a href="#"><i class="fas fa-heart"></i> Wish list</a>
           <a href="#"><i class="fas fa-tags"></i> Discounts</a>
           <a href="#"><i class="fas fa-shield-alt"></i> Security & access</a>

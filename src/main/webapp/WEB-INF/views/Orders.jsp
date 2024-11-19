@@ -149,7 +149,7 @@
                       </td>
                       <td>
                         <a
-                          href="./Order_Detail.html"
+                          href="Order_Detail.jsp"
                           class="btn btn-sm btn-primary"
                           >Order Detail</a
                         >

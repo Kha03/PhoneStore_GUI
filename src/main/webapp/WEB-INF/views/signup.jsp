@@ -18,7 +18,7 @@
       <div class="form">
         <div class="form-row functionChoice">
           <div class="col choose">
-            <a href="./signin.html" class="function login">Sign in</a>
+            <a href="signin.jsp" class="function login">Sign in</a>
             <a href="#" class="function signup active">Sign up</a>
           </div>
         </div>
@@ -97,7 +97,7 @@
         </div>
 
         <div class="form-group">
-          <p>Already have an account? <a href="./signin.html">Sign in</a></p>
+          <p>Already have an account? <a href="signin.jsp">Sign in</a></p>
         </div>
       </div>
     </form>

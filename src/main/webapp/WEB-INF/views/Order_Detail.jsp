@@ -76,7 +76,7 @@
           <p><strong>Address:</strong> 123 Main St, Cityville, USA</p>
           <p><strong>Phone:</strong> (123) 456-7890</p>
 
-          <a href="./Orders.html" class="btn btn-primary mt-3"
+          <a href="Orders.jsp" class="btn btn-primary mt-3"
             >Back to Orders</a
           >
         </div>
