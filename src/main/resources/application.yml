@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: customer
+  mvc:
+    servlet:
+      path: /
+      load-on-startup: 1
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp

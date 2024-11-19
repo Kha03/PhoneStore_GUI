@@ -1,0 +1,126 @@
+/* Global Styles */
+body {
+  background-color: #f8f9fa;
+}
+/* Sidebar Styles */
+.sidebar {
+  padding-top: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #000;
+  display: block;
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #e9ecef;
+  border-radius: 5px;
+}
+
+/* Breadcrumb & Content Padding */
+.content {
+  padding: 20px;
+}
+
+/* Order History & Order Detail */
+.order-summary {
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.order-summary h4 {
+  margin-bottom: 20px;
+}
+
+.order-table {
+  margin-top: 20px;
+}
+.order-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.order-summary p {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.order-item td {
+  vertical-align: middle;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #00408b;
+}
+
+/* Custom Container for Orders */
+.custom-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Personal Data Page Styles */
+.profile-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.profile-sidebar {
+  width: 250px;
+}
+
+.profile-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.btn-edit {
+  border: none;
+  background: none;
+  color: #007bff;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.form-control {
+  background-color: #f6f6f6;
+  border-radius: 0;
+  height: 100%;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group .input-group-prepend .input-group-text {
+  height: 100%;
+  border-radius: 0;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.input-group .btn-edit {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+}
