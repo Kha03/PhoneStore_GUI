@@ -1,10 +1,8 @@
-package iuh.fit.se.techgalaxy.frontend.customer.dto.response;
+package iuh.fit.se.techgalaxy.frontend.customer.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.Collection;
 
 @Getter
 @Setter
@@ -13,9 +11,9 @@ import java.util.Collection;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class DataResponse<T> {
+public class ApiResponse<T> {
     @Builder.Default
     int status = 200;
     String message;
-    Collection<T> data;
+    T data;
 }

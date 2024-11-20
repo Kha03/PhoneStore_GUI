@@ -8,3 +8,6 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+
+api:
+  base-url: http://localhost:8081

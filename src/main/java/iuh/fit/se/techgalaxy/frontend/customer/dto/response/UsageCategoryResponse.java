@@ -11,8 +11,4 @@ import lombok.experimental.FieldDefaults;
 public class UsageCategoryResponse {
 	String id;
 	String name;
-	String description;
-	String avatar;
-	String status;
-	
 }

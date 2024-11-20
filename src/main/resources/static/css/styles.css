@@ -48,7 +48,6 @@ body {
   background: #f1f3f5;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.1);
   transform: translateY(-5px);
-  cursor: pointer;
 }
 .product_card-img {
   width: 256px;
@@ -61,7 +60,7 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 1;
+  height: 1px;
   background: linear-gradient(
     to right,
     rgba(68, 68, 68, 0.1) 0%,
@@ -114,8 +113,8 @@ body {
   content: "";
   position: absolute;
   border-radius: 50%;
-  top: -260;
-  right: -390;
+  top: -260px;
+  right: -390px;
   width: 800px;
   height: 655px;
   background: #adb5bd;
