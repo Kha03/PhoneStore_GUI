@@ -137,8 +137,12 @@
                     <div id="FilterPrice" class="collapse show">
                         <div class="card-body p-0">
                             <div class="mt-2 d-flex flex-wrap gap-2">
-                                <input type="hidden" id="hidden-min" name="minPrice" value="0"/>
-                                <input type="hidden" id="hidden-max" name="maxPrice" value="100000000"/>
+                                <input type="hidden" id="hidden-min" name="minPrice"
+                                       value="0"
+                                       data-min="${selectedMinPrice != null ? selectedMinPrice : 0}"/>
+                                <input type="hidden" id="hidden-max" name="maxPrice"
+                                       value="100000000"
+                                       data-max="${selectedMaxPrice != null ? selectedMaxPrice : 100000000}"/>
                                 <input
                                         type="radio"
                                         class="btn-check"
@@ -146,7 +150,7 @@
                                         autocomplete="off"
                                         value="0-7000000"
                                         name="priceRange"
-                                />
+                                        <c:if test="${selectedMinPrice == 0 && selectedMaxPrice == 7000000}">checked</c:if> />
                                 <label class="btn btn-outline-dark" for="btn-check-price-1">
                                     Dưới 7 Triệu
                                 </label>
@@ -158,7 +162,7 @@
                                         autocomplete="off"
                                         value="7000000-15000000"
                                         name="priceRange"
-                                />
+                                        <c:if test="${selectedMinPrice == 7000000 && selectedMaxPrice == 15000000}">checked</c:if> />
                                 <label class="btn btn-outline-dark" for="btn-check-price-2">
                                     7 - 15 Triệu
                                 </label>
@@ -170,7 +174,7 @@
                                         autocomplete="off"
                                         value="15000000-25000000"
                                         name="priceRange"
-                                />
+                                        <c:if test="${selectedMinPrice == 15000000 && selectedMaxPrice == 25000000}">checked</c:if> />
                                 <label class="btn btn-outline-dark" for="btn-check-price-3">
                                     15 - 25 Triệu </label
                                 ><input
@@ -180,7 +184,7 @@
                                     autocomplete="off"
                                     value="25000000-"
                                     name="priceRange"
-                            />
+                                    <c:if test="${selectedMinPrice == 25000000}">checked</c:if> />
                                 <label class="btn btn-outline-dark" for="btn-check-price-4">
                                     25 Triệu trở lên</label
                                 >
@@ -189,16 +193,14 @@
                                 <label
                                         for="slider-range"
                                         class="form-label"
-                                        data-bs-toggle="collapse"
-                                        href="#sliderPrice"
                                         style="cursor: pointer; text-decoration: underline"
-                                >Khoảng giá khác:</label
-                                >
+                                >Khoảng giá khác:</label>
+
                                 <div id="sliderPrice" class="collapse p-2">
                                     <div id="slider-range"></div>
                                     <p class="mt-3">
-                                        Giá từ: <span id="min-value">0</span> triệu -
-                                        <span id="max-value">100</span> triệu
+                                        Giá từ: <span id="min-value">0</span> triệu - <span id="max-value">100</span>
+                                        triệu
                                     </p>
                                 </div>
                             </div>
@@ -374,14 +376,15 @@
         <div class="col-9">
             <div class="row mb-3">
                 <div class="offset-9 col-3 pe-4">
-                    <form>
-                        <select class="form-select filter-select" id="sortOptions">
-                            <option value="featured">Sort by: Featured</option>
-                            <option value="price-asc">Price: ascending</option>
-                            <option value="price-desc">Price: descending</option>
-                            <option value="new-arrivals">New Arrivals</option>
-                        </select>
-                    </form>
+                    <select class="form-select filter-select" id="sortOptions">
+                        <option value="none" ${selectedsort == 'none' ? 'selected' : ''}>Sort by</option>
+                        <option value="asc" ${selectedsort == 'asc' ? 'selected' : ''}>Price:
+                            ascending
+                        </option>
+                        <option value="desc" ${selectedsort == 'desc' ? 'selected' : ''}>Price:
+                            descending
+                        </option>
+                    </select>
                 </div>
             </div>
             <div class="row gy-4">

@@ -7,13 +7,13 @@ import iuh.fit.se.techgalaxy.frontend.customer.entities.Memory;
 import iuh.fit.se.techgalaxy.frontend.customer.entities.Trademark;
 import iuh.fit.se.techgalaxy.frontend.customer.service.*;
 import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +43,7 @@ public class ProdcutController {
             @RequestParam(required = false) List<String> memory,
             @RequestParam(required = false) List<String> usageCategoryId,
             @RequestParam(required = false) List<String> values,
-            @RequestParam(defaultValue = "asc") String sort,
+            @RequestParam(required = false) String sort,
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
             ModelAndView model
@@ -62,27 +62,21 @@ public class ProdcutController {
         model.addObject("products", response.getContent());
 
         model.addObject("selectedTrademarks", trademark);
-        model.addObject("minPrice", minPrice);
-        model.addObject("maxPrice", maxPrice);
+        model.addObject("selectedMinPrice", minPrice);
+        model.addObject("selectedMaxPrice", maxPrice);
         model.addObject("selectedMemories", memory);
         model.addObject("selectedusageCategory", usageCategoryId);
         model.addObject("selectedValues", values);
-        model.addObject("sort", sort);
+        model.addObject("selectedsort", sort);
         model.addObject("page", page);
         model.setViewName("listproduct");
         return model;
     }
 
     @PostMapping("/addToCart")
-    public String addToCart(@RequestParam String productVariantId, HttpServletRequest request) {
+    public ResponseEntity<String> addToCart(@RequestParam String productVariantId) {
         log.info("Adding product variant with ID {} to the cart", productVariantId);
         // Process the cart logic here
-        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
-            // Return a response for AJAX requests (e.g., JSON, success message, etc.)
-            return "Cart updated successfully";
-        } else {
-            // For non-AJAX requests, perform the redirect
-            return "redirect:/products";
-        }
+        return ResponseEntity.ok("Cart updated successfully");
     }
 }

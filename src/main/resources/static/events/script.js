@@ -1,43 +1,56 @@
-const toggleButtons = document.querySelectorAll(".toggleButton");
-const arrowIcons = document.querySelectorAll(".arrowIcon");
+const toggleButtons = $(".toggleButton");
+const arrowIcons = $(".arrowIcon");
 
 if (toggleButtons.length > 0 && arrowIcons.length > 0) {
-    toggleButtons.forEach((button, index) => {
-        button.addEventListener("click", () => {
-            arrowIcons[index].classList.toggle("arrow-up");
+    toggleButtons.each(function (index) {
+        $(this).on("click", function () {
+            $(arrowIcons[index]).toggleClass("arrow-up");
         });
     });
 }
+
 // Khởi tạo thanh trượt
-document.addEventListener("DOMContentLoaded", function () {
-    const checkboxes = document.querySelectorAll('input[name="priceRange"]');
-    const sliderPrice = document.getElementById("sliderPrice");
-    const sliderLabel = document.querySelector('label[for="slider-range"]');
-    const minValueDisplay = document.getElementById("min-value");
-    const maxValueDisplay = document.getElementById("max-value");
-    const hiddenMinInput = document.getElementById("hidden-min");
-    const hiddenMaxInput = document.getElementById("hidden-max");
-    const sliderRange = document.getElementById("slider-range");
+$(document).ready(function () {
+    const checkboxes = $('input[name="priceRange"]');
+    const sliderPrice = $("#sliderPrice");
+    const sliderLabel = $('label[for="slider-range"]');
+    const minValueDisplay = $("#min-value");
+    const maxValueDisplay = $("#max-value");
+    const hiddenMinInput = $("#hidden-min");
+    const hiddenMaxInput = $("#hidden-max");
+    const sliderRange = $("#slider-range");
 
-    // Update hidden input based on radio button selection
-    checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener("change", function () {
-            if (checkbox.checked) {
-                sliderPrice.classList.remove("show"); // Hide slider
-                const [min, max] = checkbox.value.split("-");
-                hiddenMinInput.value = min || 0;
-                hiddenMaxInput.value = max || ""; // Empty means no limit
+    // Hàm để cập nhật giá trị cho slider
+    function updateSliderWithValues(min, max) {
+        sliderRange[0].noUiSlider.set([min, max]);
+        minValueDisplay.text(min);
+        maxValueDisplay.text(max);
+    }
 
-                minValueDisplay.textContent = parseInt(min || 0) / 1_000_000;
-                maxValueDisplay.textContent = max ? parseInt(max) / 1_000_000 : "Không giới hạn";
-            }
-        });
+    // Cập nhật giá trị input ẩn khi chọn radio button
+    checkboxes.on("change", function () {
+        const checkbox = $(this);
+
+        if (checkbox.prop("checked")) {
+            sliderPrice.removeClass("show"); // Ẩn slider
+            const [min, max] = checkbox.val().split("-");
+            hiddenMinInput.val(min || 0);
+            hiddenMaxInput.val(max || ""); // Rỗng nghĩa là không giới hạn
+        }
     });
 
-    // Update hidden input based on slider change
-    if (sliderRange) {
-        noUiSlider.create(sliderRange, {
-            start: [7, 15], // Initial values in triệu
+    // Cập nhật giá trị input ẩn khi thay đổi slider
+    if (sliderRange.length) {
+        const checkedCheckbox = $('input[name="priceRange"]:checked');
+        let initialMin = 0;
+        let initialMax = 100;
+        if (checkedCheckbox.length) {
+            const [min, max] = checkedCheckbox.val().split("-");
+            initialMin = parseInt(min) / 1_000_000 || 0;
+            initialMax = parseInt(max) / 1_000_000 || 100;
+        }
+        noUiSlider.create(sliderRange[0], {
+            start: [initialMin, initialMax], // Giá trị khởi đầu (triệu)
             connect: true,
             range: {
                 min: 0,
@@ -47,26 +60,35 @@ document.addEventListener("DOMContentLoaded", function () {
             tooltips: [false, false],
         });
 
-        sliderRange.noUiSlider.on("update", function (values) {
-            const min = Math.round(values[0]) * 1_000_000; // Convert to actual value
+        sliderRange[0].noUiSlider.on("update", function (values) {
+            const min = Math.round(values[0]) * 1_000_000; // Chuyển sang giá trị thực
             const max = Math.round(values[1]) * 1_000_000;
 
-            hiddenMinInput.value = min;
-            hiddenMaxInput.value = max;
+            hiddenMinInput.val(min);
+            hiddenMaxInput.val(max);
 
-            minValueDisplay.textContent = values[0];
-            maxValueDisplay.textContent = values[1];
+            minValueDisplay.text(values[0]);
+            maxValueDisplay.text(values[1]);
         });
 
-        // Show slider and uncheck all radios when slider label is clicked
-        sliderLabel.addEventListener("click", function () {
-            checkboxes.forEach((checkbox) => {
-                checkbox.checked = false;
-            });
-            sliderPrice.classList.add("show");
+        // Hiển thị hoặc ẩn slider khi click vào nhãn slider
+        sliderLabel.on("click", function () {
+            if (sliderPrice.hasClass("show")) {
+                sliderPrice.removeClass("show"); // Ẩn slider nếu đang hiển thị
+            } else {
+                checkboxes.prop("checked", false); // Bỏ chọn tất cả radio buttons
+                sliderPrice.addClass("show"); // Hiển thị slider
+            }
         });
     }
+    if (!$('input[name="priceRange"]:checked').length) {
+        sliderPrice.addClass("show");
+        const min = hiddenMinInput.data("min");
+        const max = hiddenMaxInput.data("max");
+        updateSliderWithValues(min / 1_000_000, max / 1_000_000);
+    }
 });
+
 
 // Define the data container
 var dataContainer = $("#data-container");
