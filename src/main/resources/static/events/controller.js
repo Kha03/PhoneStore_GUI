@@ -12,7 +12,7 @@ $(".addToCartForm").on("submit", function (event) {
         data: formData,
         processData: false,
         contentType: false,
-        success: function ( response) {
+        success: function (response) {
             console.log(response);
             toastBootstrap.show(); // Hiển thị thông báo toast
         },
@@ -26,7 +26,7 @@ $(".addToCartForm").on("click", function (event) {
     event.stopPropagation();
 });
 
-$('#sortOptions').on('change', function() {
+$('#sortOptions').on('change', function () {
     var sortOrder = $(this).val();
 
     var url = new URL(window.location.href);
@@ -38,3 +38,14 @@ $('#sortOptions').on('change', function() {
     window.history.pushState({}, '', `${url.pathname}?${params.toString()}`);
     location.reload();
 });
+if ($('#resetButton').length > 0) {
+    $('#resetButton').click(function () {
+        window.location.href = window.location.pathname;
+    });
+}
+if ($('.product_detail-link').length > 0) {
+    $('.product_detail-link').click(function (event) {
+        // event.preventDefault();
+        console.log('Product detail link clicked!');
+    });
+}

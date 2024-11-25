@@ -320,7 +320,7 @@ footer form {
   background: #888;
   border-radius: 4px;
 }
-.info_sodf-out {
+.info_sold-out {
   font-weight: 500;
   color: #717171;
   padding-left: 16px;
@@ -332,31 +332,8 @@ footer form {
   font-weight: 500;
   color: #717171;
 }
-.info_select-color {
+.info_select-group {
   margin-top: 24px;
-}
-.info_color {
-  margin-left: 8px;
-  position: relative;
-  border-radius: 50%;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-  background: #003789;
-}
-.info_color:hover {
-  opacity: 0.9;
-}
-.info_color.active::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 7px;
-  height: 10px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg) translate(-90%, -30%);
 }
 .info_detail {
   margin-top: 32px;
@@ -377,6 +354,7 @@ footer form {
   margin-top: 20px;
 }
 .info_price .info_price-cost {
+  min-width: 104px;
   color: #717171;
   text-decoration: line-through;
   font-size: 1rem;
@@ -451,7 +429,9 @@ footer form {
   background-color: #021736;
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
-
+.info_btn-add.btn:active {
+  color: #ffffff ;
+}
 .info_btn-add:hover:after {
   top: -45%;
   background-color: #021736;

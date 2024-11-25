@@ -3,12 +3,31 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Document</title>
+    <title>Product List</title>
+    <%-- Favicon --%>
+    <link rel="apple-touch-icon" sizes="57x57" href="<c:url value='/favicon/apple-icon-57x57.png'/>">
+    <link rel="apple-touch-icon" sizes="60x60" href="<c:url value='/favicon/apple-icon-60x60.png'/>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<c:url value='/favicon/apple-icon-72x72.png'/>">
+    <link rel="apple-touch-icon" sizes="76x76" href="<c:url value='/favicon/apple-icon-76x76.png'/>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<c:url value='/favicon/apple-icon-114x114.png'/>">
+    <link rel="apple-touch-icon" sizes="120x120" href="<c:url value='/favicon/apple-icon-120x120.png'/>">
+    <link rel="apple-touch-icon" sizes="144x144" href="<c:url value='/favicon/apple-icon-144x144.png'/>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<c:url value='/favicon/apple-icon-152x152.png'/>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/favicon/apple-icon-180x180.png'/>">
+    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/favicon/android-icon-192x192.png'/>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/favicon/favicon-32x32.png'/>">
+    <link rel="icon" type="image/png" sizes="96x96" href="<c:url value='/favicon/favicon-96x96.png'/>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/favicon/favicon-16x16.png'/>">
+    <link rel="manifest" href="<c:url value='/favicon/manifest.json'/>">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="<c:url value='/favicon/ms-icon-144x144.png'/>">
+    <meta name="theme-color" content="#ffffff">
     <!-- Fonts -->
     <link href="<c:url value='/fonts/stylesheet.css' />" rel="stylesheet"/>
     <!-- Bootstrap CSS -->
@@ -103,15 +122,15 @@
                                         <input
                                                 class="form-check-input me-1"
                                                 type="checkbox"
-                                                value="${brand.getId()}"
-                                                id="${brand.getId()}"
+                                                value="${brand.id}"
+                                                id="${brand.id}"
                                                 name="trademark"
-                                                <c:if test="${selectedTrademarks != null and selectedTrademarks.contains(brand.getId())}">
+                                                <c:if test="${selectedTrademarks != null and selectedTrademarks.contains(brand.id)}">
                                                     checked
                                                 </c:if>
                                         />
                                         <label class="form-check-label stretched-link"
-                                               for="${brand.getId()}">${brand.getName()}</label>
+                                               for="${brand.id}">${brand.name}</label>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -232,14 +251,14 @@
                                                 class="form-check-input me-1"
                                                 type="checkbox"
                                                 name="memory"
-                                                value="${memorie.getId()}"
-                                                id="${memorie.getId()}"
-                                                <c:if test="${selectedMemories != null and selectedMemories.contains(memorie.getId())}">
+                                                value="${memorie.id}"
+                                                id="${memorie.id}"
+                                                <c:if test="${selectedMemories != null and selectedMemories.contains(memorie.id)}">
                                                     checked
                                                 </c:if>
                                         />
                                         <label class="form-check-label"
-                                               for="${memorie.getId()}">${memorie.getName()}</label>
+                                               for="${memorie.id}">${memorie.name}</label>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -271,14 +290,14 @@
                                                 class="form-check-input me-1"
                                                 type="checkbox"
                                                 name="values"
-                                                value="${drive.getValue()}"
-                                                id="${drive.getId()}"
-                                                <c:if test="${selectedValues != null and selectedValues.contains(drive.getValue())}">
+                                                value="${drive.value}"
+                                                id="${drive.id}"
+                                                <c:if test="${selectedValues != null and selectedValues.contains(drive.value)}">
                                                     checked
                                                 </c:if>
                                         />
                                         <label class="form-check-label"
-                                               for="${drive.getId()}">${drive.getValue()}</label>
+                                               for="${drive.id}">${drive.value}</label>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -310,14 +329,14 @@
                                                 class="form-check-input me-1"
                                                 type="checkbox"
                                                 name="values"
-                                                value="${scanFre.getValue()}"
-                                                id="${scanFre.getId()}"
-                                                <c:if test="${selectedValues != null and selectedValues.contains(scanFre.getValue())}">
+                                                value="${scanFre.value}"
+                                                id="${scanFre.id}"
+                                                <c:if test="${selectedValues != null and selectedValues.contains(scanFre.value)}">
                                                     checked
                                                 </c:if>
                                         />
                                         <label class="form-check-label"
-                                               for="${scanFre.getId()}">${scanFre.getValue()}</label>
+                                               for="${scanFre.id}">${scanFre.value}</label>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -347,16 +366,16 @@
                                     <input
                                             type="checkbox"
                                             class="btn-check"
-                                            id="${useNeed.getId()}"
-                                            value="${useNeed.getId()}"
+                                            id="${useNeed.id}"
+                                            value="${useNeed.id}"
                                             autocomplete="off"
                                             name="usageCategoryId"
-                                            <c:if test="${selectedusageCategory != null and selectedusageCategory.contains(useNeed.getId())}">
+                                            <c:if test="${selectedusageCategory != null and selectedusageCategory.contains(useNeed.id)}">
                                                 checked
                                             </c:if>
                                     />
-                                    <label class="btn btn-outline-dark" for="${useNeed.getId()}">
-                                            ${useNeed.getName()}
+                                    <label class="btn btn-outline-dark" for="${useNeed.id}">
+                                            ${useNeed.name}
                                     </label>
                                 </c:forEach>
                             </div>
@@ -400,10 +419,11 @@
                         <c:forEach var="content" items="${products}">
                             <!-- Declaring a custom variable -->
                             <c:set var="product" value="${content.getContent()}"/>
-                            <c:set var="discountPercent" value="${product.getSale() * 100}"/>
+                            <c:set var="discountPercent" value="${product.sale * 100}"/>
                             <!-- item product -->
                             <div class="col-4">
-                                <a href="#!" class="product_detail-link text-decoration-none text-reset">
+                                <a href="<c:url value="/products/detail/${product.variantId}" />"
+                                   class="product_detail-link text-decoration-none text-reset">
                                     <div
                                             class="product_card p-3 shadow-sm position-relative overflow-hidden"
                                     >
@@ -422,7 +442,7 @@
                                         </div>
                                         <div class="product_card-content mt-3">
                                             <h6 class="fw-light text-truncate lh-base">
-                                                    ${product.getName()}
+                                                    ${product.name}
                                             </h6>
                                             <div
                                                     class="d-flex justify-content-between mt-3 align-items-end product_card-content_cost"
@@ -431,13 +451,14 @@
                                                     <p
                                                             class="text-muted text-decoration-line-through m-0 <c:if test="${discountPercent == 0}">opacity-0</c:if>  product_card-discount"
                                                     >
-                                                        $${product.getPrice()}
+                                                        <fmt:formatNumber value="${product.price}" type="currency" currencySymbol="$" groupingUsed="true" />
                                                     </p>
                                                     <p class="fw-light m-0">
-                                                        $${product.getPrice() - product.getPrice() * product.getSale()}</p>
+                                                        <fmt:formatNumber value="${product.price - (product.price * product.sale)}" type="currency" currencySymbol="$" groupingUsed="true" />
+                                                    </p>
                                                 </div>
                                                 <div class="product_card-start d-flex gap-2">
-                                                    <img src="<c:url value='icon/start-icon.svg' />" alt="Star"/>
+                                                    <img src="<c:url value='/icon/start-icon.svg' />" alt="Star"/>
                                                     <p class="m-0">4.8</p>
                                                 </div>
                                             </div>
@@ -448,10 +469,10 @@
 
                                             <form:form class="addToCartForm" role="form" method="post">
                                                 <input type="hidden" name="productVariantId"
-                                                       value="${product.getId()}"/>
+                                                       value="${product.id}"/>
                                                 <button type="submit" class="btn btn-outline-dark d-flex gap-1">
                                                     <img
-                                                            src="<c:url value='icon/shopping-cart.svg' />"
+                                                            src="<c:url value='/icon/shopping-cart.svg' />"
                                                             alt=""
                                                             class="cart-icon"
                                                     />
@@ -459,7 +480,7 @@
                                                 </button>
                                             </form:form>
                                             <img
-                                                    src="<c:url value='icon/heart_icon.svg' />"
+                                                    src="<c:url value='/icon/heart_icon.svg' />"
                                                     alt=""
                                                     class="heart-icon"
                                             />
@@ -475,7 +496,6 @@
             <div class="row d-flex justify-content-center mt-3">
                 <div class="col-3">
                     <nav aria-label="Page navigation" id="pagination"></nav>
-                    <div id="data-container"></div>
                 </div>
             </div>
         </div>
@@ -486,7 +506,7 @@
         <!-- tech item -->
         <div class="col-2 d-flex align-items-center">
             <img
-                    src="<c:url value='icon/computer_icon.svg' />"
+                    src="<c:url value='/icon/computer_icon.svg' />"
                     alt="computer_icon"
             />
             <p class="m-0 fs-5 ms-4" style="width: 180px">
@@ -496,7 +516,7 @@
         <!-- tech item -->
         <div class="col-2 d-flex align-items-center">
             <img
-                    src="<c:url value='icon/clock_icon.svg' />"
+                    src="<c:url value='/icon/clock_icon.svg' />"
                     alt="clock_icon"
             />
             <p class="m-0 fs-5 ms-4" style="width: 180px">Guarantee</p>
@@ -504,7 +524,7 @@
         <!-- tech item -->
         <div class="col-2 d-flex align-items-center">
             <img
-                    src="<c:url value='icon/television_icon.svg' />"
+                    src="<c:url value='/icon/television_icon.svg' />"
                     alt="television_icon"
             />
             <p class="m-0 fs-5 ms-4" style="width: 180px">
@@ -514,7 +534,7 @@
         <!-- tech item -->
         <div class="col-2 d-flex align-items-center">
             <img
-                    src="<c:url value='icon/airplane_icon.svg' />"
+                    src="<c:url value='/icon/airplane_icon.svg' />"
                     alt="airplane_icon"
             />
             <p class="m-0 fs-5 ms-4" style="width: 180px">24/7 Support</p>
@@ -526,6 +546,8 @@
 <script>
     load("#footer", "/footer");
     const contextPath = '${pageContext.request.contextPath}';
+    const totalPages = ${totalPages};
+    const page = ${page};
 </script>
 <!-- events -->
 <script src="<c:url value='/events/script.js'/>"></script>

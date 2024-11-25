@@ -1,7 +1,7 @@
 package iuh.fit.se.techgalaxy.frontend.customer.service.impl;
 
-import iuh.fit.se.techgalaxy.frontend.customer.entities.Memory;
-import iuh.fit.se.techgalaxy.frontend.customer.service.MemoriesService;
+import iuh.fit.se.techgalaxy.frontend.customer.entities.Color;
+import iuh.fit.se.techgalaxy.frontend.customer.service.ColorService;
 import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -18,39 +18,22 @@ import java.util.Set;
 @Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class MemoriesServiceImpl implements MemoriesService {
+public class ColorServiceImpl implements ColorService {
     WebClient webClient;
-
-
     @Override
-    public ApiResponse<List<Memory>> getAllMemories() {
-        try {
+    public ApiResponse<List<Color>> getColorsById(Set<String> ids) {
+       try {
             return webClient.get()
-                    .uri("/memories")
-                    .retrieve()
-                    .toEntity(new ParameterizedTypeReference<ApiResponse<List<Memory>>>() {
-                    })
-                    .block().getBody();
-        } catch (NullPointerException e) {
-            log.error("Error: ", e);
-            return null;
-        }
-    }
-
-    @Override
-    public ApiResponse<List<Memory>> getMemoriesById(Set<String> ids) {
-        try {
-            return webClient.get()
-                    .uri(uriBuilder -> uriBuilder.path("/memories/ids")
+                    .uri(uriBuilder -> uriBuilder.path("/colors/ids")
                             .queryParam("ids", ids)
                             .build())
                     .retrieve()
-                    .toEntity(new ParameterizedTypeReference<ApiResponse<List<Memory>>>() {
+                    .toEntity(new ParameterizedTypeReference<ApiResponse<List<Color>>>() {
                     })
                     .block().getBody();
         } catch (NullPointerException e) {
             log.error("Error: ", e);
             return null;
-        }
+       }
     }
 }

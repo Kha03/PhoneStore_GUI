@@ -9,4 +9,6 @@ public interface AttributeValueService {
     ApiResponse<List<ValueResponse>> getValueByDriveSize();
     ApiResponse<List<ValueResponse>> getValueByScanFre();
 
+    ApiResponse<List<ValueResponse>> getValueByVariantId(String variantId);
+
 }

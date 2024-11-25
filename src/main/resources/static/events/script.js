@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     // Hàm để cập nhật giá trị cho slider
     function updateSliderWithValues(min, max) {
-        sliderRange[0].noUiSlider.set([min, max]);
+        sliderRange.length && sliderRange[0].noUiSlider.set([min, max]);
         minValueDisplay.text(min);
         maxValueDisplay.text(max);
     }
@@ -38,7 +38,6 @@ $(document).ready(function () {
             hiddenMaxInput.val(max || ""); // Rỗng nghĩa là không giới hạn
         }
     });
-
     // Cập nhật giá trị input ẩn khi thay đổi slider
     if (sliderRange.length) {
         const checkedCheckbox = $('input[name="priceRange"]:checked');
@@ -90,36 +89,28 @@ $(document).ready(function () {
 });
 
 
-// Define the data container
-var dataContainer = $("#data-container");
-
-// Define the template function to generate HTML
-function template(data) {
-    var html = `<ul class="pagination">`;
-    $.each(data, function (index, item) {
-        html += `<li  class="page-item"><a class="page-link" href="#!">${item}</a></li>`;
-    });
-    html += "</ul>";
-    return html;
-}
-
 if ($("#pagination").length > 0) {
     // Initialize pagination
     $("#pagination").pagination({
-        dataSource: [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-            22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-            12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30,
-            31, 32,
-        ], // Your data array
+        dataSource: new Array(totalPages),
         prevText: '<img src="../icon/arrow-left_page.svg"/>',
         nextText: '<img src="../icon/arrow-right_page.svg"/>',
-        pageSize: 4, // Adjust the number of items per page
-        pageRange: 1,
-        callback: function (data, pagination) {
-            var html = template(data);
-            // dataContainer.html(html);
-        },
+        pageSize: 1,
+        pageRange: 2,
+        pageNumber: page + 1,
+        afterPageOnClick: function (event, pageNumber) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', pageNumber - 1);
+            window.location.href = url.href;
+        }, afterPreviousOnClick: function (event, pageNumber) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', pageNumber - 1);
+            window.location.href = url.href;
+        }, afterNextOnClick: function (event, pageNumber) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', pageNumber - 1);
+            window.location.href = url.href;
+        }
     });
 }
 
@@ -130,19 +121,5 @@ if ($(".info_color").length > 0) {
     });
 }
 
-if ($('#resetButton').length > 0) {
-    $('#resetButton').click(function () {
-        // Bỏ chọn tất cả các checkbox với name="memory"
-        $('input[name="memory"]').prop('checked', false);
 
-        // Reload lại trang mà không thay đổi các tham số URL
-        window.location.href = window.location.pathname;
-    });
-}
-if ($('.product_detail-link').length > 0) {
-    $('.product_detail-link').click(function (event) {
-        event.preventDefault();
-        console.log('Product detail link clicked!');
-    });
-}
 

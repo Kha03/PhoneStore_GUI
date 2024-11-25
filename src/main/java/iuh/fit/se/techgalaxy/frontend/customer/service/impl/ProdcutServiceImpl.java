@@ -1,7 +1,9 @@
 package iuh.fit.se.techgalaxy.frontend.customer.service.impl;
 
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductPageResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductVariantDetailResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.service.ProductService;
+import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -33,7 +36,7 @@ public class ProdcutServiceImpl implements ProductService {
 
     @Override
     public PagedModel<EntityModel<ProductPageResponse>> getFilteredProductDetails(List<String> trademark, Double minPrice, Double maxPrice, List<String> memory, List<String> usageCategoryId, List<String> values, String sort, Integer page, Integer size) {
-        String url = UriComponentsBuilder.fromHttpUrl(baseUrl + "/variants/details/filter")
+        String url = UriComponentsBuilder.fromHttpUrl(baseUrl + "/products/variants/details/filter")
                 .queryParamIfPresent("trademark", Optional.ofNullable(trademark))
                 .queryParamIfPresent("minPrice", Optional.ofNullable(minPrice))
                 .queryParamIfPresent("maxPrice", Optional.ofNullable(maxPrice))
@@ -52,6 +55,15 @@ public class ProdcutServiceImpl implements ProductService {
                         .accept(MediaTypes.HAL_JSON).retrieve().toEntity(new ParameterizedTypeReference<PagedModel<EntityModel<ProductPageResponse>>>() {
                         }).block();
         return responseEntity.getBody();
+    }
+
+    @Override
+    public ApiResponse<Set<ProductVariantDetailResponse>> getProductVariantDetail(String variantId) {
+        ApiResponse<Set<ProductVariantDetailResponse>> response = webClientBuilder.build().get()
+                .uri(baseUrl + "/products/variants/" + variantId + "/details")
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ApiResponse<Set<ProductVariantDetailResponse>>>()
+                {}).block();
+        return response;
     }
 }
 

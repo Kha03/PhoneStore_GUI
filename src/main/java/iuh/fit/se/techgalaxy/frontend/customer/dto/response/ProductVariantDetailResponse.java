@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -14,20 +15,10 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductVariantDetailResponse {
     String id;
+    String name;
     ProductStatus status;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
-    Map<String, ColorQuantity[]> memories;
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @FieldDefaults(level = AccessLevel.PRIVATE)
-    public static class ColorQuantity {
-        Integer viewsCount;
-        Double price;
-        Double sale;
-        Integer quantity;
-        String colorId;
-    }
+    Map<String, List<ColorQuantity>> memories;
+
 }

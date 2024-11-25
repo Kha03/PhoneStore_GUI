@@ -7,7 +7,7 @@
     class="d-flex align-items-center justify-content-between pt-2 pb-2 header"
   >
     <a href="#!">
-      <img  src="<c:url value='imgs/img_logo_blue_a700.svg' />" alt="Logo" />
+      <img  src="<c:url value='/imgs/img_logo_blue_a700.svg' />" alt="Logo" />
     </a>
     <ul class="nav col-12 col-md-auto justify-content-center">
       <li>

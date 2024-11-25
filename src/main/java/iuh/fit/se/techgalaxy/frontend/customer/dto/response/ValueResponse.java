@@ -13,5 +13,7 @@ import lombok.experimental.FieldDefaults;
 public class ValueResponse {
     String id;
     String attributeName;
+    String attributeId;
     String value;
+    String type;
 }

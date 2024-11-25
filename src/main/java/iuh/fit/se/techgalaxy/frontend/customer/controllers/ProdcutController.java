@@ -1,8 +1,8 @@
 package iuh.fit.se.techgalaxy.frontend.customer.controllers;
 
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductPageResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.UsageCategoryResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ValueResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.*;
+import iuh.fit.se.techgalaxy.frontend.customer.entities.Color;
 import iuh.fit.se.techgalaxy.frontend.customer.entities.Memory;
 import iuh.fit.se.techgalaxy.frontend.customer.entities.Trademark;
 import iuh.fit.se.techgalaxy.frontend.customer.service.*;
@@ -15,13 +15,14 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -34,6 +35,7 @@ public class ProdcutController {
     AttributeValueService attributeValueService;
     MemoriesService memoriesService;
     UsageCategoryService usageCategoryService;
+    ColorService colorService;
 
     @GetMapping()
     public ModelAndView getFilteredProducts(
@@ -45,7 +47,7 @@ public class ProdcutController {
             @RequestParam(required = false) List<String> values,
             @RequestParam(required = false) String sort,
             @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "2") Integer size,
             ModelAndView model
     ) {
         PagedModel<EntityModel<ProductPageResponse>> response = productService.getFilteredProductDetails(trademark, minPrice, maxPrice, memory, usageCategoryId, values, sort, page, size);
@@ -68,6 +70,7 @@ public class ProdcutController {
         model.addObject("selectedusageCategory", usageCategoryId);
         model.addObject("selectedValues", values);
         model.addObject("selectedsort", sort);
+        model.addObject("totalPages", response.getMetadata().getTotalPages());
         model.addObject("page", page);
         model.setViewName("listproduct");
         return model;
@@ -79,4 +82,55 @@ public class ProdcutController {
         // Process the cart logic here
         return ResponseEntity.ok("Cart updated successfully");
     }
+    @GetMapping("/detail/{productId}")
+    public ModelAndView getProductDetail(@PathVariable String productId, ModelAndView model) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ApiResponse<Set<ProductVariantDetailResponse>> response = productService.getProductVariantDetail(productId);
+        ProductVariantDetailResponse product = response.getData().stream().findFirst().orElse(null);
+        ApiResponse<List<ValueResponse>> valueByVariantId = attributeValueService.getValueByVariantId(productId);
+        if (product != null) {
+            // Gọi API để lấy tên cho memories và colors
+            Map<String, String> memoryNames = getMemoryNames(product.getMemories().keySet());
+            Map<String, String> colorNames = getColorNames(product.getMemories());
+
+            // Xử lý dữ liệu: chuyển đổi id -> name
+            Map<String, List<ColorQuantity>> updatedMemories = new LinkedHashMap<>();
+            product.getMemories().forEach((memoryId, colorQuantities) -> {
+                String memoryName = memoryNames.getOrDefault(memoryId, memoryId);
+                colorQuantities.forEach(color -> {
+                    String colorName = colorNames.getOrDefault(color.getColorId(), color.getColorId());
+                    color.setColorId(colorName);
+                });
+                updatedMemories.put(memoryName, colorQuantities);
+            });
+            product.setMemories(updatedMemories);
+            model.addObject("memoryNames", memoryNames);
+        }
+
+        try {
+            String memoriesJson = objectMapper.writeValueAsString(product.getMemories());
+            model.addObject("memoriesJson", memoriesJson);
+        } catch (Exception e) {
+            model.addObject("memoriesJson", "{}");
+        }
+        model.addObject("values", valueByVariantId.getData());
+        model.addObject("product", product);
+        model.setViewName("productdetail");
+        return model;
+    }
+
+    private Map<String, String> getMemoryNames(Set<String> memoryIds) {
+        return memoriesService.getMemoriesById(memoryIds).getData().stream()
+                .collect(Collectors.toMap(Memory::getId, Memory::getName));
+    }
+
+    private Map<String, String> getColorNames(Map<String, List<ColorQuantity>> memories) {
+        Set<String> colorIds = memories.values().stream()
+                .flatMap(List::stream)
+                .map(ColorQuantity::getColorId)
+                .collect(Collectors.toSet());
+        return colorService.getColorsById(colorIds).getData().stream()
+                .collect(Collectors.toMap(Color::getId, Color::getName));
+    }
+
 }

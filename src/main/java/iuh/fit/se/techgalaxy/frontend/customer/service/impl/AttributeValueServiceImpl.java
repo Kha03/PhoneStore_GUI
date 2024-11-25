@@ -52,4 +52,20 @@ public class AttributeValueServiceImpl implements AttributeValueService {
         }
         return null;
     }
+
+    @Override
+    public ApiResponse<List<ValueResponse>> getValueByVariantId(String variantId) {
+        try {
+            ResponseEntity<ApiResponse<List<ValueResponse>>> responseEntity =
+                    webClient.get()
+                            .uri("attributes/attributeByVariantId/" + variantId)
+                            .retrieve()
+                            .toEntity(new ParameterizedTypeReference<ApiResponse<List<ValueResponse>>>() {
+                            }).block();
+            return responseEntity.getBody();
+        } catch (NullPointerException e) {
+            log.error("Error: ", e);
+        }
+        return null;
+    }
 }

@@ -43,19 +43,19 @@
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2">
                             <a href="#" class="nav-link p-0 footer_link text-nowrap"
-                            ><img src="<c:url value='icon/adress_icon_footer.svg' />" alt=""/> 123
+                            ><img src="<c:url value='/icon/adress_icon_footer.svg' />" alt=""/> 123
                                 Main Street, Anytown,USA</a
                             >
                         </li>
                         <li class="nav-item mb-2">
                             <a href="#" class="nav-link p-0 footer_link text-nowrap"
-                            ><img src="<c:url value='icon/phone_icon_footer.svg' />" alt=""/> +1
+                            ><img src="<c:url value='/icon/phone_icon_footer.svg' />" alt=""/> +1
                                 (555) 123-4567</a
                             >
                         </li>
                         <li class="nav-item mb-2">
                             <a href="#" class="nav-link p-0 footer_link text-nowrap"
-                            ><img src="<c:url value='icon/mail_icon_footer.svg' />" alt=""/>
+                            ><img src="<c:url value='/icon/mail_icon_footer.svg' />" alt=""/>
                                 TechHeimSupport@gmail.com</a
                             >
                         </li>
@@ -75,7 +75,7 @@
                             >
                             <img
 
-                                    src="<c:url value='icon/user_icon_footer.svg' />"
+                                    src="<c:url value='/icon/user_icon_footer.svg' />"
                                     alt=""
                                     class="p-1"
                             />
@@ -86,32 +86,32 @@
                                     placeholder="Email address"
                             />
                             <button class="btn p-1" type="button">
-                                <img src="<c:url value='icon/arrow-right.svg' />" alt=""/>
+                                <img src="<c:url value='/icon/arrow-right.svg' />" alt=""/>
                             </button>
                         </div>
                     </form>
                     <ul class="list-unstyled d-flex align-self-center me-5 pe-3 mt-3">
                         <li class="me-3">
                             <a class="link-body-emphasis" href="#">
-                                <img src="<c:url value='icon/Facebook.svg' />" alt=""/>
+                                <img src="<c:url value='/icon/Facebook.svg' />" alt=""/>
                             </a>
                         </li>
                         <li class="me-3">
                             <a class="link-body-emphasis" href="#">
-                                <img src="<c:url value='icon/twitter.svg' />" alt=""/>
+                                <img src="<c:url value='/icon/twitter.svg' />" alt=""/>
                             </a>
                         </li>
                         <li class="me-3">
                             <a class="link-body-emphasis" href="#"
                             >
-                                <img src="<c:url value='icon/Instagram.svg' />" alt=""
+                                <img src="<c:url value='/icon/Instagram.svg' />" alt=""
                                 />
                             </a>
                         </li>
                         <li class="me-3">
                             <a class="link-body-emphasis" href="#"
                             >
-                                <img src="<c:url value='icon/Youtube.svg' />" alt=""
+                                <img src="<c:url value='/icon/Youtube.svg' />" alt=""
                                 />
                             </a>
                         </li>
