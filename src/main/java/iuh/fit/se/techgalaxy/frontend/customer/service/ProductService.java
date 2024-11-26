@@ -16,4 +16,6 @@ public interface ProductService {
             String sort, Integer page, Integer size);
 
     ApiResponse<Set<ProductVariantDetailResponse>> getProductVariantDetail(String variantId);
+
+    String getVariantDetailIdByVariantIdAndMemoryColor(String variantId,String colorId, String memoryId);
 }

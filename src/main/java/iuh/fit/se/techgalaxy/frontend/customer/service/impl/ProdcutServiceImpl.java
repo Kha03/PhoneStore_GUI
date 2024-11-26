@@ -14,11 +14,12 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -64,6 +65,41 @@ public class ProdcutServiceImpl implements ProductService {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ApiResponse<Set<ProductVariantDetailResponse>>>()
                 {}).block();
         return response;
+    }
+
+    @Override
+    public String getVariantDetailIdByVariantIdAndMemoryColor(String variantId,String colorId, String memoryId) {
+        String url = UriComponentsBuilder.fromHttpUrl(baseUrl + "/products/variants/details/getProductVariantDetailByProductVariantAndColorAndMemory")
+                .queryParam("productVariantId", variantId)
+                .queryParam("color", colorId)
+                .queryParam("memory", memoryId)
+                .toUriString();
+
+        try {
+            // Gửi request và xử lý response
+            ApiResponse<List<ProductVariantDetailResponse>> response = webClientBuilder.build()
+                    .get()
+                    .uri(url)
+                    .retrieve()
+                    .onStatus(
+                            HttpStatusCode::isError,
+                            clientResponse -> clientResponse.bodyToMono(ApiResponse.class)
+                                    .flatMap(errorBody -> {
+                                        String message = errorBody.getMessage();
+                                        return Mono.error(new RuntimeException("Error from API: " + message));
+                                    })
+                    )
+                    .bodyToMono(new ParameterizedTypeReference<ApiResponse<List<ProductVariantDetailResponse>>>() {})
+                    .block();
+            if (response != null && response.getData() != null && !response.getData().isEmpty()) {
+                return response.getData().get(0).getId();
+            } else {
+                throw new RuntimeException("No data found in the API response");
+            }
+        } catch (Exception e) {
+            log.error("Error fetching variant detail: {}", e.getMessage());
+            throw new RuntimeException("Failed to fetch product variant details", e);
+        }
     }
 }
 

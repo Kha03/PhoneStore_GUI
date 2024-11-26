@@ -4,7 +4,6 @@ function selectMemory(memoryName) {
 
     // Lấy danh sách màu từ bộ nhớ được chọn
     const colors = productMemories[memoryName];
-
     if (!colors) {
         console.error(`Không tìm thấy màu nào cho bộ nhớ: ${memoryName}`);
         return;
@@ -13,14 +12,14 @@ function selectMemory(memoryName) {
     // Render danh sách màu sắc
     colors.forEach(color => {
         const $wrapperDiv = $("<div>").addClass("ms-2");
-
+        const idFound = Object.keys(colorKey).find(key => colorKey[key] === color.colorId) || null;
         const $colorInput = $("<input>")
             .attr({
                 type: "radio",
                 class: "btn-check",
                 id: `color-${color.colorId}`,
-                name: "colorOption",
-                value: color.colorId,
+                name: "colorId",
+                value: idFound,
                 autocomplete: "off",
             });
 
@@ -41,9 +40,10 @@ function selectMemory(memoryName) {
     });
 
     // Tự động chọn màu đầu tiên nếu có
-    if (colors.length > 0) {
-        $(`#color-${colors[0].colorId}`).prop("checked", true);
-        selectColor(colors[0]);
+    const firstAvailableColor = colors.find(color => color.quantity > 0);
+    if (firstAvailableColor) {
+        $(`#color-${firstAvailableColor.colorId}`).prop("checked", true);
+        selectColor(firstAvailableColor);
     }
 }
 

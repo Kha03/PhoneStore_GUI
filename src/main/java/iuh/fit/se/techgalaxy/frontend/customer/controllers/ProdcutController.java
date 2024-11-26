@@ -7,6 +7,8 @@ import iuh.fit.se.techgalaxy.frontend.customer.entities.Memory;
 import iuh.fit.se.techgalaxy.frontend.customer.entities.Trademark;
 import iuh.fit.se.techgalaxy.frontend.customer.service.*;
 import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,10 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -77,9 +76,24 @@ public class ProdcutController {
     }
 
     @PostMapping("/addToCart")
-    public ResponseEntity<String> addToCart(@RequestParam String productVariantId) {
-        log.info("Adding product variant with ID {} to the cart", productVariantId);
-        // Process the cart logic here
+    public ResponseEntity<String> addToCart(@RequestParam String productVariantId,
+                                            @RequestParam(required = false) String memoryId,
+                                            @RequestParam(required = false) String colorId,
+                                            HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new HashMap<>();
+        }
+        String idToAdd;
+        if (memoryId == null && colorId == null) {
+            idToAdd = productVariantId;
+        } else {
+            idToAdd = productService.getVariantDetailIdByVariantIdAndMemoryColor(productVariantId,colorId, memoryId);
+        }
+        cart.put(idToAdd, cart.getOrDefault(idToAdd, 0) + 1);
+        session.setAttribute("cart", cart);
+        log.info("Added product variant with ID {} to the cart", idToAdd);
         return ResponseEntity.ok("Cart updated successfully");
     }
     @GetMapping("/detail/{productId}")
@@ -103,16 +117,20 @@ public class ProdcutController {
                 });
                 updatedMemories.put(memoryName, colorQuantities);
             });
+
             product.setMemories(updatedMemories);
             model.addObject("memoryNames", memoryNames);
+            try {
+                String memoriesJson = objectMapper.writeValueAsString(product.getMemories());
+                String colorNamesJson = objectMapper.writeValueAsString(colorNames);
+                model.addObject("memoriesJson", memoriesJson);
+                model.addObject("colorNamesJson", colorNamesJson);
+            } catch (Exception e) {
+                model.addObject("memoriesJson", "{}");
+            }
         }
 
-        try {
-            String memoriesJson = objectMapper.writeValueAsString(product.getMemories());
-            model.addObject("memoriesJson", memoriesJson);
-        } catch (Exception e) {
-            model.addObject("memoriesJson", "{}");
-        }
+        model.addObject("variantId", productId);
         model.addObject("values", valueByVariantId.getData());
         model.addObject("product", product);
         model.setViewName("productdetail");

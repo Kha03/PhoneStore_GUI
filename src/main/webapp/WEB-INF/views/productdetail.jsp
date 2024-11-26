@@ -48,6 +48,18 @@
 </script>
 <!-- Main -->
 <main class="container container-fluid">
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
+             aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    add to cart success
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
     <c:set var="product" value="${product}"/>
     <!-- breadcrumb -->
     <div class="row mt-3">
@@ -143,6 +155,9 @@
                             <p class="m-0">Free Delivery</p>
                         </div>
                     </div>
+                    <form:form class="addToCartForm" role="form" method="post">
+                        <input type="hidden" name="productVariantId"
+                               value="${variantId}"/>
                     <div class="info_select-group  d-flex">
                         <p class="m-0">Select memory</p>
                         <div class="d-flex ms-3">
@@ -154,7 +169,7 @@
                                         id="${memoryEntry.key}"
                                         value="${memoryEntry.key}"
                                         autocomplete="off"
-                                        name="memoryEntry"
+                                        name="memoryId"
                                     ${status.first ? "checked" : ""}
                                 />
                                 <label class="btn btn-outline-dark btn-sm" for="${memoryEntry.key}" onclick="selectMemory('${memoryEntry.value}')">
@@ -186,7 +201,9 @@
                     </div>
                     <!-- button add -->
                     <div class="info_add-cart d-flex flex-column">
+
                         <button class="btn  w-75 info_btn-add">Add To Cart</button>
+
                         <button class="btn w-75 info_btn-buy">
                             Buy Now
                             <img
@@ -196,6 +213,7 @@
                             />
                         </button>
                     </div>
+                    </form:form>
                     <div class="info_detail w-100 d-flex">
                         <div class="info_detail-name">
                             <ul>
@@ -1368,10 +1386,13 @@
 <footer id="footer" class="footer"></footer>
 <script>
     load("#footer", "/footer");
+    const contextPath = '${pageContext.request.contextPath}';
+    const colorKey = ${colorNamesJson};
     const productMemories = ${memoriesJson};
 </script>
 <!-- events  -->
 <script src="<c:url value='/events/script.js'/>"></script>
 <script src="<c:url value='/events/eventproductdetail.js'/>"></script>
+<script src="<c:url value='/events/controller.js'/>"></script>
 </body>
 </html>
