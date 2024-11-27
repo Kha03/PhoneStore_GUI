@@ -22,7 +22,7 @@
     </ul>
 
     <div class="col-3 text-end">
-      <button type="button" class="btn position-relative me-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
+      <button type="button" id="cartButton" class="btn position-relative me-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
         <img
                 src="<c:url value='/icon/shopping-cart.svg' />"
                 alt="cart"
@@ -69,12 +69,29 @@
     </c:forEach>
   </div>
   <div class="offcanvas-footer p-3">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-around align-items-center">
       <div>
         <p class="mb-0">Grand Total:</p>
         <h5 class="fw-bold"><fmt:formatNumber value="${cartTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></h5>
       </div>
-      <button class="btn btn-signIn btn-lg">Proceed to Checkout</button>
+      <a href="${pageContext.request.contextPath}/cart" class="text-decoration-none btn-cart text-center  w-50">Go To Cart</a>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteLabel">Confirm Delete Item</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to remove this item from your cart?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Remove</button>
+      </div>
     </div>
   </div>
 </div>

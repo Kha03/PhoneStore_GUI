@@ -6,6 +6,7 @@ import iuh.fit.se.techgalaxy.frontend.customer.entities.Color;
 import iuh.fit.se.techgalaxy.frontend.customer.entities.Memory;
 import iuh.fit.se.techgalaxy.frontend.customer.entities.Trademark;
 import iuh.fit.se.techgalaxy.frontend.customer.service.*;
+import iuh.fit.se.techgalaxy.frontend.customer.service.impl.CartService;
 import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -35,7 +36,7 @@ public class ProdcutController {
     MemoriesService memoriesService;
     UsageCategoryService usageCategoryService;
     ColorService colorService;
-
+    CartService cartService;
     @GetMapping()
     public ModelAndView getFilteredProducts(
             @RequestParam(required = false) List<String> trademark,
@@ -81,31 +82,14 @@ public class ProdcutController {
                                             @RequestParam(required = false) String colorId,
                                             HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new HashMap<>();
-        }
-        String idToAdd;
-        if (memoryId == null && colorId == null) {
-            idToAdd = productVariantId;
-        } else {
-            idToAdd = productService.getVariantDetailIdByVariantIdAndMemoryColor(productVariantId,colorId, memoryId);
-        }
-        cart.put(idToAdd, cart.getOrDefault(idToAdd, 0) + 1);
-        session.setAttribute("cart", cart);
-        log.info("Added product variant with ID {} to the cart", idToAdd);
+        cartService.addToCart(productVariantId, memoryId, colorId, session);
+        log.info("Added product variant with ID {} to the cart", productVariantId);
         return ResponseEntity.ok("Cart updated successfully");
     }
     @PostMapping("/removeFromCart")
     public ResponseEntity<String> removeFromCart(@RequestParam String productId, HttpServletRequest request){
         HttpSession session = request.getSession();
-        log.info("Removing product variant with ID {} from the cart", productId);
-        Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new HashMap<>();
-        }
-       cart.remove(productId);
-        session.setAttribute("cart", cart);
+        cartService.removeFromCart(productId, session);
         log.info("Removed product variant with ID {} from the cart", productId);
         return ResponseEntity.ok("Cart updated successfully");
     }

@@ -155,7 +155,7 @@
                             <p class="m-0">Free Delivery</p>
                         </div>
                     </div>
-                    <form:form class="addToCartForm" role="form" method="post">
+                    <form:form class="addToCartForm" role="form" method="post" action="${pageContext.request.contextPath}/cart">
                         <input type="hidden" name="productVariantId"
                                value="${variantId}"/>
                     <div class="info_select-group  d-flex">
@@ -202,9 +202,9 @@
                     <!-- button add -->
                     <div class="info_add-cart d-flex flex-column">
 
-                        <button class="btn  w-75 info_btn-add">Add To Cart</button>
+                        <button class="btn  w-75 info_btn-add" id="addCartBtn">Add To Cart</button>
 
-                        <button class="btn w-75 info_btn-buy">
+                        <button type="submit" class="btn w-75 info_btn-buy">
                             Buy Now
                             <img
                                     src="<c:url value='/icon/arrow-right.svg' />"
