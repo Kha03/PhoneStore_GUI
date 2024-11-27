@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
 <div class="container container-fluid border-bottom border-primary">
   <div
     class="d-flex align-items-center justify-content-between pt-2 pb-2 header"
@@ -44,104 +44,37 @@
   </div>
   <div class="offcanvas-body">
     <!-- Product Item -->
-    <div class="card mb-3">
-      <div class="row g-0 align-items-center">
-        <div class="col-md-4">
-          <img src="../Icons/productlaptop.png" class="img-fluid rounded-start" alt="Product Image">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h6 class="card-title mb-1">MacBook Pro M2 MNEJ3 2022 LLA 13.3inch</h6>
-            <p class="text-muted mb-1">Memory: 256GB</p>
-            <p class="text-muted mb-1">Color: Black</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span>Quantity: 1</span>
-              <p class="mb-0 fw-bold">$433.00</p>
+    <c:forEach var="product" items="${cart}">
+      <!-- Product Item -->
+      <div class="card mb-3">
+        <div class="row g-0 align-items-center">
+          <div class="col-md-4">
+<%--            <img src="<c:url value='/imgs/${product.productsImage[0].url}' />" class="img-fluid rounded-start" alt="Product Image">--%>
+             <img src="<c:url value='/imgs/p1.png' />"  class="img-fluid rounded-start" alt="Product Image"/>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h6 class="card-title mb-1">${product.productVariantId}</h6>
+              <p class="text-muted mb-1">Memory: ${product.memory != null ? product.memory.name : "N/A"}</p>
+              <p class="text-muted mb-1">Color: ${product.color != null ? product.color.name : "N/A"}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span>Quantity: ${product.quantity}</span>
+                <p class="mb-0 fw-bold">  <fmt:formatNumber value="${product.price - (product.price * product.sale)}" type="currency" currencySymbol="$" groupingUsed="true" /></p>
+              </div>
+              <button class="btn btn-danger btn-sm mt-2 btn-remove" data-id="${product.id}">Remove</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- End Product Item -->
-    <div class="card mb-3">
-      <div class="row g-0 align-items-center">
-        <div class="col-md-4">
-          <img src="../Icons/productlaptop.png" class="img-fluid rounded-start" alt="Product Image">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h6 class="card-title mb-1">MacBook Pro M2 MNEJ3 2022 LLA 13.3inch</h6>
-            <p class="text-muted mb-1">Memory: 256GB</p>
-            <p class="text-muted mb-1">Color: Black</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span>Quantity: 1</span>
-              <p class="mb-0 fw-bold">$433.00</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> <div class="card mb-3">
-    <div class="row g-0 align-items-center">
-      <div class="col-md-4">
-        <img src="../Icons/productlaptop.png" class="img-fluid rounded-start" alt="Product Image">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h6 class="card-title mb-1">MacBook Pro M2 MNEJ3 2022 LLA 13.3inch</h6>
-          <p class="text-muted mb-1">Memory: 256GB</p>
-          <p class="text-muted mb-1">Color: Black</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <span>Quantity: 1</span>
-            <p class="mb-0 fw-bold">$433.00</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> <div class="card mb-3">
-    <div class="row g-0 align-items-center">
-      <div class="col-md-4">
-        <img src="../Icons/productlaptop.png" class="img-fluid rounded-start" alt="Product Image">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h6 class="card-title mb-1">MacBook Pro M2 MNEJ3 2022 LLA 13.3inch</h6>
-          <p class="text-muted mb-1">Memory: 256GB</p>
-          <p class="text-muted mb-1">Color: Black</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <span>Quantity: 1</span>
-            <p class="mb-0 fw-bold">$433.00</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-    <!-- Repeat for more products -->
-    <div class="card mb-3">
-      <div class="row g-0 align-items-center">
-        <div class="col-md-4">
-          <img src="../Icons/lpproduct.png" class="img-fluid rounded-start" alt="Product Image">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h6 class="card-title mb-1">MacBook Pro M2 MNEJ3 2022 LLA 13.3inch</h6>
-            <p class="text-muted mb-1">Memory: 256GB</p>
-            <p class="text-muted mb-1">Color: Black</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span>Quantity: 1</span>
-              <p class="mb-0 fw-bold">$433.00</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </c:forEach>
   </div>
   <div class="offcanvas-footer p-3">
     <div class="d-flex justify-content-between align-items-center">
       <div>
         <p class="mb-0">Grand Total:</p>
-        <h5 class="fw-bold">$543.02</h5>
+        <h5 class="fw-bold"><fmt:formatNumber value="${cartTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></h5>
       </div>
-      <button class="btn btn-primary btn-lg">Proceed to Checkout</button>
+      <button class="btn btn-signIn btn-lg">Proceed to Checkout</button>
     </div>
   </div>
 </div>

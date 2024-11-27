@@ -3,6 +3,7 @@ package iuh.fit.se.techgalaxy.frontend.customer.service.impl;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductDetailResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductPageResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductVariantDetailResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductVariantResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.service.ProductService;
 import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
 import lombok.AccessLevel;
@@ -112,6 +113,20 @@ public class ProdcutServiceImpl implements ProductService {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ApiResponse<List<ProductDetailResponse>>>() {
                 }).block();
         return response;
+    }
+
+    @Override
+    public ApiResponse<List<ProductVariantResponse>> getProductVariant(String variantId) {
+        try{
+            ApiResponse<List<ProductVariantResponse>> response = webClientBuilder.build().get()
+                    .uri(baseUrl + "/products/variants/" + variantId)
+                    .retrieve().bodyToMono(new ParameterizedTypeReference<ApiResponse<List<ProductVariantResponse>>>() {
+                    }).block();
+            return response;
+        } catch (Exception e) {
+            log.error("Error fetching product variant: {}", e.getMessage());
+            throw new RuntimeException("Failed to fetch product variant", e);
+        }
     }
 }
 

@@ -14,7 +14,8 @@ $(".addToCartForm").on("submit", function (event) {
         contentType: false,
         success: function (response) {
             console.log(response);
-            toastBootstrap.show(); // Hiển thị thông báo toast
+            load("#header", "/header");
+            toastBootstrap.show(); // Hiển thị toast
         },
         error: function () {
             console.error('Error adding to cart');
@@ -49,3 +50,27 @@ if ($('.product_detail-link').length > 0) {
         console.log('Product detail link clicked!');
     });
 }
+// Add click event listener for remove button inside the offcanvas body
+$('.btn-remove').on('click',  function() {
+    const productVariantId = $(this).data('id');
+
+    if (!confirm("Are you sure you want to remove this item from your cart?")) {
+        return; // If not confirmed, do nothing
+    }
+
+    $.ajax({
+        url: `${contextPath}/products/removeFromCart`,
+        type: 'POST',
+        data: { productId: productVariantId },
+        contentType: 'application/x-www-form-urlencoded',
+        processData: true,
+        success: function(response) {
+            console.log('Item removed successfully:', response);
+            load("#header", "/header");
+        },
+        error: function(xhr, status, error) {
+            console.error('Error removing item from cart:', error);
+            alert("There was an error removing the item from your cart. Please try again.");
+        }
+    });
+});

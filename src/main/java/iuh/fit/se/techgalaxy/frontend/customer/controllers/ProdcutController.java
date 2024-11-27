@@ -96,6 +96,19 @@ public class ProdcutController {
         log.info("Added product variant with ID {} to the cart", idToAdd);
         return ResponseEntity.ok("Cart updated successfully");
     }
+    @PostMapping("/removeFromCart")
+    public ResponseEntity<String> removeFromCart(@RequestParam String productId, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        log.info("Removing product variant with ID {} from the cart", productId);
+        Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new HashMap<>();
+        }
+       cart.remove(productId);
+        session.setAttribute("cart", cart);
+        log.info("Removed product variant with ID {} from the cart", productId);
+        return ResponseEntity.ok("Cart updated successfully");
+    }
     @GetMapping("/detail/{productId}")
     public ModelAndView getProductDetail(@PathVariable String productId, ModelAndView model) {
         ObjectMapper objectMapper = new ObjectMapper();

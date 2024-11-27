@@ -30,8 +30,6 @@ public class TemplateController {
     ) {
         HttpSession session = request.getSession();
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
-        log.info("cart: {}", cart);
-
         if (cart != null) {
             List<String> productIds = List.copyOf(cart.keySet());
             ApiResponse<List<ProductDetailResponse>> productDetails = productService.getProductDetailsByIds(productIds);
@@ -40,18 +38,17 @@ public class TemplateController {
                 if (cart.containsKey(product.getId())) {
                     product.setQuantity(cart.get(product.getId()));
                 }
+                product.setProductVariantId(productService.getProductVariant(product.getProductVariantId()).getData().get(0).getName());
             }
 
             model.addAttribute("cart", productDetails.getData());
             double cartTotal = productDetails.getData().stream()
-                    .mapToDouble(product -> product.getPrice() * product.getQuantity())
+                    .mapToDouble(product -> (product.getPrice() - product.getPrice() * product.getSale())  * product.getQuantity())
                     .sum();
             model.addAttribute("cartTotal", cartTotal);
         } else {
             model.addAttribute("cartTotal", 0);
         }
-
-        model.addAttribute("name", "TechGalaxy");
         return "header";
     }
     @GetMapping("/footer")
