@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign up</title>
     <!-- Fonts -->
-    <link href="../assets/fonts/stylesheet.css" rel="stylesheet" />
+    <link href="../fonts/stylesheet.css" rel="stylesheet" />
     <!-- Bootstrap CSS -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <!-- Styles -->
-    <link href="../assets/css/signup.css" rel="stylesheet" />
+    <link href="../css/signup.css" rel="stylesheet" />
     <!-- Bootstrap JS -->
-    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
   </head>
   <body>
     <form>
@@ -79,7 +79,7 @@
           <div class="col method">
             <button class="socialAcc" id="gg">
               <img
-                src="../assets/icon/google_login.png"
+                src="../resources/static/icon/google_login.png"
                 alt=""
                 style="width: 20px; height: fit-content"
               />

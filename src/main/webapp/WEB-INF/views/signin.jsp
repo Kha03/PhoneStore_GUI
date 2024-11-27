@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,28 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign in</title>
     <!-- Fonts -->
-    <link href="../assets/fonts/stylesheet.css" rel="stylesheet" />
+    <link href="<c:url value='/css/signup.css'/>" rel="stylesheet" type="text/css">
     <!-- Bootstrap CSS -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Styles -->
-    <link href="../assets/css/signup.css" rel="stylesheet" />
-    <!-- Bootstrap JS -->
-    <script src="../assets/js/bootstrap.min.js"></script>
+    <link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css">
+    <script src="<c:url value='/js/bootstrap.min.js'/>"></script>
   </head>
   <body>
-    <form>
+    <form method="post" action='/signin'>
       <div class="form">
         <div class="form-row functionChoice">
           <div class="col choose">
             <a href="#" class="function login active">Sign in</a>
-            <a href="signup.jsp" class="function signup">Sign up</a>
+            <a href="<c:url value='/signup.jsp'/>" class="function signup">Sign up</a>
           </div>
         </div>
         <h1 style="margin-bottom: 1rem">Log In</h1>
         <div class="form-group">
           <input
-            type="email"
+            type="text"
             class="form-control"
+            name="username"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Enter email"
@@ -37,11 +38,12 @@
           <input
             type="password"
             class="form-control"
+            name="password"
             id="exampleInputPassword1"
             placeholder="Password"
             required
           />
-          <img src="../assets/icon/view.png" id="pwd" />
+          <img src="<c:url value='/icon/view.png'/>" id="pwd" />
         </div>
         <div class="form-check" style="margin-bottom: 0.5rem">
           <input type="checkbox" class="form-check-input" id="exampleCheck1" />
@@ -64,7 +66,7 @@
           <div class="col method">
             <button class="socialAcc" id="gg">
               <img
-                src="../assets/icon/google_login.png"
+                src="<c:url value='/icon/google_login.png'/>"
                 alt=""
                 style="width: 20px; height: fit-content"
               />
@@ -72,7 +74,7 @@
             </button>
             <button class="socialAcc" id="fb">
               <img
-                src="../assets/icon/facebook_login.png"
+                src="<c:url value='/icon/facebook_login.png'/>"
                 alt=""
                 style="width: 20px; height: fit-content"
               />
@@ -82,11 +84,11 @@
         </div>
 
         <div class="form-group">
-          <p>Don't have an account? <a href="signup.jsp">Sign up</a></p>
+          <p>Don't have an account? <a href="<c:url value='/signup.jsp'/>">Sign up</a></p>
         </div>
       </div>
     </form>
 
-    <script src="../assets/events/signup.js"></script>
+    <script src="<c:url value='/events/signup.js'/>"></script>
   </body>
 </html>
