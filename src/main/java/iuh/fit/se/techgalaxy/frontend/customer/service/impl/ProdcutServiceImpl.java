@@ -1,5 +1,6 @@
 package iuh.fit.se.techgalaxy.frontend.customer.service.impl;
 
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductDetailResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductPageResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductVariantDetailResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.service.ProductService;
@@ -100,6 +101,17 @@ public class ProdcutServiceImpl implements ProductService {
             log.error("Error fetching variant detail: {}", e.getMessage());
             throw new RuntimeException("Failed to fetch product variant details", e);
         }
+    }
+
+    @Override
+    public ApiResponse<List<ProductDetailResponse>> getProductDetailsByIds(List<String> productDetailIds) {
+        String url = UriComponentsBuilder.fromHttpUrl(baseUrl + "/products/variants/details/getProductDetailsByIds")
+                .queryParam("productDetailIds", productDetailIds)
+                .toUriString();
+        ApiResponse<List<ProductDetailResponse>> response = webClientBuilder.build().get().uri(url)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ApiResponse<List<ProductDetailResponse>>>() {
+                }).block();
+        return response;
     }
 }
 

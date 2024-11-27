@@ -1,5 +1,6 @@
 package iuh.fit.se.techgalaxy.frontend.customer.service;
 
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductDetailResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductPageResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductVariantDetailResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
@@ -18,4 +19,7 @@ public interface ProductService {
     ApiResponse<Set<ProductVariantDetailResponse>> getProductVariantDetail(String variantId);
 
     String getVariantDetailIdByVariantIdAndMemoryColor(String variantId,String colorId, String memoryId);
+
+
+    ApiResponse<List<ProductDetailResponse>> getProductDetailsByIds(List<String> productDetailIds);
 }
