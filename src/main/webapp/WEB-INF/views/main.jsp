@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
@@ -11,12 +11,12 @@
     <link href="<c:url value='/fonts/stylesheet.css' />" rel="stylesheet"/>
     <!-- Bootstrap CSS -->
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet"/>
-    <!-- Bootstrap JS -->
-    <script src="<c:url value='/js/bootstrap.min.js' />"></script>
     <!-- Styles -->
     <link href="<c:url value='/css/styles.css' />" rel="stylesheet"/>
     <!-- Scripts -->
     <script src="<c:url value='/events/loadtemplate.js' />"></script>
+
+    
 </head>
 <body>
 <!-- header -->
@@ -870,7 +870,12 @@
 <!-- Footer -->
 <footer id="footer" class="footer"></footer>
 <script>
+    load("#header", "/header");
     load("#footer", "/footer");
 </script>
+
+    <script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
+
 </body>
 </html>
+ 
