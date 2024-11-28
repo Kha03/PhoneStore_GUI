@@ -51,15 +51,21 @@
     <!-- main -->
     <div class="container_checkout mt-3">
       <div class="fincons">
-        <div class="fSelected">
-          <img src="<c:url value='/icon/giohang.png' />" alt="" class="iconStore" />
+        <div class="fCheckout">
+          <div class="fdestxt">
+            <img
+                    src="<c:url value='/icon/giohang.svg' />"
+                    alt=""
+                    class="iconSmall"
+            /><span class="des">Cart</span>
+          </div>
           <div class="line"></div>
         </div>
         <div class="fCheckout">
           <div class="lineGrey"></div>
           <div class="fdestxt">
             <img
-              src="<c:url value='/icon/checkout.png' />"
+              src="<c:url value='/icon/checkout.svg' />"
               alt=""
               class="iconSmall"
             /><span class="des">Checkout</span>
@@ -69,7 +75,7 @@
         <div class="fCheckout">
           <div class="lineGrey"></div>
           <div class="fdestxt">
-            <img src="<c:url value='/icon/payment.png' />"
+            <img src="<c:url value='/icon/payment.svg' />"
               alt=""
               class="iconSmall"
             /><span class="des">Payment</span>
@@ -157,9 +163,16 @@
                 <span class="total"><fmt:formatNumber value="${finalTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></span>
               </div>
             </div>
-            <button class="btnTotal mt-3">
-              <span class="txtProcced">Procced to checkout</span>
-            </button>
+            <c:if test="${empty cart}">
+              <a href="javascript:void(0);" class="btn btnTotal mt-3 text-center disabled-link">
+                <span class="txtProcced">Proceed to checkout</span>
+              </a>
+            </c:if>
+            <c:if test="${not empty cart}">
+              <a href="${pageContext.request.contextPath}/cart/checkout" class="btn btnTotal mt-3 text-center">
+                <span class="txtProcced">Proceed to checkout</span>
+              </a>
+            </c:if>
           </div>
         </div>
       </div>

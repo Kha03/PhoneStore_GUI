@@ -7,23 +7,11 @@
 
 .fincons {
   display: flex;
+  justify-content: space-between;
   width: 462px;
   height: 140px;
-  flex-direction: row;
 }
 
-.fSelected {
-  display: flex;
-  width: 130px;
-  height: 73px;
-  flex-direction: row;
-  align-items: center;
-}
-
-.iconStore {
-  width: 72px;
-  height: 72px;
-}
 
 .line {
   width: 100%;
@@ -31,7 +19,7 @@
 }
 
 .lineGrey {
-  width: 57px;
+  width: 100%;
   border: 1px solid#9E9E9E;
 }
 
@@ -284,4 +272,8 @@
 .txtProcced {
   font-size: 18px;
   color: white;
+}
+.disabled-link {
+  pointer-events: none;
+  opacity: 0.5;
 }

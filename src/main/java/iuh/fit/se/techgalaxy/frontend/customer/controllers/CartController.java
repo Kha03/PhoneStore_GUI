@@ -24,6 +24,15 @@ public class CartController {
         cartService.populateCartData(model, request.getSession());
         return "cart";
     }
+
+    @GetMapping("/checkout")
+    public String getCheckout(Model model, HttpServletRequest request) {
+        cartService.populateCartData(model, request.getSession());
+       if(model.getAttribute("cartTotal") == null || (double) model.getAttribute("cartTotal") == 0.0){
+            return "redirect:/cart";
+        }
+        return "checkout";
+    }
     @PostMapping()
     public String addToCart(@RequestParam String productVariantId,
                                             @RequestParam(required = false) String memoryId,

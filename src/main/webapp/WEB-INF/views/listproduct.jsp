@@ -471,7 +471,7 @@
                                             <form:form class="addToCartForm" role="form" method="post">
                                                 <input type="hidden" name="productVariantId"
                                                        value="${product.id}"/>
-                                                <button type="submit" class="btn btn-outline-dark d-flex gap-1">
+                                                <button class="btn btn-outline-dark d-flex gap-1 addCartBtn">
                                                     <img
                                                             src="<c:url value='/icon/shopping-cart.svg' />"
                                                             alt=""
