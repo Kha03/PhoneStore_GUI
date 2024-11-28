@@ -45,10 +45,13 @@ public class AuthServiceImpl implements AuthService {
                 if (responseBody.containsKey("data")) {
                     Map<?, ?> data = (Map<?, ?>) ((List<?>) responseBody.get("data")).get(0);
                     String accessToken = (String) data.get("access_token");
+                    Map<?, ?> account = (Map<?, ?>) data.get("account");
+                    String email = (String) account.get("email");
+
 
                     // Store the accessToken in the session
                     session.setAttribute("accessToken", accessToken);
-                    System.out.println("Access Token in Service: " + accessToken);
+                    session.setAttribute("email", email);
 
                     // Check for Set-Cookie headers
                     HttpHeaders headers = loginResponse.getHeaders();
