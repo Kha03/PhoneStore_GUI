@@ -29,6 +29,32 @@ $(document).ready(function () {
                 },
             });
         });
+        $(".addCartBtn").on("click", function (event) {
+            event.preventDefault();
+
+            const form = $(this).closest("form")[0];
+            const toastLiveExample = $("#liveToast")[0];
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+
+            const formData = new FormData(form);
+
+            $.ajax({
+                url: `${contextPath}/products/addToCart`,
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                    load("#header", "/header");
+                    toastBootstrap.show();
+                },
+                error: function () {
+                    console.error("Error adding to cart");
+                }
+            });
+        });
+
     }
     $(".addToCartForm").on("click", function (event) {
         event.stopPropagation();

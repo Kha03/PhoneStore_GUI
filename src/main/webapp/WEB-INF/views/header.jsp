@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
 <style>
 .dropdown-menu {
 	z-index: 1050; /* Ensure it appears above other elements */
@@ -22,7 +23,7 @@
 					Us</a></li>
 		</ul>
 
-    <div class="col-3 text-end">
+    <div class="col-3 d-flex flex-row justify-content-end">
       <button type="button" id="cartButton" class="btn position-relative me-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
         <img
                 src="<c:url value='/icon/shopping-cart.svg' />"
@@ -32,27 +33,27 @@
           ${cart != null ? cart.size() : 0}
         </span>
       </button>
-		<c:if test="${accessToken != null}">
-			<div class="dropdown btn btn-signIn me-2">
-				<button class="btn btn-secondary dropdown-toggle" type="button"
-						id="dropdownMenuButton1" data-bs-toggle="dropdown"
-						aria-expanded="false">Profile</button>
-				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					<li><a class="dropdown-item"
-						   href="<c:url value='/profile' />">Profile</a></li>
-					<li>
-						<form method="post" action="/logout">
-							<button class="dropdown-item">Log out</button>
-						</form>
-					</li>
-				</ul>
-			</div>
-		</c:if>
+        <c:if test="${accessToken != null}">
+            <div class="dropdown me-2">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img  src="<c:url value='/icon/user.svg' />"
+                          alt="user">
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="<c:url value='/profile' />">Profile</a></li>
+                    <li>
+                        <form method="post" action="/logout">
+                            <button type="submit" class="dropdown-item">Log out</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </c:if>
 
 		<c:if test="${accessToken == null}">
-			<div class="btn btn-signIn me-2">
+			<div class="me-2">
 				<form action="<c:url value='/signin'/>" method="get">
-					<button type="submit" class="btn btn-signIn ">Sign In /
+					<button type="submit" class="btn btn-signIn" >Sign In /
 						Sign Up</button>
 				</form>
 			</div>
@@ -101,7 +102,7 @@
     <div class="d-flex justify-content-around align-items-center">
       <div>
         <p class="mb-0">Grand Total:</p>
-        <h5 class="fw-bold"><fmt:formatNumber value="${cartTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></h5>
+        <h5 class="fw-bold"><fmt:formatNumber value="${finalTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></h5>
       </div>
       <a href="${pageContext.request.contextPath}/cart" class="text-decoration-none btn-cart text-center  w-50">Go To Cart</a>
     </div>
