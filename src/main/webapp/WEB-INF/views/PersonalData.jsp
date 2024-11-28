@@ -1,38 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Personal Data</title>
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <!-- Fonts -->
-    <link href="../assets/fonts/stylesheet.css" rel="stylesheet" />
+    <link href="<c:url value='/fonts/stylesheet.css'/>" rel="stylesheet" />
     <!-- Bootstrap CSS -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet" />
     <!-- Styles -->
-    <link href="../assets/css/styles.css" rel="stylesheet" />
-    <link href="../assets/css/acount.css" rel="stylesheet" />
+    <link href="<c:url value='/css/styles.css'/>" rel="stylesheet" />
+    <link href="<c:url value='/css/acount.css'/>" rel="stylesheet" />
     <!-- Bootstrap JS -->
-    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="<c:url value='/js/bootstrap.min.js'/>"></script>
     <!-- Scripts -->
-    <script src="../assets/events/loadtemplate.js"></script>
+    <script src="<c:url value='/events/loadtemplate.js'/>"></script>
+    
   </head>
-  <body>
-    <!-- header -->
-    <header id="header" class="header"></header>
-    <script>
-      load("#header", "./header.html");
-    </script>
+<body>
+<!-- header -->
+<header id="header" class="header"></header>
+<script>
+    load("#header", "/header");
+</script>
     <div class="container profile-container">
       <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3 sidebar bg-white">
           <div class="text-center mb-4">
             <img
-              src="../assets/imgs/ava.png"
+              src="<c:url value='/imgs/ava.png'/>"
               alt="User Avatar"
               class="rounded-circle mb-2 w-25 h-25 img-fluid"
             />
@@ -44,7 +48,7 @@
           <a href="#"
             ><i class="fas fa-dollar-sign"></i> Payment & Instalments</a
           >
-          <a href="Orders.jsp"><i class="fas fa-box"></i> Orders</a>
+          <a href="<c:url value='/Orders.jsp'/>"><i class="fas fa-box"></i> Orders</a>
           <a href="#"><i class="fas fa-heart"></i> Wish list</a>
           <a href="#"><i class="fas fa-tags"></i> Discounts</a>
           <a href="#"><i class="fas fa-shield-alt"></i> Security & access</a>
@@ -76,11 +80,7 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"
-                    ><i
-                      class="fas fa-user"
-                      style="color: #000; font-size: 1.35rem"
-                    ></i
-                  ></span>
+                    ><i class="fas fa-user" style="color: #000; font-size: 1.35rem"></i></span>
                 </div>
                 <input
                   type="text"
@@ -106,11 +106,7 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"
-                    ><i
-                      class="fas fa-envelope"
-                      style="color: #000; font-size: 1.35rem"
-                    ></i
-                  ></span>
+                    ><i class="fas fa-envelope" style="color: #000; font-size: 1.35rem"></i></span>
                 </div>
                 <input
                   type="email"
@@ -136,11 +132,7 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"
-                    ><i
-                      class="fas fa-phone"
-                      style="color: #000; font-size: 1.35rem"
-                    ></i
-                  ></span>
+                    ><i class="fas fa-phone" style="color: #000; font-size: 1.35rem"></i></span>
                 </div>
                 <input
                   type="text"
@@ -166,11 +158,7 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"
-                    ><i
-                      class="fas fa-key"
-                      style="color: #000; font-size: 1.35rem"
-                    ></i
-                  ></span>
+                    ><i class="fas fa-key" style="color: #000; font-size: 1.35rem"></i></span>
                 </div>
                 <input
                   type="password"
@@ -196,11 +184,7 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"
-                    ><i
-                      class="fas fa-home"
-                      style="color: #000; font-size: 1.35rem"
-                    ></i
-                  ></span>
+                    ><i class="fas fa-home" style="color: #000; font-size: 1.35rem"></i></span>
                 </div>
                 <input
                   type="text"
@@ -226,11 +210,7 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"
-                    ><i
-                      class="fas fa-mail-bulk"
-                      style="color: #000; font-size: 1.35rem"
-                    ></i
-                  ></span>
+                    ><i class="fas fa-mail-bulk" style="color: #000; font-size: 1.35rem"></i></span>
                 </div>
                 <input
                   type="text"
@@ -255,9 +235,10 @@
       </div>
     </div>
     <!-- Footer -->
-    <footer id="footer" class="footer"></footer>
-    <script>
-      load("#footer", "./footer.html");
-    </script>
+<footer id="footer" class="footer"></footer>
+<script>
+    load("#footer", "/footer");
+</script>
+    <script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
   </body>
 </html>
