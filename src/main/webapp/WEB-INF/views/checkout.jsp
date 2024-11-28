@@ -204,11 +204,14 @@
                     <form class="checkout-form">
                         <div class="mb-3">
                             <label for="name" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="name" readonly>
+                            <input type="text" class="form-control" id="name" readonly
+                            value="${customer.name}"
+                            >
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" readonly>
+                            <input type="email" class="form-control" id="email" readonly
+                            value="${sessionScope.get("email")}">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Shipping Address</label>

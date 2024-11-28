@@ -1,6 +1,10 @@
 package iuh.fit.se.techgalaxy.frontend.customer.controllers;
 
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.CustomerResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.service.CustomerService;
 import iuh.fit.se.techgalaxy.frontend.customer.service.impl.CartService;
+import iuh.fit.se.techgalaxy.frontend.customer.service.impl.CustomerServiceImpl;
+import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
@@ -12,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Controller
@@ -19,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class CartController {
     CartService cartService;
+    CustomerService customerService;
     @GetMapping
     public String getCart(Model model, HttpServletRequest request) {
         cartService.populateCartData(model, request.getSession());
@@ -34,6 +41,11 @@ public class CartController {
         cartService.populateCartData(model, request.getSession());
        if(model.getAttribute("cartTotal") == null || (double) model.getAttribute("cartTotal") == 0.0){
             return "redirect:/cart";
+        }
+         HttpSession session = request.getSession();
+        ApiResponse<List< CustomerResponse>> customerResponse = customerService.getInfoByMail((String) session.getAttribute("email"), session);
+        if(customerResponse.getData() != null && !customerResponse.getData().isEmpty()){
+            model.addAttribute("customer", customerResponse.getData().get(0));
         }
         return "checkout";
     }
