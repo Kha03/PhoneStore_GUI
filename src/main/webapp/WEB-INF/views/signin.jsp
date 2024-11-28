@@ -75,6 +75,19 @@
         <button type="submit" class="btn btn-primary" style="width: 70%">
           Log In
         </button>
+        <div class="form-group mt-3">
+<div class="form-group mt-3" style="text-align: center;">
+  <a href="<c:url value='/main'/>" style="text-decoration: none; color: blue; font-size: 1rem;">
+    <img src="<c:url value='/icon/back.png'/>"
+         alt=""
+         style="width: 20px; height: fit-content; margin-right: 5px;"
+              />
+    Back To Main
+  </a>
+</div>
+
+</div>
+        
         <div class="form-group divider">
           <hr />
           <span> Or Log In with </span>

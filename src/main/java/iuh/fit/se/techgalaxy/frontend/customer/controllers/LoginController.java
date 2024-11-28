@@ -35,6 +35,11 @@ public class LoginController {
 
         return "signin";
     }
+    @GetMapping("/main")
+    public String showMainPage() {
+        return "main"; // Ensure 'main.jsp' is located in the correct directory (e.g., `src/main/webapp/WEB-INF/views/`).
+    }
+
 
     @PostMapping("/signin")
     public String login(@RequestParam String username,
