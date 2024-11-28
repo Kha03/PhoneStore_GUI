@@ -101,4 +101,44 @@ public void logout(HttpSession session, String accessToken, HttpServletResponse 
         session.invalidate();
     }
 }
+
+@Override
+public ResponseEntity<Map> register(String email, String password, String name) {
+    try {
+        // Construct the payload with user registration data
+        Map<String, String> payload = Map.of(
+            "email", email,
+            "password", password,
+            "fullName", name
+        );
+
+        // Send POST request to backend registration endpoint
+        ResponseEntity<Map> registrationResponse = webClient.post()
+                .uri("/api/accounts/auth/register")
+                .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+                .bodyValue(payload)
+                .retrieve()
+                .toEntity(Map.class)
+                .block(); // Blocking for synchronous call
+
+        // Check if the response is successful
+        if (registrationResponse != null && registrationResponse.getStatusCode() == HttpStatus.CREATED) {
+            // Registration successful
+            return ResponseEntity.ok(Map.of("message", "Registration successful"));
+        } else if (registrationResponse != null) {
+            // Backend returned an error
+            return ResponseEntity.status(registrationResponse.getStatusCode())
+                    .body(Map.of("error", "Registration failed", "details", registrationResponse.getBody()));
+        } else {
+            // Null response case
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Unexpected error occurred during registration"));
+        }
+    } catch (Exception e) {
+        // Handle exceptions and return an error response
+        log.error("Error during registration: {}", e.getMessage(), e);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", "Registration failed due to an internal error", "details", e.getMessage()));
+    }
+}
 }

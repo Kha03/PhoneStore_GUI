@@ -37,7 +37,7 @@
         <div class="form-row functionChoice">
           <div class="col choose">
             <a href="#" class="function login active">Sign in</a>
-            <a href="<c:url value='/signup.jsp'/>" class="function signup">Sign up</a>
+            <a href="<c:url value='/signup'/>" class="function signup">Sign up</a>
           </div>
         </div>
         <h1 style="margin-bottom: 1rem">Log In</h1>
