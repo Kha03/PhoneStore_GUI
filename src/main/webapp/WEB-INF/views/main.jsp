@@ -891,7 +891,6 @@
     load("#footer", "/footer");
 </script>
 <script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
-
 </body>
 </html>
  
