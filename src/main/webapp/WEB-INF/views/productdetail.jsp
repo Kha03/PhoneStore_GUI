@@ -32,7 +32,8 @@
     <!-- Bootstrap CSS -->
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet"/>
     <!-- Bootstrap JS -->
-    <script src="<c:url value='/js/bootstrap.min.js' />"></script>
+    <%--    <script src="<c:url value='/js/bootstrap.min.js' />"></script>--%>
+    <%--   bootstrap.bundle.min.js instead of bootstrap.min.js in footer--%>
     <!-- jquery -->
     <script src="<c:url value='/js/jquery.js' />"></script>
     <!-- Styles -->
@@ -1394,5 +1395,6 @@
 <script src="<c:url value='/events/script.js'/>"></script>
 <script src="<c:url value='/events/eventproductdetail.js'/>"></script>
 <script src="<c:url value='/events/controller.js'/>"></script>
+<script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
 </body>
 </html>

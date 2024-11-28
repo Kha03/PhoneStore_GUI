@@ -31,7 +31,8 @@
     <!-- Bootstrap CSS -->
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet"/>
     <!-- Bootstrap JS -->
-    <script src="<c:url value='/js/bootstrap.min.js' />"></script>
+    <%--    <script src="<c:url value='/js/bootstrap.min.js' />"></script>--%>
+    <%--   bootstrap.bundle.min.js instead of bootstrap.min.js in footer--%>
     <!-- Styles -->
     <link href="<c:url value='/css/styles.css' />" rel="stylesheet"/>
     <link href="<c:url value='/css/checkOut.css' />" rel="stylesheet"/>
@@ -78,6 +79,12 @@
 
       <div class="content">
         <div class="content1">
+          <c:if test="${empty cart}">
+            <div class="text-center">
+              <img src="<c:url value='/imgs/empty-cart.png' />" alt="Empty Cart" class="img-fluid mb-3" />
+              <p class="text-muted">Your cart is empty. Please add some products!</p>
+            </div>
+          </c:if>
        <c:forEach var="product" items="${cart}">
          <div class="fDetailProduct">
              <%--<img src="<c:url value='/imgs/${product.productsImage[0].url}' />" class="img-fluid rounded-start" alt="Product Image">--%>
@@ -138,16 +145,16 @@
             <div class="fDetailPayment">
               <div class="fsub">
                 <span class="sub">Subtotal</span>
-                <span class="sub">$519.52</span>
+                <span class="sub"><fmt:formatNumber value="${cartTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></span>
               </div>
               <div class="fsub">
                 <span class="sub">Discount</span>
-                <span class="sub">-$111.87</span>
+                <span class="sub"><fmt:formatNumber value="${cartDiscount}" type="currency" currencySymbol="$" groupingUsed="true" /></span>
               </div>
               <div class="line"></div>
               <div class="ftotal">
                 <span class="total">Grand Total</span>
-                <span class="total">$543.02</span>
+                <span class="total"><fmt:formatNumber value="${finalTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></span>
               </div>
             </div>
             <button class="btnTotal mt-3">
@@ -418,5 +425,6 @@
       load("#footer", "/footer");
     </script>
   <script src="<c:url value='/events/controller.js' />"></script>
+    <script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
   </body>
 </html>

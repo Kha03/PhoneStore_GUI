@@ -23,8 +23,11 @@ public class CartService {
      ProductService productService;
      public void populateCartData(Model model, HttpSession session) {
           Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
+
           model.addAttribute("cart", List.of());
-          model.addAttribute("cartTotal", 0);
+          model.addAttribute("cartTotal", 0.0);
+          model.addAttribute("cartDiscount", 0.0);
+          model.addAttribute("finalTotal", 0.0);
 
           if (cart == null || cart.isEmpty()) {
                return;
@@ -36,7 +39,10 @@ public class CartService {
           if (productDetails == null || productDetails.getData() == null || productDetails.getData().isEmpty()) {
                return;
           }
+
+
           List<ProductDetailResponse> productDetailResponses = productDetails.getData();
+
           for (ProductDetailResponse product : productDetailResponses) {
                if (cart.containsKey(product.getId())) {
                     product.setQuantity(cart.get(product.getId()));
@@ -46,11 +52,28 @@ public class CartService {
                     product.setProductVariantId(variantResponse.getData().get(0).getName());
                }
           }
+
+          // caculate Subtotal, Discount , Final Total
+          double cartTotal = 0.0;
+          double cartDiscount = 0.0;
+          for (ProductDetailResponse product : productDetailResponses) {
+               // caculate Subtotal
+               double productSubtotal = product.getPrice() * product.getQuantity();
+               cartTotal += productSubtotal;
+
+               // caculate Discount
+               double productDiscount = product.getPrice() * product.getSale() * product.getQuantity();
+               cartDiscount += productDiscount;
+          }
+
+
+          double finalTotal = cartTotal - cartDiscount;
+
+
           model.addAttribute("cart", productDetailResponses);
-          double cartTotal = productDetailResponses.stream()
-                  .mapToDouble(product -> (product.getPrice() - product.getPrice() * product.getSale()) * product.getQuantity())
-                  .sum();
           model.addAttribute("cartTotal", cartTotal);
+          model.addAttribute("cartDiscount", cartDiscount);
+          model.addAttribute("finalTotal", finalTotal);
      }
      public void addToCart(String productVariantId, String memoryId, String colorId, HttpSession session) {
           Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");

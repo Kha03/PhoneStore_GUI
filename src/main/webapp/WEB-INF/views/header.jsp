@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
 <style>
 .dropdown-menu {
 	z-index: 1050; /* Ensure it appears above other elements */
@@ -50,9 +51,9 @@
         </c:if>
 
 		<c:if test="${accessToken == null}">
-			<div class=" btn btn-signIn me-2">
+			<div class="me-2">
 				<form action="<c:url value='/signin'/>" method="get">
-					<button type="submit" >Sign In /
+					<button type="submit" class="btn btn-signIn" >Sign In /
 						Sign Up</button>
 				</form>
 			</div>
@@ -101,7 +102,7 @@
     <div class="d-flex justify-content-around align-items-center">
       <div>
         <p class="mb-0">Grand Total:</p>
-        <h5 class="fw-bold"><fmt:formatNumber value="${cartTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></h5>
+        <h5 class="fw-bold"><fmt:formatNumber value="${finalTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></h5>
       </div>
       <a href="${pageContext.request.contextPath}/cart" class="text-decoration-none btn-cart text-center  w-50">Go To Cart</a>
     </div>
