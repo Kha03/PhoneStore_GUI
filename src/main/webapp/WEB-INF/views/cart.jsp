@@ -169,10 +169,28 @@
               </a>
             </c:if>
             <c:if test="${not empty cart}">
-              <a href="${pageContext.request.contextPath}/cart/checkout" class="btn btnTotal mt-3 text-center">
+              <a href="${pageContext.request.contextPath}/cart/checkout" id="proceedCheckoutBtn" class="btn btnTotal mt-3 text-center">
                 <span class="txtProcced">Proceed to checkout</span>
               </a>
             </c:if>
+          </div>
+          <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>You need to be logged in to proceed to checkout.</p>
+                  <p>Would you like to signin now?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <a href="${pageContext.request.contextPath}/signin" class="btn btn-primary">Signin</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -436,8 +454,9 @@
     <footer id="footer" class="footer"></footer>
     <script>
       load("#footer", "/footer");
+      const token = "${token}"
     </script>
-  <script src="<c:url value='/events/controller.js' />"></script>
     <script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
+    <script src="<c:url value='/events/controller.js' />"></script>
   </body>
 </html>

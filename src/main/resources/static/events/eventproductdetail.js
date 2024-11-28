@@ -44,6 +44,12 @@ function selectMemory(memoryName) {
     if (firstAvailableColor) {
         $(`#color-${firstAvailableColor.colorId}`).prop("checked", true);
         selectColor(firstAvailableColor);
+        $("#addCartBtn").prop("disabled", false);
+        $("#buyBtn").prop("disabled", false);
+    }
+    else {
+        $("#addCartBtn").prop("disabled", true);
+        $("#buyBtn").prop("disabled", true);
     }
 }
 

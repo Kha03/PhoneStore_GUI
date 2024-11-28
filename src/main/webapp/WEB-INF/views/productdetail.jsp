@@ -205,7 +205,7 @@
 
                         <button class="btn  w-75 info_btn-add" id="addCartBtn">Add To Cart</button>
 
-                        <button type="submit" class="btn w-75 info_btn-buy">
+                        <button type="submit" class="btn w-75 info_btn-buy" id="buyBtn">
                             Buy Now
                             <img
                                     src="<c:url value='/icon/arrow-right.svg' />"

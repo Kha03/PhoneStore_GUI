@@ -22,6 +22,10 @@ public class CartController {
     @GetMapping
     public String getCart(Model model, HttpServletRequest request) {
         cartService.populateCartData(model, request.getSession());
+        HttpSession session = request.getSession();
+        String token = (String) session.getAttribute("accessToken");
+        log.info("Access token: {}", token);
+        model.addAttribute("token", token);
         return "cart";
     }
 

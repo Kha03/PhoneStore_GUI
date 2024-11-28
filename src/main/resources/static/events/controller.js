@@ -114,4 +114,10 @@ $(document).ready(function () {
             }
         });
     });
+    $('#proceedCheckoutBtn').click(function(event) {
+        if (!token) {
+            event.preventDefault();
+            $('#loginModal').modal('show');
+        }
+    });
 });
