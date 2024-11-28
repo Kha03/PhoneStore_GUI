@@ -117,7 +117,7 @@ hr {
   width: 20px;
   height: 20px;
   right: 10px; /* Adjust this value as needed */
-  top: 35%; /* Center vertically */
+  top: 50%; /* Center vertically */
   transform: translateY(-50%); /* Center vertically */
   cursor: pointer; /* Optional: changes cursor to pointer */
 }

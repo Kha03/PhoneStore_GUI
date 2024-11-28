@@ -3,6 +3,7 @@ package iuh.fit.se.techgalaxy.frontend.customer.controllers;
 
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
+@Slf4j
 public class LoginController {
 
     private final AuthServiceImpl authService;
@@ -42,17 +44,15 @@ public class LoginController {
                         Model model,
                         RedirectAttributes redirectAttributes
                         ) {
-    	System.out.println(">>> LOGIN");
+
         ResponseEntity<Map> loginResponse = authService.login(username, password, session, response);
         
         if (loginResponse.getStatusCode().is2xxSuccessful()) {
             redirectAttributes.addFlashAttribute("successMessage", "Login successfully!");
-            System.out.println(">>> LOGIN SUCCESS");
             return "redirect:/home";
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "Login failed!");
             model.addAttribute("errorMessage", "Login failed!");
-            System.out.println(">>> LOGIN FAILED");
             return "redirect:/signin";
         }
     }
@@ -61,7 +61,6 @@ public class LoginController {
 
     @PostMapping("/logout")
     public ModelAndView logout(HttpSession session, HttpServletResponse response) {
-        System.out.println(">>> LOGOUT");
         String accessToken = (String) session.getAttribute("accessToken");
 
         if (accessToken != null) {

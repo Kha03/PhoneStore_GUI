@@ -1,29 +1,28 @@
 package iuh.fit.se.techgalaxy.frontend.customer.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
-import org.springframework.web.reactive.function.client.WebClient;
-
 import iuh.fit.se.techgalaxy.frontend.customer.service.AuthService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthServiceImpl implements AuthService {
-    private final WebClient webClient;
-
-    // Inject the WebClient configured in WebClientConfig
-    public AuthServiceImpl(WebClient webClient) {
-        this.webClient = webClient;
-    }
-
+    WebClient webClient;
     @Override
     public ResponseEntity<Map> login(String username, String password, HttpSession session, HttpServletResponse response) {
         try {
