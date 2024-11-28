@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +26,8 @@
     <meta name="msapplication-TileImage" content="<c:url value='/favicon/ms-icon-144x144.png'/>">
     <meta name="theme-color" content="#ffffff">
     <!-- Fonts -->
+    <link href="<c:url value='/fonts/stylesheet.css' />" rel="stylesheet"/>
+    <!-- Custom CSS -->
     <link href="<c:url value='/css/signup.css'/>" rel="stylesheet" type="text/css">
     <!-- Bootstrap CSS -->
     <link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css">
@@ -123,6 +125,6 @@
         </div>
       </div>
     </form>
-    <script src="<c:url value='/js/signup.js'/>"></script>
+    <script src="<c:url value='/events/signup.js'/>"></script>
   </body>
 </html>

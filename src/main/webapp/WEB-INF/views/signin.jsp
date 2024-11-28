@@ -26,6 +26,8 @@
     <meta name="msapplication-TileImage" content="<c:url value='/favicon/ms-icon-144x144.png'/>">
     <meta name="theme-color" content="#ffffff">
     <!-- Fonts -->
+    <link href="<c:url value='/fonts/stylesheet.css' />" rel="stylesheet"/>
+    <!-- Custom CSS -->
     <link href="<c:url value='/css/signup.css'/>" rel="stylesheet" type="text/css">
     <!-- Bootstrap CSS -->
     <link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css">
