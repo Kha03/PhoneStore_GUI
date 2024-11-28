@@ -11,4 +11,5 @@ public interface AuthService {
     public ResponseEntity<Map> login(String username, String password, HttpSession session, HttpServletResponse response);
 
     void logout(HttpSession session, String accessToken, HttpServletResponse response);
+    public ResponseEntity<Map> register(String email, String password, String name);
 }

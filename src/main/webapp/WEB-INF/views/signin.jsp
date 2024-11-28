@@ -37,7 +37,7 @@
         <div class="form-row functionChoice">
           <div class="col choose">
             <a href="#" class="function login active">Sign in</a>
-            <a href="<c:url value='/signup.jsp'/>" class="function signup">Sign up</a>
+            <a href="<c:url value='/signup'/>" class="function signup">Sign up</a>
           </div>
         </div>
         <h1 style="margin-bottom: 1rem">Log In</h1>
@@ -75,6 +75,19 @@
         <button type="submit" class="btn btn-primary" style="width: 70%">
           Log In
         </button>
+        <div class="form-group mt-3">
+<div class="form-group mt-3" style="text-align: center;">
+  <a href="<c:url value='/main'/>" style="text-decoration: none; color: blue; font-size: 1rem;">
+    <img src="<c:url value='/icon/back.png'/>"
+         alt=""
+         style="width: 20px; height: fit-content; margin-right: 5px;"
+              />
+    Back To Main
+  </a>
+</div>
+
+</div>
+        
         <div class="form-group divider">
           <hr />
           <span> Or Log In with </span>
