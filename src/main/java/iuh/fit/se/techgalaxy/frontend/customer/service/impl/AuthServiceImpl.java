@@ -29,7 +29,6 @@ public class AuthServiceImpl implements AuthService {
             // Payload containing username and password
             Map<String, String> payload = Map.of("username", username, "password", password);
 
-            // Send request to the backend for login
             ResponseEntity<Map> loginResponse = webClient.post()
                     .uri("/api/accounts/auth/login") // The base URL is already set in WebClientConfig
                     .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
