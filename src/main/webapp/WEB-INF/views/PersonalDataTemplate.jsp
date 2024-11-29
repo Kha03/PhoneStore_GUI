@@ -15,7 +15,7 @@
     <a href="#">
         <i class="fas fa-dollar-sign"></i> Payment & Instalments
     </a>
-    <a href="<c:url value='/Orders'/>">
+    <a href="<c:url value='${pageContext.request.contextPath}/orders'/>">
         <i class="fas fa-box"></i> Orders
     </a>
     <a href="#">

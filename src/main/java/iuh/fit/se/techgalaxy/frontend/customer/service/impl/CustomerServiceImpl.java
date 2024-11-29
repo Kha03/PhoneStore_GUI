@@ -24,8 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomerServiceImpl implements CustomerService {
-    WebClient webClient;
-
+	WebClient webClient;
     @Override
     public ApiResponse<List<CustomerResponse>> getInfoByMail(String email, HttpSession session) {
         try {
@@ -43,6 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
                         return Mono.error(new AppException(ErrorCode.GENERAL_ERROR));
                     })
                     .onStatus(HttpStatusCode::is5xxServerError, response -> {
+                        // Handle 5xx errors
                         return Mono.error(new AppException(ErrorCode.SERVER_ERROR));
                     })
                     .bodyToMono(new ParameterizedTypeReference<ApiResponse<List<CustomerResponse>>>() {})
@@ -56,7 +56,5 @@ public class CustomerServiceImpl implements CustomerService {
             log.error("Unexpected error occurred while getting customer by email: {}", e.getMessage());
             return new ApiResponse<>(ErrorCode.GENERAL_ERROR.getCode(), "An unexpected error occurred.", null);
         }
-
     }
-    }
-
+}

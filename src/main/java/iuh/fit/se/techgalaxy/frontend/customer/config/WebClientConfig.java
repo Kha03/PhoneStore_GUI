@@ -33,6 +33,6 @@ public class WebClientConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor)
-                .addPathPatterns("/cart/checkout"); // Kiểm tra các yêu cầu đến "/checkout"
+                .addPathPatterns("/cart/checkout","/orders","/profile/**"); // Kiểm tra các yêu cầu đến "/checkout"
     }
 }

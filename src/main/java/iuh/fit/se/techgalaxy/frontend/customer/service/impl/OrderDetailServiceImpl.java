@@ -8,6 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderDetailResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.service.OrderDetailService;
 import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -21,9 +22,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
 	WebClient webClient;
 
-	public ApiResponse<List<OrderDetailResponse>> orderDetailByOrderId(String orderId) {
+	public ApiResponse<List<OrderDetailResponse>> orderDetailByOrderId(String orderId,HttpSession session) {
 		try {
-			return webClient.get().uri("/order-details/order/" + orderId).retrieve()
+			 String accessToken = (String) session.getAttribute("accessToken");
+			return webClient.get().uri("/order-details/order/" + orderId)
+					 .header("Authorization", "Bearer " + accessToken)
+					.retrieve()
 					.toEntity(new ParameterizedTypeReference<ApiResponse<List<OrderDetailResponse>>>() {
 					}).block().getBody();
 		} catch (NullPointerException e) {
@@ -31,5 +35,4 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 			return null;
 		}
 	}
-
 }

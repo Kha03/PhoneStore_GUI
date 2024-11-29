@@ -1,36 +1,29 @@
 package iuh.fit.se.techgalaxy.frontend.customer.controllers;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.CustomerResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderDetailResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.entities.enumeration.DetailStatus;
+import iuh.fit.se.techgalaxy.frontend.customer.service.AuthService;
+import iuh.fit.se.techgalaxy.frontend.customer.service.CustomerService;
+import iuh.fit.se.techgalaxy.frontend.customer.service.OrderDetailService;
+import iuh.fit.se.techgalaxy.frontend.customer.service.OrderService;
+import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import ch.qos.logback.core.model.Model;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.CustomerResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderDetailResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.entities.enumeration.DetailStatus;
-import iuh.fit.se.techgalaxy.frontend.customer.service.AttributeValueService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.ColorService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.CustomerService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.MemoriesService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.OrderDetailService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.OrderService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.ProductService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.TrademarkService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.UsageCategoryService;
-import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
+import io.netty.handler.codec.http.HttpRequest;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -44,42 +37,42 @@ public class OrderController {
 	OrderDetailService orderDetailServiceImpl;
 
 	@GetMapping()
-	public ModelAndView getOrders(
-			ModelAndView model) {
+	public ModelAndView getOrders(ModelAndView model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		ApiResponse<List<CustomerResponse>> customerResponse = customerServiceImpl
+				.getInfoByMail((String) session.getAttribute("email"), session);
 		ApiResponse<List<OrderResponse>> orders = orderServiceImpl
-				.getOrderByCustomerId("008b425f-fcbe-4b3a-952c-555835a4dc2c");
-		
-//		orders.getData().forEach(idOrder -> {
-//			ApiResponse<List<OrderDetailResponse>> orderDetail = orderDetailServiceImpl
-//					.orderDetailByOrderId(idOrder.getId());
-//			double total = orderDetail.getData().stream().mapToDouble(t -> t.getPrice() * t.getQuantity()).sum();
-//			model.addObject("total", total);
-//		});
-		
+				.getOrderByCustomerId(customerResponse.getData().get(0).getId(),session);
+
+		orders.getData().forEach(order -> {
+			ApiResponse<List<OrderDetailResponse>> orderDetail = orderDetailServiceImpl
+					.orderDetailByOrderId(order.getId(),session);
+			order.setOrderDetails(orderDetail.getData());
+		});
+
 		model.addObject("orders", orders.getData());
-		model.addObject("size",orders.getData().size());
+		model.addObject("size", orders.getData().size());
 		model.setViewName("Orders");
 		return model;
 	}
 
 	@GetMapping("/orders")
 	public ModelAndView getOrderDetailsByOrderId(@RequestParam(value = "idOrder", required = false) String idOrder,
-			@RequestParam(value = "cusId", required = false) String cusId, ModelAndView model) {
+			@RequestParam(value = "cusId", required = false) String cusId, ModelAndView model,HttpServletRequest request) {
 		String idOrder1 = idOrder;
-		ApiResponse<List<OrderDetailResponse>> orderDetail = orderDetailServiceImpl.orderDetailByOrderId(idOrder1);
-//		ApiResponse<List<CustomerResponse>> customer = customerServiceImpl.getCustomerById(cusId);
-		ApiResponse<List<OrderResponse>> orderRe = orderServiceImpl.getOrderById(idOrder1);
+		HttpSession session = request.getSession();
+		ApiResponse<List<CustomerResponse>> customerResponse = customerServiceImpl
+				.getInfoByMail((String) session.getAttribute("email"), session);
+		ApiResponse<List<OrderDetailResponse>> orderDetail = orderDetailServiceImpl.orderDetailByOrderId(idOrder1,session);
+		ApiResponse<List<OrderResponse>> orderRe = orderServiceImpl.getOrderById(idOrder1,session);
 		if (orderDetail != null && orderDetail.getData() != null) {
 			List<OrderDetailResponse> orderDetails = orderDetail.getData();
-
 			DetailStatus status = null;
 			status = DetailStatus.valueOf(
 					orderDetails.stream().map(st -> st.getDetailStatus().toString()).findFirst().orElse("PEN"));
 			double total = orderDetails.stream().mapToDouble(t -> t.getPrice() * t.getQuantity()).sum();
-
 			String idOrderDetail = orderRe.getData().stream().map(id -> String.valueOf(id.getId())) // Chuyển đổi id
 					.findFirst().orElse(null);
-
 			String address = orderRe.getData().stream().map(order -> order.getAddress()).findFirst().orElse(null);
 			model.addObject("idOrderDetail", idOrderDetail);
 			model.addObject("total", total);
@@ -90,12 +83,9 @@ public class OrderController {
 		} else {
 			System.out.println("No order details found for idOrder: " + idOrder);
 		}
-//		model.addObject("cus", customer.getData());
+		model.addObject("cus", customerResponse.getData());
 		model.setViewName("Order_Detail");
 		return model;
 	}
-	
-	
-	
-	
+
 }

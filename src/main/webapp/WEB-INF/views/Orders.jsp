@@ -1,3 +1,5 @@
+<%@page
+	import="iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderResponse"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
@@ -50,7 +52,7 @@
 <link href="<c:url value='/css/styles.css' />" rel="stylesheet" />
 <link href="<c:url value='/css/acount.css' />" rel="stylesheet" />
 <!-- Bootstrap JS -->
-<script src="<c:url value='/js/bootstrap.min.js' />"></script>
+<!--<script src="<c:url value='/js/bootstrap.min.js' />"></script>  -->
 <!-- Scripts -->
 <script src="<c:url value='/events/loadtemplate.js' />"></script>
 </head>
@@ -137,8 +139,18 @@
 										<c:set var="count" value="${count + 1}" />
 										<tr>
 											<td>${o.id}</td>
-											<td> ${o.createdAt}</td>
-											<td>${total}</td>
+											<td>${o.createdAt}</td>
+											<td>
+												<%
+												Object obj = pageContext.findAttribute("o");
+												OrderResponse orderRe = (OrderResponse) obj;
+												double total = orderRe.getOrderDetails().stream().mapToDouble(t -> t.getPrice() * t.getQuantity()).sum();
+
+												java.text.NumberFormat currencyFormatter = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("vi", "VN"));
+												String formattedTotal = currencyFormatter.format(total);
+												out.print(formattedTotal);
+												%>
+											</td>
 											<td>${o.customer.name}</td>
 											<td><img src="https://via.placeholder.com/50"
 												alt="Product 1" /> <img
@@ -274,7 +286,6 @@
 		load("#footer", "/footer");
 	</script>
 	<!-- events  -->
-	<script src="<c:url value='/events/script.js'/>"></script>
-	<script src="<c:url value='/events/eventproductdetail.js'/>"></script>
+	<script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
 </body>
 </html>
