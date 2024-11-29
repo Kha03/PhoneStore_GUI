@@ -51,7 +51,11 @@ public class ProfileController {
 
 		ApiResponse<List<CustomerResponse>> customerResponse = customerService
 				.getInfoByMail((String) session.getAttribute("email"), session);
+		CustomerResponse customerResponse1 = customerResponse.getData().get(0);
 
+		session.setAttribute("username", customerResponse1.getName());
+		session.setAttribute("profileImage", customerResponse1.getAvatar());
+		System.out.println("Profile Image: " + customerResponse1.getAvatar());
 		CustomerResponse customer = customerResponse.getData().get(0);
 		System.out.println("Customer: " + customer.getName());
 		List<Map<String, String>> fields = List.of(
