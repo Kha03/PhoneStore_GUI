@@ -41,7 +41,7 @@
                 <h3 class="mb-4">Identification</h3>
                 <p class="text-muted">Verify your identity</p>
 
-                <form action="<c:url value='/profile/save' />" method="post" id="profileForm">
+                <form action="<c:url value='/profile/save' />" method="post" id="profileForm" enctype="multipart/form-data">
                 	<input type="hidden" name="id" value="${customer.id}" />
                     <div class="row g-3">
                         <!-- Form Groups for Personal Information -->
