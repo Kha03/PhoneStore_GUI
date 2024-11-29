@@ -1,32 +1,15 @@
 package iuh.fit.se.techgalaxy.frontend.customer.service.impl;
 
-<<<<<<< HEAD
-import java.util.List;
-
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.CustomerResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.entities.Trademark;
-import iuh.fit.se.techgalaxy.frontend.customer.service.CustomerService;
-import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
-=======
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.CustomerResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.exception.AppException;
 import iuh.fit.se.techgalaxy.frontend.customer.exception.ErrorCode;
 import iuh.fit.se.techgalaxy.frontend.customer.service.CustomerService;
 import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
 import jakarta.servlet.http.HttpSession;
->>>>>>> 9341e2b12752329331247b73bd8b31c51085d870
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-<<<<<<< HEAD
-=======
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -35,34 +18,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
->>>>>>> 9341e2b12752329331247b73bd8b31c51085d870
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomerServiceImpl implements CustomerService {
-<<<<<<< HEAD
-	WebClient webClient;
-
-	@Override
-	public ApiResponse<List<CustomerResponse>> getCustomerById(String CustomerId) {
-		try {
-			
-			return webClient.get()
-                    .uri("/customers/"+CustomerId)
-                    .retrieve()
-                    .toEntity(new ParameterizedTypeReference<ApiResponse<List<CustomerResponse>>>() {
-                    })
-                    .block().getBody();
-		} catch (NullPointerException e) {
-			log.error("Error: ", e);
-			return null;
-		}
-	}
-
-}
-=======
     WebClient webClient;
 
     @Override
@@ -99,4 +60,3 @@ public class CustomerServiceImpl implements CustomerService {
     }
     }
 
->>>>>>> 9341e2b12752329331247b73bd8b31c51085d870

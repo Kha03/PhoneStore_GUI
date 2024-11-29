@@ -45,7 +45,6 @@ public class OrderController {
 
 	@GetMapping()
 	public ModelAndView getOrders(
-
 			ModelAndView model) {
 		ApiResponse<List<OrderResponse>> orders = orderServiceImpl
 				.getOrderByCustomerId("008b425f-fcbe-4b3a-952c-555835a4dc2c");
@@ -68,9 +67,8 @@ public class OrderController {
 			@RequestParam(value = "cusId", required = false) String cusId, ModelAndView model) {
 		String idOrder1 = idOrder;
 		ApiResponse<List<OrderDetailResponse>> orderDetail = orderDetailServiceImpl.orderDetailByOrderId(idOrder1);
-		ApiResponse<List<CustomerResponse>> customer = customerServiceImpl.getCustomerById(cusId);
+//		ApiResponse<List<CustomerResponse>> customer = customerServiceImpl.getCustomerById(cusId);
 		ApiResponse<List<OrderResponse>> orderRe = orderServiceImpl.getOrderById(idOrder1);
-
 		if (orderDetail != null && orderDetail.getData() != null) {
 			List<OrderDetailResponse> orderDetails = orderDetail.getData();
 
@@ -92,7 +90,7 @@ public class OrderController {
 		} else {
 			System.out.println("No order details found for idOrder: " + idOrder);
 		}
-		model.addObject("cus", customer.getData());
+//		model.addObject("cus", customer.getData());
 		model.setViewName("Order_Detail");
 		return model;
 	}
