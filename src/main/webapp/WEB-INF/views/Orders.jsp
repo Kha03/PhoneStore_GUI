@@ -64,7 +64,6 @@
 		load("#header", "/header");
 	</script>
 	<!-- main -->
-	<c:set var="count" value="0" />
 	<div class="container-fluid custom-container">
 		<div class="row">
 			<div class="col-md-3 sidebar bg-white">
@@ -101,22 +100,43 @@
 							Current <span class="badge bg-secondary">${size}</span>
 						</button>
 					</li>
+					<c:set var="counter" value="0" scope="page" />
+					<c:set var="count" value="0" scope="page" />
+					<c:set var="cter" value="0" scope="page" />
+					<c:forEach items="${orders}" var="o" varStatus="status">
+						<c:if test="${o.orderStatus == 'DELIVERED'}">
+							<%-- Tăng giá trị biến đếm nếu điều kiện đúng --%>
+							<c:set var="counter" value="${counter + 1}" scope="page" />
+						</c:if>
+					</c:forEach>
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="delivered-tab" data-bs-toggle="tab"
 							data-bs-target="#delivered" type="button" role="tab">
-							Delivered <span class="badge bg-secondary">3</span>
+							Delivered <span class="badge bg-secondary">${counter}</span>
 						</button>
 					</li>
+
+					<c:forEach items="${orders}" var="o" varStatus="status">
+						<c:if test="${o.orderStatus == 'CANCELLED'}">
+							<c:set var="count" value="${count + 1}" scope="page" />
+						</c:if>
+					</c:forEach>
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="canceled-tab" data-bs-toggle="tab"
 							data-bs-target="#canceled" type="button" role="tab">
-							Canceled <span class="badge bg-secondary">2</span>
+							Canceled <span class="badge bg-secondary">${count}</span>
 						</button>
 					</li>
+
+					<c:forEach items="${orders}" var="o" varStatus="status">
+						<c:if test="${o.orderStatus == 'RETURNED'}">
+							<c:set var="cter" value="${cter + 1}" scope="page" />
+						</c:if>
+					</c:forEach>
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="returned-tab" data-bs-toggle="tab"
 							data-bs-target="#returned" type="button" role="tab">
-							Returned <span class="badge bg-secondary">1</span>
+							Returned <span class="badge bg-secondary">${cter}</span>
 						</button>
 					</li>
 				</ul>
@@ -136,7 +156,6 @@
 								</thead>
 								<tbody>
 									<c:forEach items="${orders}" var="o" varStatus="status">
-										<c:set var="count" value="${count + 1}" />
 										<tr>
 											<td>${o.id}</td>
 											<td>${o.createdAt}</td>
@@ -181,30 +200,30 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>#8967856</td>
-										<td>2023/08/20</td>
-										<td>$10,998.00</td>
-										<td>2023/08/22</td>
-										<td>Jimmy Smith</td>
-										<td><img src="https://via.placeholder.com/50"
-											alt="Product 1" /> <img src="https://via.placeholder.com/50"
-											alt="Product 2" /> <img src="https://via.placeholder.com/50"
-											alt="Product 3" /> <img src="https://via.placeholder.com/50"
-											alt="Product 4" /> <span>+2</span></td>
-									</tr>
-									<tr>
-										<td>#3615950</td>
-										<td>2023/06/30</td>
-										<td>$5,643.32</td>
-										<td>2023/07/05</td>
-										<td>Jimmy Smith</td>
-										<td><img src="https://via.placeholder.com/50"
-											alt="Product 1" /> <img src="https://via.placeholder.com/50"
-											alt="Product 2" /> <img src="https://via.placeholder.com/50"
-											alt="Product 3" /> <img src="https://via.placeholder.com/50"
-											alt="Product 4" /></td>
-									</tr>
+									<c:forEach items="${orders}" var="o" varStatus="status">
+										<c:if test="${o.orderStatus == 'DELIVERED'}">
+											<tr>
+												<td>${o.id}</td>
+												<td>${o.createdAt}</td>
+												<td>
+													<%
+													Object obj = pageContext.findAttribute("o");
+													OrderResponse orderRe = (OrderResponse) obj;
+													double total = orderRe.getOrderDetails().stream().mapToDouble(t -> t.getPrice() * t.getQuantity()).sum();
+
+													java.text.NumberFormat currencyFormatter = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("vi", "VN"));
+													String formattedTotal = currencyFormatter.format(total);
+													out.print(formattedTotal);
+													%>
+												</td>
+												<td>${o.createdAt}</td>
+												<td>${o.customer.name}</td>
+												<td><img src="https://via.placeholder.com/50"
+													alt="Product 3" /> <img
+													src="https://via.placeholder.com/50" alt="Product 4" /></td>
+											</tr>
+										</c:if>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -223,27 +242,31 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>#4587951</td>
-										<td>2023/05/10</td>
-										<td>$1,200.00</td>
-										<td>2023/05/15</td>
-										<td>Jimmy Smith</td>
-										<td><img src="https://via.placeholder.com/50"
-											alt="Product 1" /> <img src="https://via.placeholder.com/50"
-											alt="Product 2" /></td>
-									</tr>
-									<tr>
-										<td>#7894562</td>
-										<td>2023/07/01</td>
-										<td>$2,345.67</td>
-										<td>2023/07/03</td>
-										<td>Jimmy Smith</td>
-										<td><img src="https://via.placeholder.com/50"
-											alt="Product 1" /> <img src="https://via.placeholder.com/50"
-											alt="Product 2" /> <img src="https://via.placeholder.com/50"
-											alt="Product 3" /></td>
-									</tr>
+									<c:forEach items="${orders}" var="o" varStatus="status">
+										<c:if test="${o.orderStatus == 'CANCELLED'}">
+											<tr>
+												<td>${o.id}</td>
+												<td>${o.createdAt}</td>
+												<td>
+													<%
+													Object obj = pageContext.findAttribute("o");
+													OrderResponse orderRe = (OrderResponse) obj;
+													double total = orderRe.getOrderDetails().stream().mapToDouble(t -> t.getPrice() * t.getQuantity()).sum();
+
+													java.text.NumberFormat currencyFormatter = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("vi", "VN"));
+													String formattedTotal = currencyFormatter.format(total);
+													out.print(formattedTotal);
+													%>
+												</td>
+												<td>${o.createdAt}</td>
+												<td>${o.customer.name}</td>
+												<td><img src="https://via.placeholder.com/50"
+													alt="Product 3" /> <img
+													src="https://via.placeholder.com/50" alt="Product 4" /></td>
+											</tr>
+										</c:if>
+									</c:forEach>
+
 								</tbody>
 							</table>
 						</div>
@@ -262,16 +285,30 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>#1234567</td>
-										<td>2023/03/15</td>
-										<td>$789.00</td>
-										<td>2023/03/20</td>
-										<td>Jimmy Smith</td>
-										<td><img src="https://via.placeholder.com/50"
-											alt="Product 1" /> <img src="https://via.placeholder.com/50"
-											alt="Product 2" /></td>
-									</tr>
+									<c:forEach items="${orders}" var="o" varStatus="status">
+										<c:if test="${o.orderStatus == 'RETURNED'}">
+											<tr>
+												<td>${o.id}</td>
+												<td>${o.createdAt}</td>
+												<td>
+													<%
+													Object obj = pageContext.findAttribute("o");
+													OrderResponse orderRe = (OrderResponse) obj;
+													double total = orderRe.getOrderDetails().stream().mapToDouble(t -> t.getPrice() * t.getQuantity()).sum();
+
+													java.text.NumberFormat currencyFormatter = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("vi", "VN"));
+													String formattedTotal = currencyFormatter.format(total);
+													out.print(formattedTotal);
+													%>
+												</td>
+												<td>${o.createdAt}</td>
+												<td>${o.customer.name}</td>
+												<td><img src="https://via.placeholder.com/50"
+													alt="Product 3" /> <img
+													src="https://via.placeholder.com/50" alt="Product 4" /></td>
+											</tr>
+										</c:if>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
