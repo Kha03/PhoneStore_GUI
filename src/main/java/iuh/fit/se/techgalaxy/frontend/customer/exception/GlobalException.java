@@ -39,7 +39,7 @@ public class GlobalException {
         ModelAndView modelAndView = new ModelAndView();
         ErrorCode errorCode = ex.getErrorCode();
         modelAndView.addObject("status", errorCode.getCode());
-        modelAndView.addObject("message", errorCode.getMessage());
+        modelAndView.addObject("message", ex.getMessage());
         modelAndView.setViewName("error");
         return modelAndView;
     }

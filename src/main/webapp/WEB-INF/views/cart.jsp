@@ -49,6 +49,25 @@
       load("#header", "/header");
     </script>
     <!-- main -->
+    <c:if test="${not empty orderMessage}">
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Thank you <3</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ${orderMessage}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-signIn" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </c:if>
+
     <div class="container_checkout mt-3">
       <div class="fincons">
         <div class="fCheckout">
@@ -455,6 +474,9 @@
     <script>
       load("#footer", "/footer");
       const token = "${token}"
+      $(document).ready(function() {
+        $('#exampleModal').modal('show');
+      });
     </script>
     <script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
     <script src="<c:url value='/events/controller.js' />"></script>
