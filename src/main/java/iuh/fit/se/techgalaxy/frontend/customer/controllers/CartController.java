@@ -45,7 +45,9 @@ public class CartController {
          HttpSession session = request.getSession();
         ApiResponse<List< CustomerResponse>> customerResponse = customerService.getInfoByMail((String) session.getAttribute("email"), session);
         if(customerResponse.getData() != null && !customerResponse.getData().isEmpty()){
-            model.addAttribute("customer", customerResponse.getData().get(0));
+            CustomerResponse customer = customerResponse.getData().get(0);
+            model.addAttribute("customer", customer);
+            session.setAttribute("customerId", customer.getId());
         }
         return "checkout";
     }

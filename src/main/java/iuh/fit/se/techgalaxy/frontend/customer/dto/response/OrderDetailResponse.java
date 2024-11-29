@@ -6,6 +6,8 @@ import iuh.fit.se.techgalaxy.frontend.customer.entities.enumeration.DetailStatus
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -14,8 +16,9 @@ import lombok.experimental.FieldDefaults;
 public class OrderDetailResponse {
     String id;
     DetailStatus detailStatus;
-    Order order;
-    ProductVariantDetail productVariantDetail;
-    Integer quantity;
-    Double price;
+    OrderResponse order;
+    ProductVariantDetailResponse productVariantDetail;
+    int quantity;
+    double price;
+    LocalDateTime createdAt;
 }

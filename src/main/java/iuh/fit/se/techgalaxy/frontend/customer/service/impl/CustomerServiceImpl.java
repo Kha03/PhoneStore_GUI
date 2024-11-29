@@ -43,6 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
                         return Mono.error(new AppException(ErrorCode.GENERAL_ERROR));
                     })
                     .onStatus(HttpStatusCode::is5xxServerError, response -> {
+                        // Handle 5xx errors
                         return Mono.error(new AppException(ErrorCode.SERVER_ERROR));
                     })
                     .bodyToMono(new ParameterizedTypeReference<ApiResponse<List<CustomerResponse>>>() {})

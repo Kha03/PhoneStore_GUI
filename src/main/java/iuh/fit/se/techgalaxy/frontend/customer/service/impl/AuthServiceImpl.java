@@ -100,7 +100,7 @@ public void logout(HttpSession session, String accessToken, HttpServletResponse 
         response.addCookie(refreshTokenCookie);
 
         // Invalidate the session
-        session.invalidate();
+       session.invalidate();
     }
 }
 

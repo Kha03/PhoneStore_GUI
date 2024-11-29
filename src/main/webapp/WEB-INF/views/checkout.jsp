@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,83 +41,7 @@
     <script src="<c:url value='/events/loadtemplate.js' />"></script>
     <!-- jQuery -->
     <script src="<c:url value='/js/jquery.js' />"></script>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f9f9f9;
-        }
-        .checkout-container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        .order-summary {
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #f7f7f7;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .order-group {
-            max-height: 420px;
-            overflow-y: auto;
-        }
-        .order-group::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .order-group::-webkit-scrollbar-thumb {
-            background-color: #9e9e9e;
-            border-radius: 10px;
-        }
-        .order-summary h4 {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .order-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        .order-item:last-child {
-            border-bottom: none;
-        }
-        .order-item span {
-            font-weight: normal;
-            color: #333;
-        }
-        .order-item .price {
-            font-weight: bold;
-            color: #333;
-        }
-        .total-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #333;
-            margin-top: 15px;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            color: white;
-            border-radius: 8px;
-            padding: 10px;
-            font-size: 1.125rem;
-            width: 100%;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
-
 <body>
 <!-- header -->
 <header id="header" class="header"></header>
@@ -201,7 +126,7 @@
             <div class="col-md-5">
                 <div class="order-summary">
                     <h4>Checkout Details</h4>
-                    <form class="checkout-form">
+                    <form:form class="checkout-form" action="${pageContext.request.contextPath}/cart/checkout/order" method="post">
                         <div class="mb-3">
                             <label for="name" class="form-label">Full Name</label>
                             <input type="text" class="form-control" id="name" readonly
@@ -210,36 +135,30 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" readonly
+                            <input type="email" class="form-control" id="email" readonly name="email"
                             value="${sessionScope.get("email")}">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Shipping Address</label>
-                            <textarea required class="form-control" id="address" rows="3" placeholder="1234 Street Name, City, Country"></textarea>
+                            <textarea required class="form-control" id="address" rows="3" name="address" placeholder="1234 Street Name, City, Country"></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Payment Method</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="credit_card">
-                                <label class="form-check-label" for="creditCard">
-                                    Credit Card
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="vnpay" value="vnpay" checked>
+                                <label class="form-check-label" for="vnpay">
+                                    VN Pay
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="paypal">
-                                <label class="form-check-label" for="paypal">
-                                    PayPal
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransfer" value="bank_transfer">
-                                <label class="form-check-label" for="bankTransfer">
-                                    Bank Transfer
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="shipcod" value="shipcod">
+                                <label class="form-check-label" for="shipcod">
+                                    Payment upon receipt
                                 </label>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Proceed to Payment</button>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>

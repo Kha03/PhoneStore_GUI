@@ -5,6 +5,9 @@ import iuh.fit.se.techgalaxy.frontend.customer.entities.enumeration.PaymentStatu
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,4 +20,6 @@ public class OrderResponse {
     String address;
     PaymentStatus paymentStatus;
     OrderStatus orderStatus;
+    List<OrderDetailResponse> orderDetails;
+    LocalDateTime createdAt;
 }

@@ -1,6 +1,10 @@
 package iuh.fit.se.techgalaxy.frontend.customer.exception;
 
+import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
+import jakarta.validation.ConstraintViolation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
@@ -9,6 +13,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.net.ConnectException;
 import java.util.Map;
+import java.util.Objects;
 
 @ControllerAdvice
 @Slf4j
@@ -54,6 +59,8 @@ public class GlobalException {
     public String handleNoResourceFoundException() {
         return "redirect:/home";
     }
+
+
 //    // Handle File Exception
 //    @ExceptionHandler({URISyntaxException.class, IOException.class})
 //    public ResponseEntity<DataResponse> handleFileException() {
@@ -70,31 +77,29 @@ public class GlobalException {
 //        return handleException();
 //    }
 //    // Handle Validation Exception
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<DataResponse> handleValidationException(MethodArgumentNotValidException ex) {
-//        ErrorCode errorCode;
-//        Map<String, Object> attributes = null;
-//
-//        try {
-//            var fieldError = ex.getBindingResult().getFieldError();
-//            if (fieldError != null) {
-//                errorCode = ErrorCode.valueOf(fieldError.getDefaultMessage());
-//                var constraint = ex.getBindingResult().getAllErrors().get(0).unwrap(ConstraintViolation.class);
-//                attributes = constraint.getConstraintDescriptor().getAttributes();
-//            } else {
-//                errorCode = ErrorCode.INVALID_KEY;
-//            }
-//        } catch (Exception e) {
-//            errorCode = ErrorCode.INVALID_KEY;
-//        }
-//
-//        DataResponse dataResponse = DataResponse.builder()
-//                .status(errorCode.getCode())
-//                .message(Objects.nonNull(attributes) ? mapAttributeMessage(errorCode.getMessage(), attributes) : errorCode.getMessage())
-//                .build();
-//
-//        return ResponseEntity.status(errorCode.getHttpStatus()).body(dataResponse);
-//    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ModelAndView handleValidationException(MethodArgumentNotValidException ex) {
+        ErrorCode errorCode;
+        Map<String, Object> attributes = null;
+
+        try {
+            var fieldError = ex.getBindingResult().getFieldError();
+            if (fieldError != null) {
+                errorCode = ErrorCode.valueOf(fieldError.getDefaultMessage());
+                var constraint = ex.getBindingResult().getAllErrors().get(0).unwrap(ConstraintViolation.class);
+                attributes = constraint.getConstraintDescriptor().getAttributes();
+            } else {
+                errorCode = ErrorCode.INVALID_KEY;
+            }
+        } catch (Exception e) {
+            errorCode = ErrorCode.INVALID_KEY;
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error");
+        modelAndView.addObject("status", errorCode.getCode());
+        modelAndView.addObject("message", Objects.nonNull(attributes) ? mapAttributeMessage(errorCode.getMessage(), attributes) : errorCode.getMessage());
+        return modelAndView;
+    }
 
     private String mapAttributeMessage(String message, Map<String, Object> attributes) {
         String minValue = String.valueOf(attributes.get(MIN_ATTRIBUTE));
