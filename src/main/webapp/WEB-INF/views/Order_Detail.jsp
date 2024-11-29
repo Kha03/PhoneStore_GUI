@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,15 +65,18 @@
 			<div class="col-md-8 mx-auto">
 				<h2>Order Detail</h2>
 				<div class="order-summary">
-					<h4>Order #1050486</h4>
+					<h4># ${idOrderDetail}</h4>
+					
 					<p>
 						<strong>Placed On:</strong> 2023/04/15
 					</p>
 					<p>
-						<strong>Total:</strong> $543.02
+						<strong>Total:</strong>
+						<fmt:formatNumber value="${total}" type="number"
+							pattern="#,###.##" />
 					</p>
 					<p>
-						<strong>Status:</strong> Processing
+						<strong>Status:</strong> ${status}
 					</p>
 				</div>
 
@@ -84,41 +89,37 @@
 							<th>Price</th>
 						</tr>
 					</thead>
+					<!-- Khởi tạo biến orderTotal -->
+					<c:set var="orderTotal" value="0" scope="page" />
 					<tbody>
-						<tr class="order-item">
-							<td><img src="https://via.placeholder.com/50"
-								alt="Product 1" /> Product 1</td>
-							<td>1</td>
-							<td>$200.00</td>
-						</tr>
-						<tr class="order-item">
-							<td><img src="https://via.placeholder.com/50"
-								alt="Product 2" /> Product 2</td>
-							<td>2</td>
-							<td>$150.00</td>
-						</tr>
-						<tr class="order-item">
-							<td><img src="https://via.placeholder.com/50"
-								alt="Product 3" /> Product 3</td>
-							<td>1</td>
-							<td>$193.02</td>
-						</tr>
+						<c:forEach var="order" items="${orderDetail}">
+							<tr class="order-item">
+								<td><img src="https://via.placeholder.com/50"
+									alt="Product 1" />${order.productVariantDetail.name}</td>
+								<td>${order.quantity}</td>
+								<td><fmt:formatNumber value="${order.price}" type="number"
+										pattern="#,###.##" /></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 
 				<h4>Shipping Information</h4>
-				<p>
-					<strong>Recipient:</strong> Jimmy Smith
-				</p>
-				<p>
-					<strong>Address:</strong> 123 Main St, Cityville, USA
-				</p>
-				<p>
-					<strong>Phone:</strong> (123) 456-7890
-				</p>
+				<c:forEach var="c" items="${cus}">
+					<p>
+						<strong>Recipient:</strong> ${c.name}
+					</p>
+					<p>
+						<strong>Address:</strong>${address}
+					</p>
+					<p>
+						<strong>Phone:</strong> ${c.phone}
+					</p>
 
-				<a href="Orders.jsp" class="btn btn-primary mt-3">Back
-					to Orders</a>
+				</c:forEach>
+
+				<a href="${pageContext.request.contextPath}/orders"
+					class="btn btn-primary mt-3">Back to Orders</a>
 			</div>
 		</div>
 	</div>
