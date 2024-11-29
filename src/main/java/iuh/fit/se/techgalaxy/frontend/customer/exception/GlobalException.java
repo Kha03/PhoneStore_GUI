@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.net.ConnectException;
 import java.util.Map;
@@ -49,11 +50,10 @@ public class GlobalException {
         return modelAndView;
     }
     // Handle NoResourceFoundException File
-//    @ExceptionHandler(NoResourceFoundException.class)
-//    public ResponseEntity<DataResponse> handleNoResourceFoundException() {
-//        DataResponse dataResponse = DataResponse.builder().status(ErrorCode.NO_RESOURCE_FOUND.getCode()).message(ErrorCode.NO_RESOURCE_FOUND.getMessage()).build();
-//        return ResponseEntity.status(ErrorCode.NO_RESOURCE_FOUND.getHttpStatus()).body(dataResponse);
-//    }
+    @ExceptionHandler(NoResourceFoundException.class)
+    public String handleNoResourceFoundException() {
+        return "redirect:/home";
+    }
 //    // Handle File Exception
 //    @ExceptionHandler({URISyntaxException.class, IOException.class})
 //    public ResponseEntity<DataResponse> handleFileException() {

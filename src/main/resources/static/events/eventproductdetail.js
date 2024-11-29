@@ -44,26 +44,30 @@ function selectMemory(memoryName) {
     if (firstAvailableColor) {
         $(`#color-${firstAvailableColor.colorId}`).prop("checked", true);
         selectColor(firstAvailableColor);
+        $("#addCartBtn").prop("disabled", false);
+        $("#buyBtn").prop("disabled", false);
+    }
+    else {
+        $("#addCartBtn").prop("disabled", true);
+        $("#buyBtn").prop("disabled", true);
     }
 }
 
 function selectColor(color) {
-    // Hàm định dạng số theo kiểu có dấu phân cách hàng nghìn
     const formatCurrency = (value) => {
         return new Intl.NumberFormat('en-US', { minimumFractionDigits: 0 }).format(value);
     };
 
-    // Cập nhật giá hiện tại
     $(".info_price-cost").text(`$ ${formatCurrency(color.price)}`);
 
-    // Cập nhật chiết khấu
     const discountPercentage = color.sale ? `-${color.sale * 100}%` : "0%";
     $(".info_price-discount").text(discountPercentage);
 
-    // Cập nhật giá cuối cùng
-    const lastPrice = color.price * (1 - (color.sale / 100 || 0));
+    const lastPrice = Math.round(color.price * (1 - (color.sale || 0)));
     $(".info_price-last").text(`$ ${formatCurrency(lastPrice)}`);
 }
+
+
 
 // Khởi tạo với bộ nhớ đầu tiên
 const initialMemory = Object.keys(productMemories)[0];

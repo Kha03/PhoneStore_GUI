@@ -32,7 +32,8 @@
     <!-- Bootstrap CSS -->
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet"/>
     <!-- Bootstrap JS -->
-    <script src="<c:url value='/js/bootstrap.min.js' />"></script>
+    <%--    <script src="<c:url value='/js/bootstrap.min.js' />"></script>--%>
+    <%--   bootstrap.bundle.min.js instead of bootstrap.min.js in footer--%>
     <!-- jquery -->
     <script src="<c:url value='/js/jquery.js' />"></script>
     <!-- Styles -->
@@ -155,7 +156,7 @@
                             <p class="m-0">Free Delivery</p>
                         </div>
                     </div>
-                    <form:form class="addToCartForm" role="form" method="post">
+                    <form:form class="addToCartForm" role="form" method="post" action="${pageContext.request.contextPath}/cart">
                         <input type="hidden" name="productVariantId"
                                value="${variantId}"/>
                     <div class="info_select-group  d-flex">
@@ -202,9 +203,9 @@
                     <!-- button add -->
                     <div class="info_add-cart d-flex flex-column">
 
-                        <button class="btn  w-75 info_btn-add">Add To Cart</button>
+                        <button class="btn  w-75 info_btn-add" id="addCartBtn">Add To Cart</button>
 
-                        <button class="btn w-75 info_btn-buy">
+                        <button type="submit" class="btn w-75 info_btn-buy" id="buyBtn">
                             Buy Now
                             <img
                                     src="<c:url value='/icon/arrow-right.svg' />"
@@ -1394,5 +1395,6 @@
 <script src="<c:url value='/events/script.js'/>"></script>
 <script src="<c:url value='/events/eventproductdetail.js'/>"></script>
 <script src="<c:url value='/events/controller.js'/>"></script>
+<script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
 </body>
 </html>

@@ -33,7 +33,8 @@
     <!-- Bootstrap CSS -->
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet"/>
     <!-- Bootstrap JS -->
-    <script src="<c:url value='/js/bootstrap.min.js' />"></script>
+    <%--    <script src="<c:url value='/js/bootstrap.min.js' />"></script>--%>
+    <%--   bootstrap.bundle.min.js instead of bootstrap.min.js in footer--%>
     <!-- noUiSlider CSS -->
     <link
             rel="stylesheet"
@@ -470,7 +471,7 @@
                                             <form:form class="addToCartForm" role="form" method="post">
                                                 <input type="hidden" name="productVariantId"
                                                        value="${product.id}"/>
-                                                <button type="submit" class="btn btn-outline-dark d-flex gap-1">
+                                                <button class="btn btn-outline-dark d-flex gap-1 addCartBtn">
                                                     <img
                                                             src="<c:url value='/icon/shopping-cart.svg' />"
                                                             alt=""
@@ -552,5 +553,6 @@
 <!-- events -->
 <script src="<c:url value='/events/script.js'/>"></script>
 <script src="<c:url value='/events/controller.js'/>"></script>
+<script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
 </body>
 </html>

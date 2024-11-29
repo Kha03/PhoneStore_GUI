@@ -1,41 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Check out</title>
+    <title>Cart</title>
+    <%-- Favicon --%>
+    <link rel="apple-touch-icon" sizes="57x57" href="<c:url value='/favicon/apple-icon-57x57.png'/>">
+    <link rel="apple-touch-icon" sizes="60x60" href="<c:url value='/favicon/apple-icon-60x60.png'/>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<c:url value='/favicon/apple-icon-72x72.png'/>">
+    <link rel="apple-touch-icon" sizes="76x76" href="<c:url value='/favicon/apple-icon-76x76.png'/>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<c:url value='/favicon/apple-icon-114x114.png'/>">
+    <link rel="apple-touch-icon" sizes="120x120" href="<c:url value='/favicon/apple-icon-120x120.png'/>">
+    <link rel="apple-touch-icon" sizes="144x144" href="<c:url value='/favicon/apple-icon-144x144.png'/>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<c:url value='/favicon/apple-icon-152x152.png'/>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/favicon/apple-icon-180x180.png'/>">
+    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/favicon/android-icon-192x192.png'/>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/favicon/favicon-32x32.png'/>">
+    <link rel="icon" type="image/png" sizes="96x96" href="<c:url value='/favicon/favicon-96x96.png'/>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/favicon/favicon-16x16.png'/>">
+    <link rel="manifest" href="<c:url value='/favicon/manifest.json'/>">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="<c:url value='/favicon/ms-icon-144x144.png'/>">
+    <meta name="theme-color" content="#ffffff">
     <!-- Fonts -->
-    <link href="../assets/fonts/stylesheet.css" rel="stylesheet" />
+    <link href="<c:url value='/fonts/stylesheet.css' />" rel="stylesheet"/>
     <!-- Bootstrap CSS -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet"/>
     <!-- Bootstrap JS -->
-    <script src="../assets/js/bootstrap.min.js"></script>
+    <%--    <script src="<c:url value='/js/bootstrap.min.js' />"></script>--%>
+    <%--   bootstrap.bundle.min.js instead of bootstrap.min.js in footer--%>
     <!-- Styles -->
-    <link href="../assets/css/styles.css" rel="stylesheet" />
+    <link href="<c:url value='/css/styles.css' />" rel="stylesheet"/>
+    <link href="<c:url value='/css/checkOut.css' />" rel="stylesheet"/>
     <!-- Scripts -->
-    <script src="../assets/events/loadtemplate.js"></script>
-
-    <link rel="stylesheet" href="../assets/css/checkOut.css" />
+    <script src="<c:url value='/events/loadtemplate.js' />"></script>
+    <!-- jQuery -->
+    <script src="<c:url value='/js/jquery.js' />"></script>
   </head>
 
   <body>
     <!-- header -->
     <header id="header" class="header"></header>
     <script>
-      load("#header", "./header.html");
+      load("#header", "/header");
     </script>
     <!-- main -->
     <div class="container_checkout mt-3">
       <div class="fincons">
-        <div class="fSelected">
-          <img src="../assets/icon/giohang.png" alt="" class="iconStore" />
+        <div class="fCheckout">
+          <div class="fdestxt">
+            <img
+                    src="<c:url value='/icon/giohang.svg' />"
+                    alt=""
+                    class="iconSmall"
+            /><span class="des">Cart</span>
+          </div>
           <div class="line"></div>
         </div>
         <div class="fCheckout">
           <div class="lineGrey"></div>
           <div class="fdestxt">
             <img
-              src="../assets/icon/checkout.png"
+              src="<c:url value='/icon/checkout.svg' />"
               alt=""
               class="iconSmall"
             /><span class="des">Checkout</span>
@@ -45,8 +75,7 @@
         <div class="fCheckout">
           <div class="lineGrey"></div>
           <div class="fdestxt">
-            <img
-              src="../assets/icon/payment.png"
+            <img src="<c:url value='/icon/payment.svg' />"
               alt=""
               class="iconSmall"
             /><span class="des">Payment</span>
@@ -56,202 +85,65 @@
 
       <div class="content">
         <div class="content1">
-          <div class="fDetailProduct">
-            <img src="../assets/imgs/lpproduct.png" alt="" class="imgProduct" />
-            <div class="fDetail">
-              <div class="ftitle">
-                <span class="txttitle"> MacBook Pro M2 MNEJ3 2022 LLA</span>
-                <br />
-                <span class="txttitle">13.3 inch</span>
-              </div>
-              <div class="fdeli">
-                <div class="fcolor">
-                  <span class="txtmt">Black</span>
-                </div>
-                <div class="fcolor">
-                  <img
-                    src="../assets/icon/delivery-truck.png"
-                    alt=""
-                    class="iconDeli"
-                  />
-                  <span class="txtmt">Free Delivery</span>
-                </div>
-                <div class="fcolor">
-                  <img
-                    src="../assets/icon/guarantee.png"
-                    alt=""
-                    class="iconDeli"
-                  />
-                  <span class="txtmt">Guaranteed</span>
-                </div>
-              </div>
-              <div class="fPriceandControl">
-                <div class="fPrice">
-                  <span class="txtDiscount">$1,293.00</span>
-                  <span class="txtsold">$433.00</span>
-                </div>
-                <div class="fControl">
-                  <img src="../assets/icon/trash.png" alt="" class="both" />
-                  <div class="fBtn">
-                    <button class="btnControl">
-                      <span class="txtControl">-</span>
-                    </button>
-                    <span class="txtControl">1</span>
-                    <button class="btnControl">
-                      <span class="txtControl">+</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+          <c:if test="${empty cart}">
+            <div class="text-center">
+              <img src="<c:url value='/imgs/empty-cart.png' />" alt="Empty Cart" class="img-fluid mb-3" />
+              <p class="text-muted">Your cart is empty. Please add some products!</p>
             </div>
-          </div>
-          <div class="fDetailProduct">
-            <img src="../assets/imgs/lpproduct.png" alt="" class="imgProduct" />
-            <div class="fDetail">
-              <div class="ftitle">
-                <span class="txttitle"> MacBook Pro M2 MNEJ3 2022 LLA</span>
-                <br />
-                <span class="txttitle">13.3 inch</span>
-              </div>
-              <div class="fdeli">
-                <div class="fcolor">
-                  <span class="txtmt">Black</span>
-                </div>
-                <div class="fcolor">
-                  <img
-                    src="../assets/icon/delivery-truck.png"
-                    alt=""
-                    class="iconDeli"
-                  />
-                  <span class="txtmt">Free Delivery</span>
-                </div>
-                <div class="fcolor">
-                  <img
-                    src="../assets/icon/guarantee.png"
-                    alt=""
-                    class="iconDeli"
-                  />
-                  <span class="txtmt">Guaranteed</span>
-                </div>
-              </div>
-              <div class="fPriceandControl">
-                <div class="fPrice">
-                  <span class="txtDiscount">$1,293.00</span>
-                  <span class="txtsold">$433.00</span>
-                </div>
-                <div class="fControl">
-                  <img src="../assets/icon/trash.png" alt="" class="both" />
-                  <div class="fBtn">
-                    <button class="btnControl">
-                      <span class="txtControl">-</span>
-                    </button>
-                    <span class="txtControl">1</span>
-                    <button class="btnControl">
-                      <span class="txtControl">+</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="fDetailProduct">
-            <img src="../assets/imgs/lpproduct.png" alt="" class="imgProduct" />
-            <div class="fDetail">
-              <div class="ftitle">
-                <span class="txttitle"> MacBook Pro M2 MNEJ3 2022 LLA</span>
-                <br />
-                <span class="txttitle">13.3 inch</span>
-              </div>
-              <div class="fdeli">
-                <div class="fcolor">
-                  <span class="txtmt">Black</span>
-                </div>
-                <div class="fcolor">
-                  <img
-                    src="../assets/icon/delivery-truck.png"
-                    alt=""
-                    class="iconDeli"
-                  />
-                  <span class="txtmt">Free Delivery</span>
-                </div>
-                <div class="fcolor">
-                  <img
-                    src="../assets/icon/guarantee.png"
-                    alt=""
-                    class="iconDeli"
-                  />
-                  <span class="txtmt">Guaranteed</span>
-                </div>
-              </div>
-              <div class="fPriceandControl">
-                <div class="fPrice">
-                  <span class="txtDiscount">$1,293.00</span>
-                  <span class="txtsold">$433.00</span>
-                </div>
-                <div class="fControl">
-                  <img src="../assets/icon/trash.png" alt="" class="both" />
-                  <div class="fBtn">
-                    <button class="btnControl">
-                      <span class="txtControl">-</span>
-                    </button>
-                    <span class="txtControl">1</span>
-                    <button class="btnControl">
-                      <span class="txtControl">+</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="fDetailProduct">
-            <img src="../assets/imgs/lpproduct.png" alt="" class="imgProduct" />
-            <div class="fDetail">
-              <div class="ftitle">
-                <span class="txttitle"> MacBook Pro M2 MNEJ3 2022 LLA</span>
-                <br />
-                <span class="txttitle">13.3 inch</span>
-              </div>
-              <div class="fdeli">
-                <div class="fcolor">
-                  <span class="txtmt">Black</span>
-                </div>
-                <div class="fcolor">
-                  <img
-                    src="../assets/icon/delivery-truck.png"
-                    alt=""
-                    class="iconDeli"
-                  />
-                  <span class="txtmt">Free Delivery</span>
-                </div>
-                <div class="fcolor">
-                  <img
-                    src="../assets/icon/guarantee.png"
-                    alt=""
-                    class="iconDeli"
-                  />
-                  <span class="txtmt">Guaranteed</span>
-                </div>
-              </div>
-              <div class="fPriceandControl">
-                <div class="fPrice">
-                  <span class="txtDiscount">$1,293.00</span>
-                  <span class="txtsold">$433.00</span>
-                </div>
-                <div class="fControl">
-                  <img src="../assets/icon/trash.png" alt="" class="both" />
-                  <div class="fBtn">
-                    <button class="btnControl">
-                      <span class="txtControl">-</span>
-                    </button>
-                    <span class="txtControl">1</span>
-                    <button class="btnControl">
-                      <span class="txtControl">+</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </c:if>
+       <c:forEach var="product" items="${cart}">
+         <div class="fDetailProduct">
+             <%--<img src="<c:url value='/imgs/${product.productsImage[0].url}' />" class="img-fluid rounded-start" alt="Product Image">--%>
+           <img src="<c:url value='/imgs/p1.png' />" alt="" class="imgProduct" />
+           <div class="fDetail">
+             <div class="ftitle">
+               <span class="txttitle">${product.productVariantId} </span>
+             </div>
+             <div class="fdeli mt-2">
+               <div class="fcolor">
+                 <span class="txtmt">Memory: ${product.memory != null ? product.memory.name : "N/A"} </span>
+               </div>
+               <div class="fcolor mt-2">
+                 <span class="txtmt">Color: ${product.color != null ? product.color.name : "N/A"}</span>
+               </div>
+               <div class="fcolor mt-2">
+                 <img
+                         src="<c:url value='/icon/delivery-truck.png' />"
+                         alt=""
+                         class="iconDeli"
+                 />
+                 <span class="txtmt ms-2">Free Delivery</span>
+               </div>
+               <div class="fcolor mt-2">
+                 <img
+                         src="<c:url value='/icon/guarantee.png' />"
+                         alt=""
+                         class="iconDeli"
+                 />
+                 <span class="txtmt ms-2">Guaranteed</span>
+               </div>
+             </div>
+             <div class="fPriceandControl">
+               <div class="fPrice">
+                 <span class="txtDiscount"> <fmt:formatNumber value="${product.price * product.sale}" type="currency" currencySymbol="$" groupingUsed="true" /></span>
+                 <span class="txtsold"> <fmt:formatNumber value="${product.price - (product.price * product.sale)}" type="currency" currencySymbol="$" groupingUsed="true" /></span>
+               </div>
+               <div class="fControl">
+                <a class="btn"  href="${pageContext.request.contextPath}/cart/remove/${product.id}" > <img src="<c:url value='/icon/trash.png' />" alt="" class="both" /></a>
+                 <div class="fBtn">
+                   <a   href="${pageContext.request.contextPath}/cart/removeSingle/${product.id}" class=" btn">
+                     <span class="txtControl">-</span>
+                   </a>
+                   <span class="txtControl">${product.quantity}</span>
+                   <a href="${pageContext.request.contextPath}/cart/add/${product.id}"  class=" btn">
+                     <span class="txtControl">+</span>
+                   </a>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </c:forEach>
         </div>
         <div class="content2">
           <div class="fPaymentDetail">
@@ -259,27 +151,46 @@
             <div class="fDetailPayment">
               <div class="fsub">
                 <span class="sub">Subtotal</span>
-                <span class="sub">$519.52</span>
+                <span class="sub"><fmt:formatNumber value="${cartTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></span>
               </div>
               <div class="fsub">
                 <span class="sub">Discount</span>
-                <span class="sub">-$111.87</span>
+                <span class="sub"><fmt:formatNumber value="${cartDiscount}" type="currency" currencySymbol="$" groupingUsed="true" /></span>
               </div>
-              <div class="fsub">
-                <span class="sub">Shipment cost</span>
-                <span class="sub">$22.50</span>
-              </div>
-
               <div class="line"></div>
-
               <div class="ftotal">
                 <span class="total">Grand Total</span>
-                <span class="total">$543.02</span>
+                <span class="total"><fmt:formatNumber value="${finalTotal}" type="currency" currencySymbol="$" groupingUsed="true" /></span>
               </div>
             </div>
-            <button class="btnTotal">
-              <span class="txtProcced">Procced to checkout</span>
-            </button>
+            <c:if test="${empty cart}">
+              <a href="javascript:void(0);" class="btn btnTotal mt-3 text-center disabled-link">
+                <span class="txtProcced">Proceed to checkout</span>
+              </a>
+            </c:if>
+            <c:if test="${not empty cart}">
+              <a href="${pageContext.request.contextPath}/cart/checkout" id="proceedCheckoutBtn" class="btn btnTotal mt-3 text-center">
+                <span class="txtProcced">Proceed to checkout</span>
+              </a>
+            </c:if>
+          </div>
+          <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>You need to be logged in to proceed to checkout.</p>
+                  <p>Would you like to signin now?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <a href="${pageContext.request.contextPath}/signin" class="btn btn-primary">Signin</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -311,7 +222,7 @@
                 >
                 <div class="product_card-img mx-auto">
                   <img
-                    src="../assets/imgs/p1.png"
+                    src="<c:url value='/imgs/p1.png' />"
                     class="object-fit-contain product_card-img_content"
                     alt="Product 1"
                   />
@@ -334,7 +245,7 @@
                       <p class="fw-light m-0">$19.00</p>
                     </div>
                     <div class="product_card-start d-flex gap-2">
-                      <img src="../assets/icon/start-icon.svg" alt="Star" />
+                      <img src="<c:url value='/icon/start-icon.svg' />" alt="Star" />
                       <p class="m-0">4.8</p>
                     </div>
                   </div>
@@ -344,14 +255,14 @@
                 >
                   <button class="btn btn-outline-dark d-flex gap-1">
                     <img
-                      src="../assets/icon/shopping-cart.svg"
+                      src="<c:url value='/icon/shopping-cart.svg' />"
                       alt=""
                       class="cart-icon"
                     />
                     <p class="m-0">Add to cart</p>
                   </button>
                   <img
-                    src="../assets/icon/heart_icon.svg"
+                   src="<c:url value='/icon/heart_icon.svg' />"
                     alt=""
                     class="heart-icon"
                   />
@@ -370,7 +281,7 @@
                 >
                 <div class="product_card-img mx-auto">
                   <img
-                    src="../assets/imgs/p1.png"
+                    src="<c:url value='/imgs/p1.png' />"
                     class="object-fit-contain product_card-img_content"
                     alt="Product 1"
                   />
@@ -393,7 +304,7 @@
                       <p class="fw-light m-0">$19.00</p>
                     </div>
                     <div class="product_card-start d-flex gap-2">
-                      <img src="../assets/icon/start-icon.svg" alt="Star" />
+                      <img src="<c:url value='/icon/start-icon.svg' />" alt="Star" />
                       <p class="m-0">4.8</p>
                     </div>
                   </div>
@@ -403,14 +314,14 @@
                 >
                   <button class="btn btn-outline-dark d-flex gap-1">
                     <img
-                      src="../assets/icon/shopping-cart.svg"
+                      src="<c:url value='/icon/shopping-cart.svg' />"
                       alt=""
                       class="cart-icon"
                     />
                     <p class="m-0">Add to cart</p>
                   </button>
                   <img
-                    src="../assets/icon/heart_icon.svg"
+                   src="<c:url value='/icon/heart_icon.svg' />"
                     alt=""
                     class="heart-icon"
                   />
@@ -429,7 +340,7 @@
                 >
                 <div class="product_card-img mx-auto">
                   <img
-                    src="../assets/imgs/p1.png"
+                    src="<c:url value='/imgs/p1.png' />"
                     class="object-fit-contain product_card-img_content"
                     alt="Product 1"
                   />
@@ -452,7 +363,7 @@
                       <p class="fw-light m-0">$19.00</p>
                     </div>
                     <div class="product_card-start d-flex gap-2">
-                      <img src="../assets/icon/start-icon.svg" alt="Star" />
+                      <img src="<c:url value='/icon/start-icon.svg' />" alt="Star" />
                       <p class="m-0">4.8</p>
                     </div>
                   </div>
@@ -462,14 +373,14 @@
                 >
                   <button class="btn btn-outline-dark d-flex gap-1">
                     <img
-                      src="../assets/icon/shopping-cart.svg"
+                      src="<c:url value='/icon/shopping-cart.svg' />"
                       alt=""
                       class="cart-icon"
                     />
                     <p class="m-0">Add to cart</p>
                   </button>
                   <img
-                    src="../assets/icon/heart_icon.svg"
+                   src="<c:url value='/icon/heart_icon.svg' />"
                     alt=""
                     class="heart-icon"
                   />
@@ -488,7 +399,7 @@
                 >
                 <div class="product_card-img mx-auto">
                   <img
-                    src="../assets/imgs/p1.png"
+                    src="<c:url value='/imgs/p1.png' />"
                     class="object-fit-contain product_card-img_content"
                     alt="Product 1"
                   />
@@ -511,7 +422,7 @@
                       <p class="fw-light m-0">$19.00</p>
                     </div>
                     <div class="product_card-start d-flex gap-2">
-                      <img src="../assets/icon/start-icon.svg" alt="Star" />
+                      <img src="<c:url value='/icon/start-icon.svg' />" alt="Star" />
                       <p class="m-0">4.8</p>
                     </div>
                   </div>
@@ -521,14 +432,14 @@
                 >
                   <button class="btn btn-outline-dark d-flex gap-1">
                     <img
-                      src="../assets/icon/shopping-cart.svg"
+                      src="<c:url value='/icon/shopping-cart.svg' />"
                       alt=""
                       class="cart-icon"
                     />
                     <p class="m-0">Add to cart</p>
                   </button>
                   <img
-                    src="../assets/icon/heart_icon.svg"
+                   src="<c:url value='/icon/heart_icon.svg' />"
                     alt=""
                     class="heart-icon"
                   />
@@ -542,7 +453,10 @@
     <!-- footer -->
     <footer id="footer" class="footer"></footer>
     <script>
-      load("#footer", "./footer.html");
+      load("#footer", "/footer");
+      const token = "${token}"
     </script>
+    <script src="<c:url value='/js/bootstrap.bundle.min.js'/>"></script>
+    <script src="<c:url value='/events/controller.js' />"></script>
   </body>
 </html>
