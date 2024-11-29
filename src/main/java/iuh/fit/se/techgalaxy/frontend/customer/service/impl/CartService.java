@@ -74,6 +74,7 @@ public class CartService {
           model.addAttribute("cartTotal", cartTotal);
           model.addAttribute("cartDiscount", cartDiscount);
           model.addAttribute("finalTotal", finalTotal);
+          session.setAttribute("finalTotal", finalTotal);
      }
      public void addToCart(String productVariantId, String memoryId, String colorId, HttpSession session) {
           Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");

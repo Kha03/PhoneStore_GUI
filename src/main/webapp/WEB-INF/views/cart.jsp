@@ -206,7 +206,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <a href="${pageContext.request.contextPath}/signin" class="btn btn-primary">Signin</a>
+                  <a href="${pageContext.request.contextPath}/signin" class="btn btn-signIn">Sign in</a>
                 </div>
               </div>
             </div>

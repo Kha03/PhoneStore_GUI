@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum ErrorCode {
     INVALID_KEY(9998, "Invalid key", HttpStatus.UNAUTHORIZED),
+    GET_PAYMENT_FAILED(9997, "Get payment failed", HttpStatus.BAD_REQUEST),
     UNCATEGORIZED_ERROR(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
     CUSTOMER_NOT_ACTIVE(9997, "An error occurred, please log in again", HttpStatus.BAD_REQUEST),
     CART_EMPTY(9996, "Cart is empty no order, please add product to cart", HttpStatus.BAD_REQUEST),
