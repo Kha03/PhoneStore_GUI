@@ -1,5 +1,7 @@
 package iuh.fit.se.techgalaxy.frontend.customer.service.impl;
 
+import java.util.List;
+
 import iuh.fit.se.techgalaxy.frontend.customer.dto.request.OrderRequestV2;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.entities.enumeration.PaymentStatus;
@@ -16,6 +18,13 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.service.OrderService;
+import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -73,5 +82,31 @@ public class OrderServiceImpl implements OrderService {
             throw new AppException(ErrorCode.ORDER_CREATION_FAILED);
         }
     }
+
+	WebClient webClient;
+
+	@Override
+	public ApiResponse<List<OrderResponse>> getOrderByCustomerId(String cusId) {
+		try {
+			return webClient.get().uri("/orders/customer/" + cusId).retrieve()
+					.toEntity(new ParameterizedTypeReference<ApiResponse<List<OrderResponse>>>() {
+					}).block().getBody();
+		} catch (NullPointerException e) {
+			log.error("Error: ", e);
+			return null;
+		}
+	}
+
+	@Override
+	public ApiResponse<List<OrderResponse>> getOrderById(String id) {
+		try {
+			return webClient.get().uri("/orders/" + id).retrieve()
+					.toEntity(new ParameterizedTypeReference<ApiResponse<List<OrderResponse>>>() {
+					}).block().getBody();
+		} catch (NullPointerException e) {
+			log.error("Error: ", e);
+			return null;
+		}
+	}
 
 }

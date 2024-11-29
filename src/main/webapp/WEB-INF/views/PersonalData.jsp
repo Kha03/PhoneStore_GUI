@@ -33,31 +33,7 @@
     <div class="container profile-container">
       <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-3 sidebar bg-white">
-          <div class="text-center mb-4">
-            <img
-              src="<c:url value='/imgs/ava.png'/>"
-              alt="User Avatar"
-              class="rounded-circle mb-2 w-25 h-25 img-fluid"
-            />
-            <h5>Jimmy Smith</h5>
-          </div>
-          <a href="#" class="active"
-            ><i class="fas fa-user"></i> Personal Data</a
-          >
-          <a href="#"
-            ><i class="fas fa-dollar-sign"></i> Payment & Instalments</a
-          >
-          <a href="<c:url value='/Orders.jsp'/>"><i class="fas fa-box"></i> Orders</a>
-          <a href="#"><i class="fas fa-heart"></i> Wish list</a>
-          <a href="#"><i class="fas fa-tags"></i> Discounts</a>
-          <a href="#"><i class="fas fa-shield-alt"></i> Security & access</a>
-          <a href="#"><i class="fas fa-bell"></i> Notification</a>
-          <a href="#"><i class="fas fa-envelope"></i> Contact us</a>
-          <a href="#" class="text-danger"
-            ><i class="fas fa-sign-out-alt"></i> Log out</a
-          >
-        </div>
+         <jsp:include page="PersonalDataTemplate.jsp" />
         <!-- Main Content -->
         <div class="col-md-9 profile-content">
           <nav aria-label="breadcrumb">

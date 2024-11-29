@@ -62,6 +62,7 @@
 		load("#header", "/header");
 	</script>
 	<!-- main -->
+	<c:set var="count" value="0" />
 	<div class="container-fluid custom-container">
 		<div class="row">
 			<div class="col-md-3 sidebar bg-white">
@@ -95,7 +96,7 @@
 						<button class="nav-link active" id="current-tab"
 							data-bs-toggle="tab" data-bs-target="#current" type="button"
 							role="tab">
-							Current <span class="badge bg-secondary">1</span>
+							Current <span class="badge bg-secondary">${size}</span>
 						</button>
 					</li>
 					<li class="nav-item" role="presentation">
@@ -132,18 +133,24 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>#1050486</td>
-										<td>2023/04/15</td>
-										<td>$543.02</td>
-										<td>Jimmy Smith</td>
-										<td><img src="https://via.placeholder.com/50"
-											alt="Product 1" /> <img src="https://via.placeholder.com/50"
-											alt="Product 2" /> <img src="https://via.placeholder.com/50"
-											alt="Product 3" /></td>
-										<td><a href="Order_Detail.jsp"
-											class="btn btn-sm btn-primary">Order Detail</a></td>
-									</tr>
+									<c:forEach items="${orders}" var="o" varStatus="status">
+										<c:set var="count" value="${count + 1}" />
+										<tr>
+											<td>${o.id}</td>
+											<td> ${o.createdAt}</td>
+											<td>${total}</td>
+											<td>${o.customer.name}</td>
+											<td><img src="https://via.placeholder.com/50"
+												alt="Product 1" /> <img
+												src="https://via.placeholder.com/50" alt="Product 2" /> <img
+												src="https://via.placeholder.com/50" alt="Product 3" /></td>
+											<td><a
+												href="${pageContext.request.contextPath}/orders/orders?idOrder=${o.id}&cusId=${o.customer.id}"
+												class="btn btn-sm btn-primary">Order Detail</a></td>
+										</tr>
+
+									</c:forEach>
+
 								</tbody>
 							</table>
 						</div>

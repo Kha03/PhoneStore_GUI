@@ -10,4 +10,7 @@ import java.util.List;
 public interface OrderService {
 
     ApiResponse<List<OrderResponse>> createOrder(String address, HttpSession session, PaymentStatus paymentStatus);
+	  ApiResponse<List<OrderResponse>> getOrderByCustomerId(String cusId);
+	  ApiResponse<List<OrderResponse>> getOrderById(String id);
+
 }
