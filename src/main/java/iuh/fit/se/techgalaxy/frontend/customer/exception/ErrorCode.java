@@ -16,6 +16,7 @@ public enum ErrorCode {
     CART_EMPTY(9996, "Cart is empty no order, please add product to cart", HttpStatus.BAD_REQUEST),
     CONNECT_REFUSED(5000, "Connection refused: no further information", HttpStatus.INTERNAL_SERVER_ERROR),
     ORDER_CREATION_FAILED(5001, "Order creation failed", HttpStatus.BAD_REQUEST),
+    INSUFFICIENT_PRODUCT_QUANTITY(5002, "Insufficient product quantity", HttpStatus.BAD_REQUEST),
 
     ADRESS_NOT_EMPTY(2000, "Address is not empty", HttpStatus.BAD_REQUEST),
     QUANTITY_MIN_1(2001, "Quantity must be greater than 0", HttpStatus.BAD_REQUEST),
