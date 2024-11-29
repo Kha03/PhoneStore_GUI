@@ -2,12 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="col-md-3 sidebar bg-white">
     <div class="text-center mb-4">
-        <img
-            src="<c:url value='/imgs/ava.png'/>"
+        <img src="<c:url value='http://localhost:8081/storage/customer/avatar/${sessionScope.profileImage}' />"
             alt="User Avatar"
             class="rounded-circle mb-2 w-25 h-25 img-fluid"
         />
-        <h5>Jimmy Smith</h5>
+        <h5><c:out value="${sessionScope.username}" /></h5>
     </div>
     <a href="#" class="active">
         <i class="fas fa-user"></i> Personal Data
