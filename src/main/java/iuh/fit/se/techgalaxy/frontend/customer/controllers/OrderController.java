@@ -1,36 +1,23 @@
 package iuh.fit.se.techgalaxy.frontend.customer.controllers;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderDetailResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.entities.enumeration.DetailStatus;
+import iuh.fit.se.techgalaxy.frontend.customer.service.CustomerService;
+import iuh.fit.se.techgalaxy.frontend.customer.service.OrderDetailService;
+import iuh.fit.se.techgalaxy.frontend.customer.service.OrderService;
+import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import ch.qos.logback.core.model.Model;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.CustomerResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderDetailResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.entities.enumeration.DetailStatus;
-import iuh.fit.se.techgalaxy.frontend.customer.service.AttributeValueService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.ColorService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.CustomerService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.MemoriesService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.OrderDetailService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.OrderService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.ProductService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.TrademarkService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.UsageCategoryService;
-import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -68,7 +55,7 @@ public class OrderController {
 			@RequestParam(value = "cusId", required = false) String cusId, ModelAndView model) {
 		String idOrder1 = idOrder;
 		ApiResponse<List<OrderDetailResponse>> orderDetail = orderDetailServiceImpl.orderDetailByOrderId(idOrder1);
-		ApiResponse<List<CustomerResponse>> customer = customerServiceImpl.getCustomerById(cusId);
+//		ApiResponse<List<CustomerResponse>> customer = customerServiceImpl.getCustomerById(cusId);
 		ApiResponse<List<OrderResponse>> orderRe = orderServiceImpl.getOrderById(idOrder1);
 
 		if (orderDetail != null && orderDetail.getData() != null) {
@@ -92,7 +79,7 @@ public class OrderController {
 		} else {
 			System.out.println("No order details found for idOrder: " + idOrder);
 		}
-		model.addObject("cus", customer.getData());
+//		model.addObject("cus", customer.getData());
 		model.setViewName("Order_Detail");
 		return model;
 	}
