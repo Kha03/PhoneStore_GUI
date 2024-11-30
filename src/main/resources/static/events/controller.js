@@ -120,4 +120,14 @@ $(document).ready(function () {
             $('#loginModal').modal('show');
         }
     });
+    $('form.checkout-form').on('submit', function(event) {
+        event.preventDefault();
+        $('#confirmationModal').modal('show'); // Mở modal xác nhận
+    });
+
+    // Khi nhấn "Confirm", submit form
+    $('#confirmSubmit').on('click', function() {
+        $('form.checkout-form')[0].submit();  // Thực hiện submit form
+        $('#confirmationModal').modal('hide');
+    });
 });

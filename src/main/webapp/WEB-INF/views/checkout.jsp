@@ -49,6 +49,25 @@
     load("#header", "/header");
 </script>
 <!-- main -->
+<!-- Modal Confirmation -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirm Your Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to proceed with the payment?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-signIn" id="confirmSubmit">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container_checkout mt-3">
     <div class="fincons">
         <div class="fCheckout">
@@ -129,18 +148,18 @@
                     <form:form class="checkout-form" action="${pageContext.request.contextPath}/cart/checkout/order" method="post">
                         <div class="mb-3">
                             <label for="name" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="name" readonly
-                            value="${customer.name}"
-                            >
+                            <input type="text" class="form-control" id="name" readonly value="${customer.name}">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" readonly name="email"
-                            value="${sessionScope.get("email")}">
+                            <input type="email" class="form-control" id="email" readonly name="email" value="${sessionScope.get("email")}">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Shipping Address</label>
                             <textarea required class="form-control" id="address" rows="3" name="address" placeholder="1234 Street Name, City, Country"></textarea>
+                            <c:if test="${!empty orderMessage}">
+                                <p class="text-danger">${orderMessage}</p>
+                            </c:if>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Payment Method</label>
@@ -164,6 +183,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- footer -->
 <footer id="footer" class="footer"></footer>

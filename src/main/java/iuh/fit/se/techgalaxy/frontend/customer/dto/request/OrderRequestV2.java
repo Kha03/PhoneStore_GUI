@@ -19,7 +19,6 @@ import java.util.List;
 public class OrderRequestV2 {
     String customerId;
     String systemUserId;
-    @NotBlank(message = "ADDRESS_NOT_EMPTY")
     String address;
     PaymentStatus paymentStatus = PaymentStatus.PENDING;
     OrderStatus orderStatus = OrderStatus.NEW;
@@ -32,7 +31,6 @@ public class OrderRequestV2 {
     @FieldDefaults(level = AccessLevel.PRIVATE)
      public static class ProductDetailOrder {
         String productVariantDetailId;
-        @Size(min = 1, message = "QUANTITY_MIN_1")
         int quantity;
     }
 }

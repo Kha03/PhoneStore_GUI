@@ -32,28 +32,33 @@ public class CheckoutController {
     public String payment(@RequestParam String email, @RequestParam String address, @RequestParam String paymentMethod, HttpServletRequest request, RedirectAttributes redirectAttributes){
         HttpSession session = request.getSession();
         ApiResponse<List<OrderResponse>> order = null;
-        if(paymentMethod .equalsIgnoreCase("shipcod")){
-            order = orderService.createOrder(address, session, PaymentStatus.PENDING);
+        log.info("Payment method: {}", address);
+        if (address == null || address.isEmpty() || address.isBlank()) {
+            redirectAttributes.addFlashAttribute("orderMessage", "Address is required!");
+            return "redirect:/cart/checkout";
         }
-        else if(paymentMethod.equalsIgnoreCase("vnpay")){
+            if(paymentMethod .equalsIgnoreCase("shipcod")){
+                order = orderService.createOrder(address, session, PaymentStatus.PENDING);
+            }
+            else if(paymentMethod.equalsIgnoreCase("vnpay")){
 
-            Object totalObj = session.getAttribute("finalTotal");
-            int total = 0;
-            if (totalObj instanceof Double) {
-                total = ((Double) totalObj).intValue();
+                Object totalObj = session.getAttribute("finalTotal");
+                int total = 0;
+                if (totalObj instanceof Double) {
+                    total = ((Double) totalObj).intValue();
+                }
+                log.info("Total: {}", total);
+                PaymentResponse.VNPayResponseCreate vnPayResponseCreate = paymentService.createVnPayPayment(total,session);
+                if (vnPayResponseCreate != null) {
+                    String paymentUrl = vnPayResponseCreate.getPaymentUrl();
+                    session.setAttribute("address", address);
+                    return "redirect:" + paymentUrl;
+                }
             }
-            log.info("Total: {}", total);
-            PaymentResponse.VNPayResponseCreate vnPayResponseCreate = paymentService.createVnPayPayment(total,session);
-            if (vnPayResponseCreate != null) {
-                String paymentUrl = vnPayResponseCreate.getPaymentUrl();
-                session.setAttribute("address", address);
-                return "redirect:" + paymentUrl;
+            if(order != null) {
+                redirectAttributes.addFlashAttribute("orderMessage", "Order placed successfully!");
+                return "redirect:/cart";
             }
-        }
-       if(order != null) {
-           redirectAttributes.addFlashAttribute("orderMessage", "Order placed successfully!");
-           return "redirect:/cart";
-       }
         return "redirect:/cart/checkout";
     }
 }
