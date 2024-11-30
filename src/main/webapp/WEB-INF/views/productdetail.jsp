@@ -536,8 +536,147 @@
             </div>
         </div>
     </div>
+<%--    FeedBAck--%>
+        <div class="row mt-5 flex-nowrap">
+            <!-- Feedback List -->
+            <div class="col-md-8 feedback-list-container">
+                <h4 class="mb-4">Các đánh giá trước đây</h4>
+
+                <!-- Feedback Item -->
+                <div class="feedback-item">
+                    <div class="d-flex align-items-center mb-3">
+                        <img
+                                src="https://via.placeholder.com/50"
+                                alt="Avatar"
+                                class="feedback-avatar"
+                        />
+                        <div class="ml-3">
+                            <h5 class="mb-0">Nguyễn Văn A</h5>
+                            <small class="text-muted">2 giờ trước</small>
+                        </div>
+                    </div>
+                    <p>
+                        Điện thoại rất tuyệt vời! Pin trâu, màn hình sắc nét, rất hài lòng
+                        với chất lượng sản phẩm.
+                    </p>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img
+                                    src="https://via.placeholder.com/150"
+                                    class="img-fluid rounded"
+                                    alt="feedback image"
+                            />
+                        </div>
+                        <div class="col-md-3">
+                            <img
+                                    src="https://via.placeholder.com/150"
+                                    class="img-fluid rounded"
+                                    alt="feedback image"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feedback Item Example 2 -->
+                <div class="feedback-item">
+                    <div class="d-flex align-items-center mb-3">
+                        <img
+                                src="https://via.placeholder.com/50"
+                                alt="Avatar"
+                                class="feedback-avatar"
+                        />
+                        <div class="ml-3">
+                            <h5 class="mb-0">Trần Thị B</h5>
+                            <small class="text-muted">1 ngày trước</small>
+                        </div>
+                    </div>
+                    <p>
+                        Giao hàng nhanh, đóng gói cẩn thận. Sản phẩm dùng rất tốt, màu sắc
+                        đẹp và chụp ảnh rõ nét.
+                    </p>
+                </div>
+                <div class="feedback-item">
+                    <div class="d-flex align-items-center mb-3">
+                        <img
+                                src="https://via.placeholder.com/50"
+                                alt="Avatar"
+                                class="feedback-avatar"
+                        />
+                        <div class="ml-3">
+                            <h5 class="mb-0">Trần Thị B</h5>
+                            <small class="text-muted">1 ngày trước</small>
+                        </div>
+                    </div>
+                    <p>
+                        Giao hàng nhanh, đóng gói cẩn thận. Sản phẩm dùng rất tốt, màu sắc
+                        đẹp và chụp ảnh rõ nét.
+                    </p>
+                </div>
+                <div class="feedback-item">
+                    <div class="d-flex align-items-center mb-3">
+                        <img
+                                src="https://via.placeholder.com/50"
+                                alt="Avatar"
+                                class="feedback-avatar"
+                        />
+                        <div class="ml-3">
+                            <h5 class="mb-0">Trần Thị B</h5>
+                            <small class="text-muted">1 ngày trước</small>
+                        </div>
+                    </div>
+                    <p>
+                        Giao hàng nhanh, đóng gói cẩn thận. Sản phẩm dùng rất tốt, màu sắc
+                        đẹp và chụp ảnh rõ nét.
+                    </p>
+                </div>
+                <div class="feedback-item">
+                    <div class="d-flex align-items-center mb-3">
+                        <img
+                                src="https://via.placeholder.com/50"
+                                alt="Avatar"
+                                class="feedback-avatar"
+                        />
+                        <div class="ml-3">
+                            <h5 class="mb-0">Trần Thị B</h5>
+                            <small class="text-muted">1 ngày trước</small>
+                        </div>
+                    </div>
+                    <p>
+                        Giao hàng nhanh, đóng gói cẩn thận. Sản phẩm dùng rất tốt, màu sắc
+                        đẹp và chụp ảnh rõ nét.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Feedback Form -->
+            <div class="col-md-4 feedback-form-container">
+                <h4 class="mb-4">Viết đánh giá của bạn</h4>
+                <form>
+                    <div class="form-group">
+              <textarea
+                      class="form-control"
+                      rows="4"
+                      placeholder="Nhập đánh giá của bạn..."
+              ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUpload"
+                        >Tải lên hình ảnh (có thể chọn nhiều ảnh):</label
+                        >
+                        <input
+                                type="file"
+                                class="form-control-file"
+                                id="imageUpload"
+                                multiple
+                        />
+                    </div>
+                    <button type="submit" class="btn btn-submit">Gửi đánh giá</button>
+                </form>
+            </div>
+        </div>
+
     <!-- smilar product -->
-    <div class="row mt-4">
+    <div class="row mt-5 pt-3">
         <div class="col-12">
             <h4 class="mb-3">Similar Products</h4>
         </div>

@@ -633,3 +633,54 @@ footer form {
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
 }
+/*feed back*/
+.feedback-form-container {
+  background-color: #1a2b44;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  position: sticky;
+  top: 20px;
+  margin-left: 5px;
+}
+.feedback-list-container {
+  padding: 20px;
+  border-radius: 8px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.feedback-item {
+  background-color: #ededed;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.feedback-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.btn-submit {
+  background-color: #021736;
+  color: #fff;
+  border: none;
+}
+.btn-submit:hover {
+  background-color: #013366;
+}
+/* Custom Scrollbar Styling */
+.feedback-list-container::-webkit-scrollbar {
+  width: 5px;
+}
+.feedback-list-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.feedback-list-container::-webkit-scrollbar-thumb {
+  background: #717171;
+  border-radius: 10px;
+}
+.feedback-list-container::-webkit-scrollbar-thumb:hover {
+  background: #013366;
+}
