@@ -80,7 +80,7 @@
                     <span class="input-group-text"><i class="fas fa-phone" style="color: #000; font-size: 1.35rem"></i></span>
                 </div>
                 <input type="text" class="form-control" id="phoneNumber" name ="phoneNumber"
-                       value="${customer.phone}" readonly />
+                       value="${customer.phone}"  />
             </div>
         </div>
 
