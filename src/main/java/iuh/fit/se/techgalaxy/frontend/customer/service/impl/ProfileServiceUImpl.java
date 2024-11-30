@@ -34,6 +34,7 @@ public class ProfileServiceUImpl implements ProfileService {
 			return webClient.put().uri("/customers/profile/{id}", customerRequest.getId())
 					.header("Authorization", "Bearer " + session.getAttribute("accessToken")).bodyValue(customerRequest)
 					.retrieve().onStatus(HttpStatusCode::is4xxClientError, response -> {
+						System.out.println("Status code: " + response.statusCode());
 						if (response.statusCode() == HttpStatus.UNAUTHORIZED) {
 							throw new AppException(ErrorCode.UNAUTHORIZED_ACCESS);
 						}

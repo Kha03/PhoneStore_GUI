@@ -77,7 +77,7 @@
         <a href="<c:url value='/' />" class="btn btn-primary btn-lg">Quay lại trang chủ</a>
     </div>
     <footer class="footer mt-5 text-center text-muted">
-        <p>&copy; VNPAY 2020</p>
+        <p>&copy; VNPAY 2024</p>
     </footer>
 </div>
 

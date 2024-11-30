@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerRequest {
     String id;

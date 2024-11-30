@@ -58,7 +58,11 @@ public class ProfileController {
         ApiResponse<List<CustomerResponse>> customerResponse = customerService
                 .getInfoByMail((String) session.getAttribute("email"), session);
         CustomerResponse customerResponse1 = customerResponse.getData().get(0);
+        if (customerResponse1 == null) {
+            model.addAttribute("error", "Not customer");
+            return "redirect:/home";
 
+        }
         session.setAttribute("username", customerResponse1.getName());
         session.setAttribute("profileImage", customerResponse1.getAvatar());
         System.out.println("Profile Image: " + customerResponse1.getAvatar());
@@ -94,15 +98,13 @@ public class ProfileController {
             @RequestParam(value = "avatar", required = false) MultipartFile file,
             Model model,
             HttpServletRequest request) {
-
-        CustomerRequest customerRequest = new CustomerRequest();
-        customerRequest.setId(formData.get("id")); // Get customer ID
-        customerRequest.setName(formData.get("fullName")); // Update name only
-
-        // Phone and email are non-editable, so they are not updated here
         HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email"); // Email from session
-        String phone =  formData.get("phoneNumber"); // Phone from session
+        CustomerRequest customerRequest = new CustomerRequest();
+        customerRequest.setId(formData.get("id"));
+        customerRequest.setName(formData.get("fullName"));
+
+        String email = formData.get("emailAddress");
+        String phone = formData.get("phoneNumber");
         customerRequest.setPhone(phone);
         // Optional Date of Birth Handling
         if (formData.get("dateOfBirth") != null && !formData.get("dateOfBirth").isBlank()) {
@@ -117,10 +119,13 @@ public class ProfileController {
             ApiResponse<List<UploadFileResponse>> response = fileService.uploadFile(file, "customer/avatar");
             UploadFileResponse uploadFileResponse = response.getData().get(0);
             customerRequest.setAvatar(uploadFileResponse.getFileName());
-        }else{
-            customerRequest.setAvatar(session.getAttribute("profileImage").toString());
+        } else {
+            if (session.getAttribute("profileImage") != null) {
+                customerRequest.setAvatar(session.getAttribute("profileImage").toString());
+            }
         }
-
+        System.out.println("Avatar: " + customerRequest.getAvatar());
+        System.out.println("Customer Request: " + customerRequest);
         // Call the service to update the customer profile
         ApiResponse<List<CustomerResponse>> customerResponse = profileService.update(session, customerRequest);
 
