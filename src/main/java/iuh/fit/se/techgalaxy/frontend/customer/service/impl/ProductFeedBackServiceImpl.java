@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -31,31 +32,41 @@ public class ProductFeedBackServiceImpl implements ProductFeedBackService {
 
 
     @Override
-    public void upFeedBack(String content, String variantId,MultipartFile[] files, HttpSession session) {
+    public void upFeedBack(String content, String variantId, MultipartFile[] files, HttpSession session) {
         String email = (String) session.getAttribute("email");
-        if(email != null) {
+        if (email != null) {
             CustomerResponse customerResponse = customerService.getInfoByMail(email, session).getData().get(0);
             String id = customerResponse.getId();
+            ProductFeedbackRequestV2 request = new ProductFeedbackRequestV2();
+            request.setCustomerId(id);
+            request.setProductVariantId(variantId);
+            request.setFeedbackText(content);
             if (files != null && files.length > 0) {
-                List<UploadFileResponse> response = fileService.uploadMultipleFiles(files, "product-feedback");
-                if (response != null && !response.isEmpty()) {
-                    ProductFeedbackRequestV2 request = new ProductFeedbackRequestV2();
-                    request.setCustomerId(id);
-                    request.setProductVariantId(variantId);
-                    request.setFeedbackText(content);
-
-                    request.setImagePaths(response.stream().map(p -> "product-feedback/"+p.getFileName()).toList());
-                    webClient.post()
-                            .uri("/product-feedbacks/v2")
-                            .header("Authorization", "Bearer " + session.getAttribute("accessToken"))
-                            .bodyValue(request)
-                            .retrieve()
-                            .bodyToMono(ApiResponse.class)
-                            .block();
+                List<MultipartFile> validFiles = Arrays.stream(files)
+                        .filter(file -> file != null && !file.isEmpty())
+                        .toList();
+                if (!validFiles.isEmpty()) {
+                    List<UploadFileResponse> response = fileService.uploadMultipleFiles(
+                            validFiles.toArray(new MultipartFile[0]),
+                            "productfeedback"
+                    );
+                    if (response != null && !response.isEmpty()) {
+                        request.setImagePaths(response.stream()
+                                .map(p -> "productfeedback/" + p.getFileName())
+                                .toList());
+                    }
                 }
             }
+            webClient.post()
+                    .uri("/product-feedbacks/v2")
+                    .header("Authorization", "Bearer " + session.getAttribute("accessToken"))
+                    .bodyValue(request)
+                    .retrieve()
+                    .bodyToMono(ApiResponse.class)
+                    .block();
         }
     }
+
 
     @Override
     public ApiResponse<List<ProductFeedbackResponseV2>> getFeedBacks(String variantId) {

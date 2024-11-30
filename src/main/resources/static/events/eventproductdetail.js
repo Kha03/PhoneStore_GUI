@@ -97,3 +97,9 @@ $('#imageUpload').on('change', function() {
         reader.readAsDataURL(file);
     }
 });
+$('#feedbackbtn').click(function(event) {
+    if (!token) {
+        event.preventDefault();
+        $('#loginModal').modal('show');
+    }
+});

@@ -49,6 +49,24 @@
 </script>
 <!-- Main -->
 <main class="container container-fluid">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>You need to be logged in to feed back.</p>
+                    <p>Would you like to signin now?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="${pageContext.request.contextPath}/signin" class="btn btn-signIn">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -623,9 +641,10 @@
                         <div class="preview-container mt-3" id="previewContainer"></div>
                     </div>
                     <div class="row">
-                        <button type="submit" class="btn btn-submit col-4 mx-auto mt-3">Gửi đánh giá</button>
+                        <button type="submit" class="btn btn-submit col-4 mx-auto mt-3" id="feedbackbtn">Gửi đánh giá</button>
                     </div>
                 </form:form>
+
             </div>
         </div>
 
@@ -1480,6 +1499,7 @@
 <footer id="footer" class="footer"></footer>
 <script>
     load("#footer", "/footer");
+    const token = "${token}"
     const contextPath = '${pageContext.request.contextPath}';
     const colorKey = ${colorNamesJson};
     const productMemories = ${memoriesJson};

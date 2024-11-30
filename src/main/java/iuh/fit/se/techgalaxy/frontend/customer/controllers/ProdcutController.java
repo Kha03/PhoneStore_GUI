@@ -95,8 +95,9 @@ public class ProdcutController {
         return ResponseEntity.ok("Cart updated successfully");
     }
     @GetMapping("/detail/{productId}")
-    public ModelAndView getProductDetail(@PathVariable String productId, ModelAndView model) {
+    public ModelAndView getProductDetail(@PathVariable String productId, ModelAndView model, HttpServletRequest request) {
         ObjectMapper objectMapper = new ObjectMapper();
+
         ApiResponse<Set<ProductVariantDetailResponse>> response = productService.getProductVariantDetail(productId);
         ProductVariantDetailResponse product = response.getData().stream().findFirst().orElse(null);
         ApiResponse<List<ValueResponse>> valueByVariantId = attributeValueService.getValueByVariantId(productId);
@@ -128,7 +129,7 @@ public class ProdcutController {
                 model.addObject("memoriesJson", "{}");
             }
         }
-
+        model.addObject("token", request.getSession().getAttribute("accessToken"));
         model.addObject("variantId", productId);
         model.addObject("values", valueByVariantId.getData());
         model.addObject("product", product);
