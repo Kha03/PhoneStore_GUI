@@ -57,40 +57,77 @@
                 <h3 class="mb-4">Identification</h3>
                 <p class="text-muted">Verify your identity</p>
 
-                <form action="<c:url value='/profile/save' />" method="post" id="profileForm" enctype="multipart/form-data">
-                	<input type="hidden" name="id" value="${customer.id}" />
-                    <div class="row g-3">
-                        <!-- Form Groups for Personal Information -->
-                        <c:forEach var="field" items="${fields}">
-                            <div class="col-md-6">
-                                <label class="form-label">${field.label}</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="${field.icon}" style="color: #000; font-size: 1.35rem"></i></span>
-                                    </div>
-                                    <input type="${field.type}" class="form-control" id="${field.id}" name="${field.id}"
-                                           <c:if test="${field.value != null}">
-                                               value="${field.value}"
-                                           </c:if>
-                                            />
-                                    <div class="input-group-prepend">
-                                        <button type="button"
-                                                class="btn-edit input-group-text"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="${field.modal}">
-                                            <i class="fas fa-pen"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
+              <form action="<c:url value='/profile/save' />" method="post" id="profileForm" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="${customer.id}" />
+    <div class="row g-3">
+        <!-- Name Field (Editable) -->
+        <div class="col-md-6">
+            <label class="form-label">Full Name</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user" style="color: #000; font-size: 1.35rem"></i></span>
+                </div>
+                <input type="text" class="form-control" id="fullName" name="fullName"
+                       value="${customer.name}" required />
+            </div>
+        </div>
 
-                    <!-- Save Button -->
-                    <div class="mt-4 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary px-4">Save</button>
-                    </div>
-                </form>
+        <!-- Phone Number Field (Non-Editable) -->
+        <div class="col-md-6">
+            <label class="form-label">Phone Number</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-phone" style="color: #000; font-size: 1.35rem"></i></span>
+                </div>
+                <input type="text" class="form-control" id="phoneNumber" name ="phoneNumber"
+                       value="${customer.phone}" readonly />
+            </div>
+        </div>
+
+        <!-- Email Address Field (Non-Editable) -->
+        <div class="col-md-6">
+            <label class="form-label">Email Address</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope" style="color: #000; font-size: 1.35rem"></i></span>
+                </div>
+                <input type="email" class="form-control" id="emailAddress"
+                       value="${customer.account.email}" readonly />
+            </div>
+        </div>
+		
+		        <div class="col-md-6">
+            <label class="form-label">Date of Birth</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-calendar-alt" style="color: #000; font-size: 1.35rem"></i></span>
+                </div>
+                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                       value="${customer.dateOfBirth}" />
+            </div>
+        </div>
+        
+        <!-- Avatar Field (Optional) -->
+        <div class="col-md-6">
+            <label class="form-label">Avatar (optional)</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-file-image" style="color: #000; font-size: 1.35rem"></i></span>
+                </div>
+                <input type="file" class="form-control" id="avatar" name="avatar" />
+            </div>
+        </div>
+
+        <!-- Date of Birth Field -->
+
+    </div>
+
+    <!-- Save Button -->
+    <div class="mt-4 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary px-4">Save</button>
+    </div>
+</form>
+
             </div>
         </div>
     </div>

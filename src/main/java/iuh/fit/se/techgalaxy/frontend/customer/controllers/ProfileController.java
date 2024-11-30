@@ -87,33 +87,45 @@ public class ProfileController {
     }
 
     @PostMapping("/save")
-    public String saveProfile(@RequestParam Map<String, String> formData, @RequestParam("avatar") MultipartFile file, Model model, HttpServletRequest request) {
+    public String saveProfile(
+            @RequestParam Map<String, String> formData,
+            @RequestParam(value = "avatar", required = false) MultipartFile file,
+            Model model,
+            HttpServletRequest request) {
+
         CustomerRequest customerRequest = new CustomerRequest();
-        customerRequest.setId(formData.get("id"));
-        System.out.println("ID: " + formData.get("id"));
-        customerRequest.setName(formData.get("fullName"));
-        customerRequest.setPhone(formData.get("phoneNumber"));
-        if (formData.get("dateOfBirth") != null || !formData.get("dateOfBirth").isEmpty()
-                || !formData.get("dateOfBirth").isBlank()) {
+        customerRequest.setId(formData.get("id")); // Get customer ID
+        customerRequest.setName(formData.get("fullName")); // Update name only
+
+        // Phone and email are non-editable, so they are not updated here
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email"); // Email from session
+        String phone =  formData.get("phoneNumber"); // Phone from session
+        customerRequest.setPhone(phone);
+        // Optional Date of Birth Handling
+        if (formData.get("dateOfBirth") != null && !formData.get("dateOfBirth").isBlank()) {
             LocalDate date = LocalDate.parse(formData.get("dateOfBirth"));
             customerRequest.setDateOfBirth(date);
         } else {
-            customerRequest.setDateOfBirth(null);
+            customerRequest.setDateOfBirth(null); // Handle null date
         }
-        if (!file.isEmpty()) {
+
+        // Optional Avatar Upload Handling
+        if (file != null && !file.isEmpty()) {
             ApiResponse<List<UploadFileResponse>> response = fileService.uploadFile(file, "customer/avatar");
             UploadFileResponse uploadFileResponse = response.getData().get(0);
             customerRequest.setAvatar(uploadFileResponse.getFileName());
-            System.out.println("Avatar: " + uploadFileResponse.getFileName());
+        }else{
+            customerRequest.setAvatar(session.getAttribute("profileImage").toString());
         }
 
-
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-
+        // Call the service to update the customer profile
         ApiResponse<List<CustomerResponse>> customerResponse = profileService.update(session, customerRequest);
+
+        // If update is successful, update session and model
         if (customerResponse.getData() != null && !customerResponse.getData().isEmpty()) {
             CustomerResponse customer = customerResponse.getData().get(0);
+
             List<Map<String, String>> fields = List.of(
                     Map.of("label", "Full Name", "icon", "fas fa-user", "type", "text", "value", customer.getName(), "id",
                             "fullName", "modal", "#editFullNameModal"),
@@ -129,15 +141,18 @@ public class ProfileController {
                     Map.of("label", "Avatar", "icon", "fas fa-file-image", "type", "file", "value",
                             customer.getAvatar() != null ? customer.getAvatar() : "", "id", "avatar", "modal",
                             "#editAvatarModal")
-
             );
 
-            // Add fields to the model
+            // Add updated fields to the model
             model.addAttribute("fields", fields);
             model.addAttribute("customer", customer);
+
+            // Update session attributes
             session.setAttribute("username", customer.getName());
             session.setAttribute("profileImage", customer.getAvatar());
         }
+
+        // Redirect to the profile page after update
         return "redirect:/profile";
     }
 
