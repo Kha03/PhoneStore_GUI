@@ -48,4 +48,33 @@ public class FileServiceImpl implements FileService {
                 })
                 .block();
     }
+
+    @Override
+    public List<UploadFileResponse> uploadMultipleFiles(MultipartFile[] files, String folder) {
+        MultipartBodyBuilder bodyBuilder = new MultipartBodyBuilder();
+        if (files == null || files.length == 0) {
+            throw new RuntimeException("File list is empty");
+        }
+        for (MultipartFile file : files) {
+            bodyBuilder.part("files", file.getResource());
+        }
+        bodyBuilder.part("folder", folder);
+
+        return webClient.post()
+                .uri("/files")
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .bodyValue(bodyBuilder.build())
+                .retrieve()
+                .onStatus(
+                        HttpStatusCode::isError,
+                        clientResponse -> clientResponse.bodyToMono(ApiResponse.class)
+                                .flatMap(errorBody -> {
+                                    String message = errorBody.getMessage();
+                                    return Mono.error(new RuntimeException("Error from API: " + message));
+                                })
+                )
+                .bodyToMono(new ParameterizedTypeReference<ApiResponse<List<List<UploadFileResponse>>>>() {
+                })
+                .block().getData().get(0);
+    }
 }

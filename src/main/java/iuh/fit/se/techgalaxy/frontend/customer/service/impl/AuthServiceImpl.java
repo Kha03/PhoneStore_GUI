@@ -1,10 +1,6 @@
 package iuh.fit.se.techgalaxy.frontend.customer.service.impl;
 
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.CustomerResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.LoginResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.service.AuthService;
-import iuh.fit.se.techgalaxy.frontend.customer.service.CustomerService;
-import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -12,11 +8,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

@@ -74,3 +74,26 @@ const initialMemory = Object.keys(productMemories)[0];
 if (initialMemory) {
     selectMemory(initialMemory);
 }
+
+$('#imageUpload').on('change', function() {
+    const previewContainer = $('#previewContainer');
+    const files = this.files;
+    previewContainer.html('');
+
+    if (files.length > 5) {
+        $('#errorModal').modal('show');
+        $(this).val('');
+        return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const img = $('<img>').attr('src', e.target.result).addClass('img-fluid');
+            previewContainer.append(img);
+        }
+        reader.readAsDataURL(file);
+    }
+});

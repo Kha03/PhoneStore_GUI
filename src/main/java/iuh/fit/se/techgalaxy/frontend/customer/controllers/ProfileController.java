@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.UploadFileResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.service.FileService;
+import iuh.fit.se.techgalaxy.frontend.customer.service.ProfileService;
 import iuh.fit.se.techgalaxy.frontend.customer.service.impl.FileServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -38,9 +40,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping({"/profile"})
 @Slf4j
 public class ProfileController {
-    CustomerServiceImpl customerService;
-    ProfileServiceUImpl profileService;
-    FileServiceImpl fileService;
+    CustomerService customerService;
+    ProfileService profileService;
+    FileService fileService;
 
     @GetMapping()
     public String getProfile(Model model, HttpServletRequest request) {

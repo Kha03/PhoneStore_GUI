@@ -49,6 +49,21 @@
 </script>
 <!-- Main -->
 <main class="container container-fluid">
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Thông báo</h5>
+                </div>
+                <div class="modal-body">
+                    Bạn chỉ có thể tải lên tối đa 5 ảnh.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
              aria-atomic="true">
@@ -541,137 +556,76 @@
             <!-- Feedback List -->
             <div class="col-md-8 feedback-list-container">
                 <h4 class="mb-4">Các đánh giá trước đây</h4>
-
                 <!-- Feedback Item -->
-                <div class="feedback-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img
-                                src="https://via.placeholder.com/50"
-                                alt="Avatar"
-                                class="feedback-avatar"
-                        />
-                        <div class="ml-3">
-                            <h5 class="mb-0">Nguyễn Văn A</h5>
-                            <small class="text-muted">2 giờ trước</small>
+                <c:forEach var="feedback" items="${feedbacks}">
+                    <div class="feedback-item">
+                        <div class="d-flex align-items-center mb-3">
+                            <c:choose>
+                                <c:when test="${not empty feedback.customerAvatar}">
+                                    <img
+                                            src="<c:url value='http://localhost:8081/storage/customer/avatar/${feedback.customerAvatar}' />"
+                                            alt="Avatar"
+                                            class="feedback-avatar"
+                                    />
+                                </c:when>
+                                <c:otherwise>
+                                    <img
+                                            src="<c:url value='/imgs/ava.png' />"
+                                            alt="Default Avatar"
+                                            class="feedback-avatar"
+                                    />
+                                </c:otherwise>
+                            </c:choose>
+                            <div class="ms-3">
+                                <h5 class="mb-0">${feedback.customerName}</h5>
+                                <small class="text-muted">${feedback.createdAt}</small>
+                            </div>
+                        </div>
+                        <p>
+                           ${feedback.feedbackText}
+                        </p>
+                        <div class="row">
+                           <c:forEach var="image" items="${feedback.imgFeedbacks}">
+                                    <div class="col-3">
+                                        <img
+                                                src="<c:url value='http://localhost:8081/storage/${image}' />"
+                                                alt="Feedback Image"
+                                                class="feedback-image"
+                                        />
+                                    </div>
+                                </c:forEach>
                         </div>
                     </div>
-                    <p>
-                        Điện thoại rất tuyệt vời! Pin trâu, màn hình sắc nét, rất hài lòng
-                        với chất lượng sản phẩm.
-                    </p>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img
-                                    src="https://via.placeholder.com/150"
-                                    class="img-fluid rounded"
-                                    alt="feedback image"
-                            />
-                        </div>
-                        <div class="col-md-3">
-                            <img
-                                    src="https://via.placeholder.com/150"
-                                    class="img-fluid rounded"
-                                    alt="feedback image"
-                            />
-                        </div>
+                </c:forEach>
+                <c:if test="${feedbacks.size() == 0}">
+                    <div class="text-center">
+                        <h3>Chưa có đánh giá nào cho sản phẩm này :(((</h3>
                     </div>
-                </div>
-
-                <!-- Feedback Item Example 2 -->
-                <div class="feedback-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img
-                                src="https://via.placeholder.com/50"
-                                alt="Avatar"
-                                class="feedback-avatar"
-                        />
-                        <div class="ml-3">
-                            <h5 class="mb-0">Trần Thị B</h5>
-                            <small class="text-muted">1 ngày trước</small>
-                        </div>
-                    </div>
-                    <p>
-                        Giao hàng nhanh, đóng gói cẩn thận. Sản phẩm dùng rất tốt, màu sắc
-                        đẹp và chụp ảnh rõ nét.
-                    </p>
-                </div>
-                <div class="feedback-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img
-                                src="https://via.placeholder.com/50"
-                                alt="Avatar"
-                                class="feedback-avatar"
-                        />
-                        <div class="ml-3">
-                            <h5 class="mb-0">Trần Thị B</h5>
-                            <small class="text-muted">1 ngày trước</small>
-                        </div>
-                    </div>
-                    <p>
-                        Giao hàng nhanh, đóng gói cẩn thận. Sản phẩm dùng rất tốt, màu sắc
-                        đẹp và chụp ảnh rõ nét.
-                    </p>
-                </div>
-                <div class="feedback-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img
-                                src="https://via.placeholder.com/50"
-                                alt="Avatar"
-                                class="feedback-avatar"
-                        />
-                        <div class="ml-3">
-                            <h5 class="mb-0">Trần Thị B</h5>
-                            <small class="text-muted">1 ngày trước</small>
-                        </div>
-                    </div>
-                    <p>
-                        Giao hàng nhanh, đóng gói cẩn thận. Sản phẩm dùng rất tốt, màu sắc
-                        đẹp và chụp ảnh rõ nét.
-                    </p>
-                </div>
-                <div class="feedback-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img
-                                src="https://via.placeholder.com/50"
-                                alt="Avatar"
-                                class="feedback-avatar"
-                        />
-                        <div class="ml-3">
-                            <h5 class="mb-0">Trần Thị B</h5>
-                            <small class="text-muted">1 ngày trước</small>
-                        </div>
-                    </div>
-                    <p>
-                        Giao hàng nhanh, đóng gói cẩn thận. Sản phẩm dùng rất tốt, màu sắc
-                        đẹp và chụp ảnh rõ nét.
-                    </p>
-                </div>
+                </c:if>
             </div>
 
             <!-- Feedback Form -->
             <div class="col-md-4 feedback-form-container">
                 <h4 class="mb-4">Viết đánh giá của bạn</h4>
-                <form>
+                <form:form action="${pageContext.request.contextPath}/upFeedBack" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="variantId" value="${variantId}">
                     <div class="form-group">
               <textarea
                       class="form-control"
                       rows="4"
                       placeholder="Nhập đánh giá của bạn..."
+                      name="content"
               ></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="imageUpload"
-                        >Tải lên hình ảnh (có thể chọn nhiều ảnh):</label
-                        >
-                        <input
-                                type="file"
-                                class="form-control-file"
-                                id="imageUpload"
-                                multiple
-                        />
+                    <div class="form-group mt-3">
+                        <label for="imageUpload">Tải lên hình ảnh (tối đa 5 ảnh):</label>
+                        <input type="file" class="form-control-file" id="imageUpload" multiple accept="image/*" name="file">
+                        <div class="preview-container mt-3" id="previewContainer"></div>
                     </div>
-                    <button type="submit" class="btn btn-submit">Gửi đánh giá</button>
-                </form>
+                    <div class="row">
+                        <button type="submit" class="btn btn-submit col-4 mx-auto mt-3">Gửi đánh giá</button>
+                    </div>
+                </form:form>
             </div>
         </div>
 

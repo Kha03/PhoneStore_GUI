@@ -9,4 +9,6 @@ import java.util.List;
 public interface FileService {
 
     ApiResponse<List<UploadFileResponse>> uploadFile(MultipartFile file, String folder);
+
+    List<UploadFileResponse> uploadMultipleFiles(MultipartFile[] files, String folder);
 }

@@ -37,6 +37,7 @@ public class ProdcutController {
     UsageCategoryService usageCategoryService;
     ColorService colorService;
     CartService cartService;
+    ProductFeedBackService productFeedBackService;
     @GetMapping()
     public ModelAndView getFilteredProducts(
             @RequestParam(required = false) List<String> trademark,
@@ -99,6 +100,7 @@ public class ProdcutController {
         ApiResponse<Set<ProductVariantDetailResponse>> response = productService.getProductVariantDetail(productId);
         ProductVariantDetailResponse product = response.getData().stream().findFirst().orElse(null);
         ApiResponse<List<ValueResponse>> valueByVariantId = attributeValueService.getValueByVariantId(productId);
+        ApiResponse<List<ProductFeedbackResponseV2>> feedbacks = productFeedBackService.getFeedBacks(productId);
         if (product != null) {
             // Gọi API để lấy tên cho memories và colors
             Map<String, String> memoryNames = getMemoryNames(product.getMemories().keySet());
@@ -130,6 +132,7 @@ public class ProdcutController {
         model.addObject("variantId", productId);
         model.addObject("values", valueByVariantId.getData());
         model.addObject("product", product);
+        model.addObject("feedbacks", feedbacks.getData());
         model.setViewName("productdetail");
         return model;
     }
