@@ -110,7 +110,20 @@
                     <div class="order-group">
                         <c:forEach var="product" items="${cart}">
                             <div class="order-item">
-                                <img src="<c:url value='/imgs/p1.png' />" alt="" class="imgProduct" />
+                                <c:choose>
+                                    <c:when test="${not empty product.productsImage.get(0).path}">
+                                        <img
+                                                src="<c:url value='http://localhost:8081/storage/${product.productsImage.get(0).path}'/>"
+                                                class="img-fluid rounded-start" alt="Product Image"
+                                        />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img
+                                                src="<c:url value='/imgs/p1.png' />"
+                                                class="imgProduct" alt="Product Image"
+                                        />
+                                    </c:otherwise>
+                                </c:choose>
                                 <div class="d-flex flex-column ms-3">
                                     <h5>${product.productVariantId}</h5>
                                     <span>Memory: ${product.memory != null ? product.memory.name : "N/A"}</span>

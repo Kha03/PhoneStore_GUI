@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -596,7 +597,8 @@
                             </c:choose>
                             <div class="ms-3">
                                 <h5 class="mb-0">${feedback.customerName}</h5>
-                                <small class="text-muted">${feedback.createdAt}</small>
+
+                                <small class="text-muted"> <fmt:formatDate value="${feedback.createdAt}" pattern="dd/MM/yyyy HH:mm" /></small>
                             </div>
                         </div>
                         <p>
@@ -604,7 +606,7 @@
                         </p>
                         <div class="row">
                            <c:forEach var="image" items="${feedback.imgFeedbacks}">
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <img
                                                 src="<c:url value='http://localhost:8081/storage/${image}' />"
                                                 alt="Feedback Image"

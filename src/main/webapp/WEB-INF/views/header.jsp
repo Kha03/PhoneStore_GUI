@@ -17,10 +17,9 @@
 			<li><a href="${pageContext.request.contextPath}/home" class="nav-link px-2 mx-2 link-secondary">Home</a>
 			</li>
 			<li><a href="${pageContext.request.contextPath}/products" class="nav-link px-2 mx-2 link-dark">Products</a></li>
-			<li><a href="#" class="nav-link px-2 mx-2 link-dark">Blog</a></li>
-			<li><a href="#" class="nav-link px-2 mx-2 link-dark">FAQ</a></li>
-			<li><a href="#" class="nav-link px-2 mx-2 link-dark">Contact
-					Us</a></li>
+			<li><a href="#!" class="nav-link px-2 mx-2 link-dark">Blog</a></li>
+			<li><a href="#!" class="nav-link px-2 mx-2 link-dark">FAQ</a></li>
+			<li><a href="#!" class="nav-link px-2 mx-2 link-dark">Contact Us</a></li>
 		</ul>
 
     <div class="col-3 d-flex flex-row justify-content-end">
@@ -79,8 +78,21 @@
       <div class="card mb-3">
         <div class="row g-0 align-items-center">
           <div class="col-md-4">
-<%--            <img src="<c:url value='/imgs/${product.productsImage[0].url}' />" class="img-fluid rounded-start" alt="Product Image">--%>
-             <img src="<c:url value='/imgs/p1.png' />"  class="img-fluid rounded-start" alt="Product Image"/>
+<%--              productDetailResponses.get(0).getProductsImage().get(0).getPath();--%>
+    <c:choose>
+        <c:when test="${not empty product.productsImage.get(0).path}">
+            <img
+                    src="<c:url value='http://localhost:8081/storage/${product.productsImage.get(0).path}'/>"
+                    class="img-fluid rounded-start" alt="Product Image"
+            />
+        </c:when>
+        <c:otherwise>
+            <img
+                    src="<c:url value='/imgs/p1.png' />"
+                    class="img-fluid rounded-start" alt="Product Image"
+            />
+        </c:otherwise>
+    </c:choose>
           </div>
           <div class="col-md-8">
             <div class="card-body">

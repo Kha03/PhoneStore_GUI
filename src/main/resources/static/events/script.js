@@ -70,13 +70,12 @@ $(document).ready(function () {
             maxValueDisplay.text(values[1]);
         });
 
-        // Hiển thị hoặc ẩn slider khi click vào nhãn slider
         sliderLabel.on("click", function () {
             if (sliderPrice.hasClass("show")) {
-                sliderPrice.removeClass("show"); // Ẩn slider nếu đang hiển thị
+                sliderPrice.removeClass("show");
             } else {
-                checkboxes.prop("checked", false); // Bỏ chọn tất cả radio buttons
-                sliderPrice.addClass("show"); // Hiển thị slider
+                checkboxes.prop("checked", false);
+                sliderPrice.addClass("show");
             }
         });
     }
@@ -95,7 +94,7 @@ if ($("#pagination").length > 0) {
         dataSource: new Array(totalPages),
         prevText: '<img src="../icon/arrow-left_page.svg"/>',
         nextText: '<img src="../icon/arrow-right_page.svg"/>',
-        pageSize: 1,
+        pageSize:1,
         pageRange: 2,
         pageNumber: page + 1,
         afterPageOnClick: function (event, pageNumber) {

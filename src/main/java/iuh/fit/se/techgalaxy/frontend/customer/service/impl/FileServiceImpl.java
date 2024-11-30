@@ -60,7 +60,7 @@ public class FileServiceImpl implements FileService {
         }
         bodyBuilder.part("folder", folder);
 
-        return webClient.post()
+        ApiResponse<List<List<UploadFileResponse>>> response = webClient.post()
                 .uri("/files")
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .bodyValue(bodyBuilder.build())
@@ -75,6 +75,10 @@ public class FileServiceImpl implements FileService {
                 )
                 .bodyToMono(new ParameterizedTypeReference<ApiResponse<List<List<UploadFileResponse>>>>() {
                 })
-                .block().getData().get(0);
+                .block();
+        if (response == null || response.getData() == null || response.getData().isEmpty()) {
+            throw new RuntimeException("Error when upload files");
+        }
+        return response.getData().get(0);
     }
 }

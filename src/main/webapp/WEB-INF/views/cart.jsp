@@ -112,8 +112,20 @@
           </c:if>
        <c:forEach var="product" items="${cart}">
          <div class="fDetailProduct">
-             <%--<img src="<c:url value='/imgs/${product.productsImage[0].url}' />" class="img-fluid rounded-start" alt="Product Image">--%>
-           <img src="<c:url value='/imgs/p1.png' />" alt="" class="imgProduct" />
+               <c:choose>
+                 <c:when test="${not empty product.productsImage.get(0).path}">
+                   <img
+                           src="<c:url value='http://localhost:8081/storage/${product.productsImage.get(0).path}'/>"
+                           class="imgProduct" alt="Product Image"
+                   />
+                 </c:when>
+                 <c:otherwise>
+                   <img
+                           src="<c:url value='/imgs/p1.png' />"
+                           class="img-fluid rounded-start" alt="Product Image"
+                   />
+                 </c:otherwise>
+               </c:choose>
            <div class="fDetail">
              <div class="ftitle">
                <span class="txttitle">${product.productVariantId} </span>

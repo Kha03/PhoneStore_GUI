@@ -48,7 +48,7 @@ public class ProdcutController {
             @RequestParam(required = false) List<String> values,
             @RequestParam(required = false) String sort,
             @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "2") Integer size,
+            @RequestParam(defaultValue = "9") Integer size,
             ModelAndView model
     ) {
         PagedModel<EntityModel<ProductPageResponse>> response = productService.getFilteredProductDetails(trademark, minPrice, maxPrice, memory, usageCategoryId, values, sort, page, size);

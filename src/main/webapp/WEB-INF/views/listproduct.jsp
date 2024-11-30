@@ -433,13 +433,22 @@
                                             style="top: 10px; right: 10px"
                                     >${discountPercent}%</span>
                                         <div class="product_card-img mx-auto">
-                                            <img
-                                                <%--check again--%>
-                                                    src="<c:url value='/imgs/p1.png' />"
-
-                                                    class="object-fit-contain product_card-img_content"
-                                                    alt="Product 1"
-                                            />
+                                            <c:choose>
+                                                <c:when test="${not empty product.avatar}">
+                                                    <img
+                                                            src="<c:url value='http://localhost:8081/storage/${product.avatar}'/>"
+                                                            alt="Image Product ${product.name}"
+                                                            class="object-fit-contain product_card-img_content"
+                                                    />
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img
+                                                            src="<c:url value='/imgs/p1.png' />"
+                                                            alt="Default Image"
+                                                            class="object-fit-contain product_card-img_content"
+                                                    />
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                         <div class="product_card-content mt-3">
                                             <h6 class="fw-light text-truncate lh-base">

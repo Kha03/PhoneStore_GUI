@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -17,6 +18,6 @@ public class ProductFeedbackResponseV2 {
     List<String> imgFeedbacks;
     String customerAvatar;
     String customerName;
-    LocalDateTime createdAt;
+    Date createdAt;
     LocalDateTime updatedAt;
 }
