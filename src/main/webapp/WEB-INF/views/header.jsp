@@ -19,7 +19,7 @@
 			<li><a href="${pageContext.request.contextPath}/products" class="nav-link px-2 mx-2 link-dark">Products</a></li>
 			<li><a href="${pageContext.request.contextPath}/blog" class="nav-link px-2 mx-2 link-dark">Blog</a></li>
 			<li><a href="#!" class="nav-link px-2 mx-2 link-dark">FAQ</a></li>
-			<li><a href="#!" class="nav-link px-2 mx-2 link-dark">Contact Us</a></li>
+			<li><a href="${pageContext.request.contextPath}/contact" class="nav-link px-2 mx-2 link-dark">Contact Us</a></li>
 		</ul>
 
     <div class="col-3 d-flex flex-row justify-content-end">

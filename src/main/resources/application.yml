@@ -12,5 +12,15 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
 
+server:
+  servlet:
+    session:
+      cookie:
+        name: CUSTOMER_SESSION
+        path: /
+        max-age: 864000
+      timeout: 20160
+
+
 api:
   base-url: http://localhost:8081

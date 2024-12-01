@@ -35,5 +35,11 @@ ProductService productService;
 		public ModelAndView getBlog(ModelAndView model) {
 			model.setViewName("blog");
 			return model;
-		}
+	}
+
+	@GetMapping("/contact")
+		public ModelAndView getContact(ModelAndView model) {
+			model.setViewName("contact");
+			return model;
+	}
 }
