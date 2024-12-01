@@ -60,7 +60,9 @@ function selectColor(color) {
 
     $(".info_price-cost").text(`$ ${formatCurrency(color.price)}`);
 
-    const discountPercentage = color.sale ? `-${color.sale * 100}%` : "0%";
+    const discountPercentage = color.sale
+        ? `-${(color.sale * 100).toFixed(0)}%`
+        : "0%";
     $(".info_price-discount").text(discountPercentage);
 
     const lastPrice = Math.round(color.price * (1 - (color.sale || 0)));
@@ -96,6 +98,52 @@ $('#imageUpload').on('change', function() {
         }
         reader.readAsDataURL(file);
     }
+});
+const thumbnails = $(".product-thumbnail");
+const maxVisible = 6;
+
+if (thumbnails.length > maxVisible) {
+    thumbnails.slice(maxVisible).hide();
+
+    const remaining = thumbnails.length - maxVisible;
+    $(".product_detail-more").removeClass("d-none").find("span").text(remaining);
+}
+
+thumbnails.on("click", function () {
+    const imageUrl = $(this).data("image");
+
+    $(".product_detail-img-content img").attr("src", imageUrl);
+
+    thumbnails.removeClass("active");
+    $(this).addClass("active");
+});
+$(".product_detail-more").on("click", function () {
+    const thumbnails = $(".product-thumbnail"); // Lấy danh sách ảnh phụ
+    const mainImage = $(".product_detail-img-content img").attr("src"); // Ảnh chính hiện tại
+
+    // Hiển thị ảnh chính trong modal với animation fade-in
+    $("#modalMainImage").css("opacity", "0").attr("src", mainImage).animate({ opacity: 1 }, 300);
+
+    // Xóa ảnh phụ cũ trong slider
+    $(".sub-images-slider").empty();
+
+    // Thêm ảnh phụ vào slider
+    thumbnails.each(function () {
+        const imageUrl = $(this).data("image");
+        const subImage = `
+            <img src="${imageUrl}" alt="Sub Image">
+        `;
+        $(".sub-images-slider").append(subImage);
+    });
+
+    // Hiển thị modal
+    $("#imageModal").modal("show");
+});
+
+// Khi click vào ảnh phụ, thay đổi ảnh chính với hiệu ứng
+$(document).on("click", ".sub-images-slider img", function () {
+    const imageUrl = $(this).attr("src");
+    $("#modalMainImage").css("opacity", "0").attr("src", imageUrl).animate({ opacity: 1 }, 300); // Thay đổi ảnh chính với animation
 });
 $('#feedbackbtn').click(function(event) {
     if (!token) {

@@ -1,9 +1,6 @@
 package iuh.fit.se.techgalaxy.frontend.customer.service.impl;
 
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductDetailResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductPageResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductVariantDetailResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.ProductVariantResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.*;
 import iuh.fit.se.techgalaxy.frontend.customer.service.ProductService;
 import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
 import lombok.AccessLevel;
@@ -126,6 +123,20 @@ public class ProdcutServiceImpl implements ProductService {
         } catch (Exception e) {
             log.error("Error fetching product variant: {}", e.getMessage());
             throw new RuntimeException("Failed to fetch product variant", e);
+        }
+    }
+
+    @Override
+    public ApiResponse<List<ProductsImageResponse>> getProductsImageByVarianttId(String productId) {
+        try {
+            return webClientBuilder.build().get()
+                    .uri(baseUrl + "/products/image/getByVariant/" + productId)
+                    .retrieve().bodyToMono(new ParameterizedTypeReference<ApiResponse<List<ProductsImageResponse>>>() {
+                    }).block();
+        }
+        catch (Exception e) {
+            log.error("Error fetching product image: {}", e.getMessage());
+            throw new RuntimeException("Failed to fetch product image", e);
         }
     }
 }

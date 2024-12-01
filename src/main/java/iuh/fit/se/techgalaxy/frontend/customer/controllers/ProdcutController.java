@@ -102,6 +102,7 @@ public class ProdcutController {
         ProductVariantDetailResponse product = response.getData().stream().findFirst().orElse(null);
         ApiResponse<List<ValueResponse>> valueByVariantId = attributeValueService.getValueByVariantId(productId);
         ApiResponse<List<ProductFeedbackResponseV2>> feedbacks = productFeedBackService.getFeedBacks(productId);
+        ApiResponse<List<ProductsImageResponse>> productsImageResponse = productService.getProductsImageByVarianttId(productId);
         if (product != null) {
             // Gọi API để lấy tên cho memories và colors
             Map<String, String> memoryNames = getMemoryNames(product.getMemories().keySet());
@@ -130,6 +131,7 @@ public class ProdcutController {
             }
         }
         model.addObject("token", request.getSession().getAttribute("accessToken"));
+        model.addObject("productsImage", productsImageResponse.getData());
         model.addObject("variantId", productId);
         model.addObject("values", valueByVariantId.getData());
         model.addObject("product", product);

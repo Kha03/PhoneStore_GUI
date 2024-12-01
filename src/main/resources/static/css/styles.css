@@ -700,3 +700,67 @@ footer form {
     height: 100%;
     object-fit: cover;
 }
+/* Modal cấu trúc chính */
+#imageModal .modal-dialog {
+  max-width:60%;
+}
+
+#imageModal .modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Ảnh chính */
+#imageModal .modal-body .main-image {
+  max-height: 500px;
+  width: auto;
+  object-fit: contain;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#imageModal .sub-images-slider {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: center;
+  padding: 10px 0;
+}
+
+#imageModal .sub-images-slider img {
+  height: 80px;
+  width: auto;
+  object-fit: cover;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#imageModal .sub-images-slider img:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#imageModal .sub-images-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+#imageModal .sub-images-slider::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+#imageModal .sub-images-slider::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+#imageModal .sub-images-slider::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+
+
+
+

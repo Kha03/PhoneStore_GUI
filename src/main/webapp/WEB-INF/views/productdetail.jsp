@@ -50,6 +50,23 @@
 </script>
 <!-- Main -->
 <main class="container container-fluid">
+    <div id="imageModal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xem ảnh</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalMainImage" src="" alt="Ảnh chính" class="w-100 main-image">
+                    <div class="sub-images-slider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -114,50 +131,50 @@
             <div class="row">
                 <div class="col-12">
                     <div class="product_detail-img-content mx-auto">
-                        <img
-                        <%--check again--%>
-                                src="<c:url value='/imgs/p1.png' />"
-                                alt="Product"
-                                class="w-100 product_detail-img"
-                        />
+                        <c:choose>
+                            <c:when test="${not empty product.imgAva}">
+                                <img
+                                        src="<c:url value='http://localhost:8081/storage/${product.imgAva}'/>"
+                                        alt="Product"
+                                        class="w-100 product_detail-img"
+                                />
+                            </c:when>
+                            <c:otherwise>
+                                <img
+                                        src="<c:url value='/imgs/p1.png' />"
+                                        alt="Product"
+                                        class="w-100 product_detail-img"
+                                />
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>
-            <div
-                    class="row product_detail-img-group pt-3 justify-content-between position-relative"
-            >
-                <div
-                        class="position-absolute top-50 translate-middle-y product_detail-more"
-                >
+            <div class="row product_detail-img-group pt-3 justify-content-between position-relative">
+                <div class="position-absolute top-50 translate-middle-y product_detail-more d-none">
                     <p class="m-0">+</p>
-                    <span class="m-0">2</span>
+                    <span class="m-0"></span>
                 </div>
-                <div class="col-2">
-                    <div class="product_detail-img_item">
-                        <img
-                                src="<c:url value='/imgs/p2.png' />" alt="" class="img_item"/>
+                <c:forEach var="image" items="${productsImage}" varStatus="status">
+                    <div class="col-2 product-thumbnail" data-image="<c:url value='http://localhost:8081/storage/${image.path}'/>">
+                        <div class="product_detail-img_item">
+                            <c:choose>
+                                <c:when test="${not empty image.path}">
+                                    <img
+                                            src="<c:url value='http://localhost:8081/storage/${image.path}'/>"
+                                            alt="sub img product" class="img_item"
+                                    />
+                                </c:when>
+                                <c:otherwise>
+                                    <img
+                                            src="<c:url value='/imgs/p2.png' />"
+                                            alt="sub img product" class="img_item"
+                                    />
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
                     </div>
-                </div>
-                <div class="col-2">
-                    <div class="product_detail-img_item">
-                        <img src="<c:url value='/imgs/p2.png' />" alt="" class="img_item"/>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="product_detail-img_item">
-                        <img src="<c:url value='/imgs/p2.png' />" alt="" class="img_item"/>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="product_detail-img_item">
-                        <img src="<c:url value='/imgs/p2.png' />" alt="" class="img_item"/>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="product_detail-img_item">
-                        <img src="<c:url value='/imgs/p2.png' />" alt="" class="img_item"/>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
         <div class="col-4">
