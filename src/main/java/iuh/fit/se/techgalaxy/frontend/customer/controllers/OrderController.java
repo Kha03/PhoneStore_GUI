@@ -1,8 +1,7 @@
 package iuh.fit.se.techgalaxy.frontend.customer.controllers;
 
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.CustomerResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderDetailResponse;
-import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderResponse;
+import iuh.fit.se.techgalaxy.frontend.customer.dto.response.*;
+import iuh.fit.se.techgalaxy.frontend.customer.entities.Color;
 import iuh.fit.se.techgalaxy.frontend.customer.entities.enumeration.DetailStatus;
 import iuh.fit.se.techgalaxy.frontend.customer.service.AuthService;
 import iuh.fit.se.techgalaxy.frontend.customer.service.CustomerService;

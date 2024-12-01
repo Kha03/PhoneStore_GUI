@@ -94,8 +94,7 @@
 					<tbody>
 						<c:forEach var="order" items="${orderDetail}">
 							<tr class="order-item">
-								<td><img src="https://via.placeholder.com/50"
-									alt="Product 1" />${order.productVariantDetail.name}</td>
+								<td>${order.productVariantDetail.name}</td>
 								<td>${order.quantity}</td>
 								<td><fmt:formatNumber value="${order.price}" type="number"
 										pattern="#,###.##" /></td>

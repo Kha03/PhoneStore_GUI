@@ -6,9 +6,9 @@
             alt="User Avatar"
             class="rounded-circle mb-2 w-25 h-25 img-fluid"
         />
-        <h5><c:out value="${sessionScope.username}" /></h5>
+        <h5><c:out value="${sessionScope.username}"/></h5>
     </div>
-    <a href="#" class="active">
+    <a href="<c:url value='${pageContext.request.contextPath}/profile'/>">
         <i class="fas fa-user"></i> Personal Data
     </a>
     <a href="#">
