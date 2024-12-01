@@ -161,7 +161,7 @@
                     <form:form class="checkout-form" action="${pageContext.request.contextPath}/cart/checkout/order" method="post">
                         <div class="mb-3">
                             <label for="name" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="name" readonly value="${customer.name}">
+                            <input type="text" class="form-control" id="name" readonly value="${customer.name}" name="name">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>

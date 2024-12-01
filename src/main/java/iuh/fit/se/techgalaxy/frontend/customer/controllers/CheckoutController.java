@@ -3,6 +3,7 @@ package iuh.fit.se.techgalaxy.frontend.customer.controllers;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.OrderResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.dto.response.PaymentResponse;
 import iuh.fit.se.techgalaxy.frontend.customer.entities.enumeration.PaymentStatus;
+import iuh.fit.se.techgalaxy.frontend.customer.service.EmailService;
 import iuh.fit.se.techgalaxy.frontend.customer.service.OrderService;
 import iuh.fit.se.techgalaxy.frontend.customer.service.PaymentService;
 import iuh.fit.se.techgalaxy.frontend.customer.utils.ApiResponse;
@@ -28,8 +29,9 @@ import java.util.List;
 public class CheckoutController {
     OrderService orderService;
     PaymentService paymentService;
+    EmailService emailService;
     @PostMapping("/order")
-    public String payment(@RequestParam String email, @RequestParam String address, @RequestParam String paymentMethod, HttpServletRequest request, RedirectAttributes redirectAttributes){
+    public String payment(@RequestParam String name,@RequestParam String email, @RequestParam String address, @RequestParam String paymentMethod, HttpServletRequest request, RedirectAttributes redirectAttributes){
         HttpSession session = request.getSession();
         ApiResponse<List<OrderResponse>> order = null;
         log.info("Payment method: {}", address);
@@ -56,7 +58,8 @@ public class CheckoutController {
                 }
             }
             if(order != null) {
-                redirectAttributes.addFlashAttribute("orderMessage", "Order placed successfully!");
+                emailService.sendEmailFromTemplateSync(paymentMethod.toString(), address, name,order.getData().get(0).getId(), session);
+                redirectAttributes.addFlashAttribute("orderMessage", "Order placed successfully, PLease check your mail!");
                 return "redirect:/cart";
             }
         return "redirect:/cart/checkout";
