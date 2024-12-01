@@ -66,22 +66,7 @@
 	<!-- main -->
 	<div class="container-fluid custom-container">
 		<div class="row">
-			<div class="col-md-3 sidebar bg-white">
-				<div class="text-center mb-4">
-					<img src="../assets/imgs/ava.png" alt="User Avatar"
-						class="rounded-circle mb-2 w-25 h-25 img-fluid" />
-					<h5>Jimmy Smith</h5>
-				</div>
-				<a href="#"><i class="fas fa-user"></i> Personal Data</a> <a
-					href="#"><i class="fas fa-dollar-sign"></i> Payment &
-					Instalments</a> <a href="#" class="active"><i class="fas fa-box"></i>
-					Orders</a> <a href="#"><i class="fas fa-heart"></i> Wish list</a> <a
-					href="#"><i class="fas fa-tags"></i> Discounts</a> <a href="#"><i
-					class="fas fa-shield-alt"></i> Security & access</a> <a href="#"><i
-					class="fas fa-bell"></i> Notification</a> <a href="#"><i
-					class="fas fa-envelope"></i> Contact us</a> <a href="#"
-					class="text-danger"><i class="fas fa-sign-out-alt"></i> Log out</a>
-			</div>
+			<jsp:include page="PersonalDataTemplate.jsp" />
 			<div class="col-md-9 content">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
@@ -147,10 +132,8 @@
 								<thead>
 									<tr>
 										<th>Order Code</th>
-										<th>Placed On</th>
 										<th>Total</th>
 										<th>Sent To</th>
-										<th>Items</th>
 										<th>Order Detail</th>
 									</tr>
 								</thead>
@@ -158,7 +141,6 @@
 									<c:forEach items="${orders}" var="o" varStatus="status">
 										<tr>
 											<td>${o.id}</td>
-											<td>${o.createdAt}</td>
 											<td>
 												<%
 												Object obj = pageContext.findAttribute("o");
@@ -171,10 +153,6 @@
 												%>
 											</td>
 											<td>${o.customer.name}</td>
-											<td><img src="https://via.placeholder.com/50"
-												alt="Product 1" /> <img
-												src="https://via.placeholder.com/50" alt="Product 2" /> <img
-												src="https://via.placeholder.com/50" alt="Product 3" /></td>
 											<td><a
 												href="${pageContext.request.contextPath}/orders/orders?idOrder=${o.id}&cusId=${o.customer.id}"
 												class="btn btn-sm btn-primary">Order Detail</a></td>
