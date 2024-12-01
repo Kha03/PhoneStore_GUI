@@ -150,7 +150,7 @@
             >
                 <h3 class="text-light banner_header">Luxury</h3>
                 <p class="banner_text text-light">Various designs and brands</p>
-                <button type="button" class="btn btn-dark w-50 py-2">View</button>
+                <a href="${pageContext.request.contextPath}/products" type="button" class="btn btn-dark w-50 py-2">View</a>
             </div>
         </div>
         <div class="col-7 h-100 d-flex align-items-center z-1">
@@ -171,7 +171,7 @@
         >
             <h4 class="mb-3">Products On Sale</h4>
             <p>Shop Now!</p>
-            <a href="#" class="btn btn-outline-light">View all &rarr;</a>
+            <a href="${pageContext.request.contextPath}/products" class="btn btn-outline-light">View all &rarr;</a>
         </div>
         <!-- Carousel for product items -->
         <div class="col-md-9">
@@ -181,297 +181,40 @@
                     data-bs-ride="carousel"
             >
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <!-- 3 item in 1 carousel inner -->
-                        <div class="row flex-nowrap">
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p1.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p1.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p1.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p1.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
-                            </div>
+                    <c:forEach var="product" items="${productVariants}" varStatus="status">
+                        <c:if test="${status.index % 4 == 0}">
+                            <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                            <div class="row flex-nowrap">
+                        </c:if>
+                        <div class="col-md-3">
+                           <a href="${pageContext.request.contextPath}/products/detail/${product.id}"
+                           class="text-decoration-none">
+                               <div class="card h-100 p-2">
+                                   <span class="badge bg-danger position-absolute" style="top: 10px; right: 10px">-50%</span>
+                                   <img
+                                           src="<c:url value='http://localhost:8081/storage/${product.avatar}' />"
+                                           class="card-img-top img-fluid"
+                                           style="height: 205px"
+                                           alt="${product.name}"
+                                   />
+                                   <h6 class="card-title fw-light text-truncate">
+                                           ${product.name}
+                                   </h6>
+                                       <%--                                <div class="d-flex justify-content-between">--%>
+                                       <%--                                    <p class="text-muted text-decoration-line-through">--%>
+                                       <%--                                        $${product.oldPrice}--%>
+                                       <%--                                    </p>--%>
+                                       <%--                                    <p class="fw-light">$${product.currentPrice}</p>--%>
+                                       <%--                                </div>--%>
+                               </div>
+                           </a>
                         </div>
-                    </div>
-                    <!-- 3 item in 1 carousel inner -->
-                    <div class="carousel-item">
-                        <div class="row flex-nowrap">
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p2.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
+
+                        <c:if test="${(status.index + 1) % 4 == 0 || status.last}">
                             </div>
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p2.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p2.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p2.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 3 item in 1 carousel inner -->
-                    <div class="carousel-item">
-                        <div class="row flex-nowrap">
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p1.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p1.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p1.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card h-100 p-2">
-                      <span
-                              class="badge bg-danger position-absolute"
-                              style="top: 10px; right: 10px"
-                      >-50%</span
-                      >
-                                    <img
-                                            src="<c:url value='imgs/p1.png' />"
-                                            class="card-img-top img-fluid"
-                                            alt="Product 1"
-                                    />
-                                    <h6 class="card-title fw-light text-truncate">
-                                        Logitech G502 Gaming
-                                    </h6>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted text-decoration-line-through">
-                                            $38.00
-                                        </p>
-                                        <p class="fw-light">$19.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        </c:if>
+                    </c:forEach>
                 </div>
                 <button
                         class="carousel-control-prev"
@@ -508,7 +251,7 @@
                     <h3>Best Sellers</h3>
                 </div>
                 <div class="col-6">
-                    <a class="btn-link float-end me-5" href="#">View all &rarr;</a>
+                    <a class="btn-link float-end me-5" href="${pageContext.request.contextPath}/products">View all &rarr;</a>
                 </div>
             </div>
         </div>
@@ -831,7 +574,7 @@
             >
                 <h3 class="text-light banner_header">Technology</h3>
                 <p class="banner_text text-light">Various designs and brands</p>
-                <button type="button" class="btn btn-dark w-50 py-2">View</button>
+                <a href="${pageContext.request.contextPath}/products" type="button" class="btn btn-dark w-50 py-2">View</a>
             </div>
         </div>
         <div class="col-7 h-100 d-flex align-items-center z-1">

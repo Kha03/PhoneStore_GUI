@@ -127,6 +127,20 @@ public class ProdcutServiceImpl implements ProductService {
     }
 
     @Override
+    public ApiResponse<List<ProductVariantResponse>> getAllProductVariant() {
+        try {
+            return webClientBuilder.build().get()
+                    .uri(baseUrl + "/products/variants/all")
+                    .retrieve().bodyToMono(new ParameterizedTypeReference<ApiResponse<List<ProductVariantResponse>>>() {
+                    }).block();
+        }
+        catch (Exception e) {
+            log.error("Error fetching all product variant: {}", e.getMessage());
+            throw new RuntimeException("Failed to fetch all product variant", e);
+        }
+    }
+
+    @Override
     public ApiResponse<List<ProductsImageResponse>> getProductsImageByVarianttId(String productId) {
         try {
             return webClientBuilder.build().get()

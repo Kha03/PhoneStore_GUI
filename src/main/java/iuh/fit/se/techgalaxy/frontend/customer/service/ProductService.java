@@ -22,6 +22,7 @@ public interface ProductService {
     ApiResponse<List<ProductDetailResponse>> getProductDetailsByIds(List<String> productDetailIds);
 
     ApiResponse<List<ProductVariantResponse>> getProductVariant(String variantId);
+    ApiResponse<List<ProductVariantResponse>> getAllProductVariant();
 
 
     ApiResponse<List<ProductsImageResponse>> getProductsImageByVarianttId(String productId);

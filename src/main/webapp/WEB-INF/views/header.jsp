@@ -17,7 +17,7 @@
 			<li><a href="${pageContext.request.contextPath}/home" class="nav-link px-2 mx-2 link-secondary">Home</a>
 			</li>
 			<li><a href="${pageContext.request.contextPath}/products" class="nav-link px-2 mx-2 link-dark">Products</a></li>
-			<li><a href="#!" class="nav-link px-2 mx-2 link-dark">Blog</a></li>
+			<li><a href="${pageContext.request.contextPath}/blog" class="nav-link px-2 mx-2 link-dark">Blog</a></li>
 			<li><a href="#!" class="nav-link px-2 mx-2 link-dark">FAQ</a></li>
 			<li><a href="#!" class="nav-link px-2 mx-2 link-dark">Contact Us</a></li>
 		</ul>
